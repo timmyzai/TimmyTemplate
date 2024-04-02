@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="../buildMultiTargeting/ByteAwesome.Services.TestAPI.props" />
+</Project>

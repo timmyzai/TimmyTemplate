@@ -1,0 +1,24 @@
+2024-04-02 15:18:41.903 +08:00  INF  User profile is available. Using '/Users/myav/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2024-04-02 15:18:41.972 +08:00  INF  Now listening on: http://localhost:7182
+2024-04-02 15:18:41.974 +08:00  INF  Application started. Press Ctrl+C to shut down.
+2024-04-02 15:18:41.974 +08:00  INF  Hosting environment: Production
+2024-04-02 15:18:41.974 +08:00  INF  Content root path: /Users/myav/Desktop/TimmyTemplate/ByteAwesome.Services.TestAPI
+2024-04-02 15:18:44.233 +08:00  INF  Application is shutting down...
+2024-04-02 15:18:44.249 +08:00  INF  Stopped Server Cleanly.
+2024-04-02 15:19:01.941 +08:00  INF  User profile is available. Using '/Users/myav/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2024-04-02 15:19:02.048 +08:00  INF  Now listening on: http://localhost:7182
+2024-04-02 15:19:02.052 +08:00  INF  Application started. Press Ctrl+C to shut down.
+2024-04-02 15:19:02.052 +08:00  INF  Hosting environment: Development
+2024-04-02 15:19:02.052 +08:00  INF  Content root path: /Users/myav/Desktop/TimmyTemplate/ByteAwesome.Services.TestAPI
+2024-04-02 15:19:02.717 +08:00  INF  Request starting HTTP/1.1 GET http://localhost:7182/ - -
+2024-04-02 15:19:02.723 +08:00  WRN  Failed to determine the https port for redirect.
+2024-04-02 15:19:02.772 +08:00  INF  Executing endpoint '/ HTTP: GET'
+2024-04-02 15:19:02.772 +08:00  INF  Executed endpoint '/ HTTP: GET'
+2024-04-02 15:19:02.774 +08:00  INF  HTTP GET / responded 302 in 39.2535 ms
+2024-04-02 15:19:02.777 +08:00  INF  Request finished HTTP/1.1 GET http://localhost:7182/ - - - 302 0 - 63.0797ms
+2024-04-02 15:19:02.783 +08:00  INF  Request starting HTTP/1.1 GET http://localhost:7182/swagger/index.html - -
+2024-04-02 15:19:02.958 +08:00  INF  HTTP GET /swagger/index.html responded 200 in 174.5209 ms
+2024-04-02 15:19:02.958 +08:00  INF  Request finished HTTP/1.1 GET http://localhost:7182/swagger/index.html - - - 200 - text/html;charset=utf-8 174.7951ms
+2024-04-02 15:19:03.103 +08:00  INF  Request starting HTTP/1.1 GET http://localhost:7182/swagger/v1/swagger.json - -
+2024-04-02 15:19:03.125 +08:00  INF  HTTP GET /swagger/v1/swagger.json responded 200 in 22.2217 ms
+2024-04-02 15:19:03.125 +08:00  INF  Request finished HTTP/1.1 GET http://localhost:7182/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 22.4700ms

@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="../build/ByteAwesome.Services.TestAPI.props" />
+</Project>
