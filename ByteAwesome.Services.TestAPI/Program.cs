@@ -38,12 +38,17 @@ namespace ByteAwesome.Services.TestAPI
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.ConfigureKestrel(
-                        options =>
+                        (context,options) =>
                         {
                             options.ListenLocalhost(7182, listenOptions =>
                             {
                                 listenOptions.Protocols = HttpProtocols.Http1;
-                                // listenOptions.UseHttps();//when local need to disable
+                                // Conditional HTTPS based on configuration
+                                var useHttps = context.Configuration.GetValue<bool>("Kestrel:UseHttps");
+                                if (useHttps)
+                                {
+                                    listenOptions.UseHttps(); // Make sure to configure the certificate
+                                }
                             });
                         });
                     webBuilder.UseStartup<Startup>();

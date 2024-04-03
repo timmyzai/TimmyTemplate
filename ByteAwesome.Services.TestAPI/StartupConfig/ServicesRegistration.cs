@@ -6,6 +6,8 @@ using ByteAwesome.Services.TestAPI.Helper;
 using ByteAwesome.Services.TestAPI.Modules;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc;
+using ByteAwesome.Services.TestAPI.Repository;
+using ByteAwesome.Services.TestAPI.Controllers;
 
 namespace ByteAwesome.Services.TestAPI
 {
@@ -19,7 +21,8 @@ namespace ByteAwesome.Services.TestAPI
             var tokenConfig = ConfigureAuthentication(services);
             services.AddSingleton(tokenConfig);
             services.AddSingleton(MappingConfig.RegisterMaps().CreateMapper());
-
+            services.AddScoped<IProductController, ProductController>();
+            services.AddScoped<IProductRepository, ProductRepository>();            
             services.Configure<AppModuleConfig>(configuration.GetSection("App"));
         }
 

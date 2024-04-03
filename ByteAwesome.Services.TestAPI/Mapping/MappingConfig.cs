@@ -1,4 +1,6 @@
 using AutoMapper;
+using ByteAwesome.Services.TestAPI.Models;
+using ByteAwesome.Services.TestAPI.Models.Dtos;
 
 namespace ByteAwesome.Services.TestAPI
 {
@@ -8,6 +10,8 @@ namespace ByteAwesome.Services.TestAPI
         {
             var mappingConfig = new MapperConfiguration(config =>
             {
+                config.CreateMap<ProductDto, Product>().ReverseMap();
+                config.CreateMap<CreateProductDto, Product>();
             });
 
             return mappingConfig;
