@@ -1,4 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using ByteAwesome.Services.TestAPI.Models;
+
 
 namespace ByteAwesome.Services.TestAPI.DbContexts
 {
@@ -15,5 +17,7 @@ namespace ByteAwesome.Services.TestAPI.DbContexts
             this.options = options;
             this.httpContextAccessor = httpContextAccessor;
         }
+
+        public DbSet<Product> Product { get; set; }
     }
 }
