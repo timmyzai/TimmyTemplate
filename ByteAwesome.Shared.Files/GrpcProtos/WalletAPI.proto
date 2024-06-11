@@ -1,0 +1,50 @@
+syntax = "proto3";
+import "google/protobuf/empty.proto";
+
+option csharp_namespace = "ByteAwesome.WalletAPI.Grpc";
+
+package WalletAPIGrpc;
+
+service WalletGrpcService {
+  rpc Claim(ClaimRewardProtoDto) returns (ClaimRewardResponse);
+  rpc CreateWalletGroup(CreateWalletGroupProtoDto) returns (CreateWalletGroupResponse);
+  rpc GetActiveSymbol(ActiveSymbolProtoDto) returns (ActiveSymbolsResponse);
+  rpc GetActiveSymbols(google.protobuf.Empty) returns (ActiveSymbolsResponse);
+}
+
+message ClaimRewardProtoDto {
+  string user_id = 1;
+  double reward_amount = 2;
+  string symbol = 3;
+  string languageCode = 4;
+}
+
+message ClaimRewardResponse {
+  bool success = 1;
+  string error_message = 2;
+}
+
+message ActiveSymbolProtoDto {
+  string symbol = 1;
+}
+
+message ActiveSymbols {
+  string symbol = 1;
+  string network = 2;
+}
+
+message ActiveSymbolsResponse {
+  bool success = 1;
+  repeated ActiveSymbols active_symbols = 2;
+  string error_message = 3;
+}
+
+message CreateWalletGroupProtoDto {
+  string user_id = 1;
+  string languageCode = 2;
+}
+
+message CreateWalletGroupResponse {
+  bool success = 1;
+  string error_message = 2;
+}

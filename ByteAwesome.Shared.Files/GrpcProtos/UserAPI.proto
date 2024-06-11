@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+option csharp_namespace = "ByteAwesome.UserAPI.Grpc";
+
+package UserAPIGrpc;
+
+service UserGrpcService {
+  rpc GetUserById(GetUserByIdProtoDto) returns (GetUserResultResponse);
+  rpc GetUserByIdentity(GetUserByIdentityProtoDto) returns (GetUserResultResponse);
+}
+
+message GetUserByIdProtoDto {
+  string user_id = 1;
+}
+
+message GetUserByIdentityProtoDto {
+  string user_identity = 1;
+}
+
+message GetUserResultResponse {
+  bool success = 1;
+  string user_id = 2;
+  string username = 3;
+  string email_address = 4;
+  string phone_number = 5;
+  string error_message = 6;
+}
