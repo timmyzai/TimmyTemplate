@@ -5,5 +5,7 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\ByteAwesome.Shared.Core\ByteAwesome.Shared.Core.csproj" />
+    <!-- Benchmark Runner -->
+    <PackageReference Include="BenchmarkDotNet" Version="0.13.12" />
   </ItemGroup>
 </Project>

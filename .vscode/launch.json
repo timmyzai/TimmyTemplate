@@ -20,6 +20,23 @@
             "sourceFileMap": {
                 "/Views": "${workspaceFolder}/Views"
             }
+        },
+        // Benchmark Runner
+        {
+            "name": "Run Test API Benchmarks",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "Build And Release TestAPI",
+            "program": "${workspaceFolder}/Services/ByteAwesome.TestAPI/bin/Release/net6.0/ByteAwesome.TestAPI.dll",
+            "args": [
+                "--benchmark"
+            ],
+            "cwd": "${workspaceFolder}/Services/ByteAwesome.TestAPI",
+            "stopAtEntry": false,
+            "console": "integratedTerminal",
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            }
         }
     ]
 }

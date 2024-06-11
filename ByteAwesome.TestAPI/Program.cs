@@ -1,3 +1,4 @@
+using BenchmarkDotNet.Running;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Serilog;
 
@@ -11,6 +12,14 @@ namespace ByteAwesome.TestAPI
             .WriteTo.Console()
             .CreateBootstrapLogger();
             Log.Information("Starting Up Server");
+            
+            if (args.Contains("--benchmark"))
+            {
+                Log.Information("Running benchmarks...");
+                BenchmarkRunner.Run<WalletApiBenchmark>();
+                return 0;
+            }
+
             try
             {
                 CreateHostBuilder(args).Build().Run();

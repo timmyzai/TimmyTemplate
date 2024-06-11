@@ -12,6 +12,19 @@
                 "/consoleloggerparameters:NoSummary"
             ],
             "problemMatcher": "$msCompile"
+        },
+        // Benchmark Runner
+        {
+            "label": "Build And Release TestAPI",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/Services/ByteAwesome.TestAPI/ByteAwesome.TestAPI.csproj",
+                "--configuration",
+                "Release"
+            ],
+            "problemMatcher": "$msCompile"
         }
     ]
 }
