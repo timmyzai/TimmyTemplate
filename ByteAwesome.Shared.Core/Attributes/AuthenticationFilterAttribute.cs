@@ -1,8 +1,12 @@
 using System.Security.Claims;
+using System.Text.Json;
+using ByteAwesome.Services;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.DependencyInjection;
+using Serilog;
 using StackExchange.Redis;
 
 namespace ByteAwesome
@@ -13,32 +17,37 @@ namespace ByteAwesome
         {
             if (context.ActionDescriptor.EndpointMetadata.OfType<AllowAnonymousAttribute>().Any()) return;
             var httpContext = context.HttpContext;
-            var redis = httpContext.RequestServices.GetRequiredService<IConnectionMultiplexer>();
             var user = httpContext.User;
             if (!user.Identity.IsAuthenticated)
             {
-                context.Result = new UnauthorizedResult();
+                await ContextResponseHelper.SetUnauthorizedResponse(httpContext);
                 return;
             }
             var userId = user.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
             if (string.IsNullOrEmpty(userId))
             {
-                context.Result = new UnauthorizedResult();
+                await ContextResponseHelper.SetUnauthorizedResponse(httpContext);
                 return;
             }
             var deviceInfo = httpContext.Items["DeviceInfo"] as DeviceInfo;
             if (deviceInfo == null)
             {
-                context.Result = new UnauthorizedResult();
+                await ContextResponseHelper.SetUnauthorizedResponse(httpContext);
                 return;
             }
             var tokenKey = user.Claims.FirstOrDefault(x => x.Type == "UserLoginSessionId")?.Value;
-            var redisValue = await redis.GetDatabase().StringGetAsync(tokenKey);
+            if (string.IsNullOrEmpty(tokenKey))
+            {
+                await ContextResponseHelper.SetUnauthorizedResponse(httpContext);
+                return;
+            }
+            var redisCacheService = httpContext.RequestServices.GetRequiredService<IRedisCacheService>();
+            var redisValue = await redisCacheService.GetAsync(tokenKey);
             var storedToken = redisValue.ToString();
             var token = httpContext.Items["DecryptedToken"] as string;
             if (string.IsNullOrEmpty(token) || storedToken != token)
             {
-                context.Result = new UnauthorizedResult();
+                await ContextResponseHelper.SetUnauthorizedResponse(httpContext);
                 return;
             }
         }

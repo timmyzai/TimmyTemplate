@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ByteAwesome
@@ -11,10 +10,7 @@ namespace ByteAwesome
         Task<ActionResult<ResponseDto<TEntityDto>>> Update([FromBody] TEntityDto input);
     }
     
-    [Route("api/[controller]/[action]")]
-    [Authorize(Roles = RoleNames.Admin)]
-    [ApiExplorerSettings(IgnoreApi = true)]
-    public class CRUD_AdminBaseController<TEntityDto, TCreateDto, TKey, TRepository> : Controller, ICRUD_AdminBaseController<TEntityDto, TCreateDto, TKey> where TRepository : IBaseRepository<TEntityDto, TCreateDto, TKey>
+    public class CRUD_AdminBaseController<TEntityDto, TCreateDto, TKey, TRepository> : AdminBaseController, ICRUD_AdminBaseController<TEntityDto, TCreateDto, TKey> where TRepository : IBaseRepository<TEntityDto, TCreateDto, TKey>
     {
         protected readonly TRepository repository;
         public CRUD_AdminBaseController(TRepository repository) { this.repository = repository; }

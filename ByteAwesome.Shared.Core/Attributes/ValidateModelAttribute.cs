@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
@@ -31,4 +33,23 @@ namespace ByteAwesome
             }
         }
     }
+    public class PositiveNumberAttribute : ValidationAttribute
+    {
+        public override bool IsValid(object value)
+        {
+            try
+            {
+                return value is IConvertible convertible && Convert.ToDouble(convertible, CultureInfo.InvariantCulture) > 0;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        public override string FormatErrorMessage(string name)
+        {
+            return $"{name} must be a positive number.";
+        }
+    }
+
 }

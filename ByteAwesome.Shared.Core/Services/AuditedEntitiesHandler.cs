@@ -1,38 +1,30 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 
-namespace ByteAwesome.TestAPI.DbContexts
+namespace ByteAwesome.Services
 {
-    public partial class ApplicationDbContext : DbContext
+public class AuditingService
     {
-        public override int SaveChanges()
+        private readonly DbContext context;
+
+        public AuditingService(DbContext context)
         {
-            ProcessAuditedEntities();
-            return base.SaveChanges();
+            this.context = context;
         }
-        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        public void ProcessAuditedEntities()
         {
-            ProcessAuditedEntities();
-            return base.SaveChangesAsync();
-        }
-        private void ProcessAuditedEntities()
-        {
-            var AuditedEntries = ChangeTracker.Entries<IAuditedEntity>();
+            var AuditedEntries = context.ChangeTracker.Entries<IAuditedEntity>();
             if (AuditedEntries.Any())
             {
                 ProcessAuditedEntities(AuditedEntries);
             }
         }
-
         private void ProcessAuditedEntities(IEnumerable<EntityEntry> entries)
         {
             var addedEntities = entries.Where(entry => entry.State == EntityState.Added).Select(entry => entry.Entity).ToList();
             var modifiedEntities = entries.Where(entry => entry.State == EntityState.Modified).Select(entry => entry.Entity).ToList();
             var currentTime = DateTime.UtcNow;
-
             string userName = CurrentSession.GetUserName() ?? "system";
-
-
             if (addedEntities.Any())
             {
                 foreach (var entity in addedEntities)

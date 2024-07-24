@@ -6,6 +6,7 @@ namespace ByteAwesome.Services
     {
         void Set<T>(string key, T value, TimeSpan expirationTime);
         bool TryGetValue<T>(string key, out T value);
+        void Remove(string key);
     }
 
     public class CacheService : ICacheService
@@ -27,6 +28,10 @@ namespace ByteAwesome.Services
             var cacheEntryOptions = new MemoryCacheEntryOptions()
                 .SetAbsoluteExpiration(expirationTime);
             _cache.Set(key, value, cacheEntryOptions);
+        }
+        public void Remove(string key)
+        {
+            _cache.Remove(key);
         }
     }
 }

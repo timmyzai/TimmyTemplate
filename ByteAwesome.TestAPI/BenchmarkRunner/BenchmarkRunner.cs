@@ -1,6 +1,5 @@
 using BenchmarkDotNet.Attributes;
 using ByteAwesome.TestAPI.DbContexts;
-using ByteAwesome.TestAPI.Repository;
 using Microsoft.EntityFrameworkCore;
 
 namespace ByteAwesome.TestAPI

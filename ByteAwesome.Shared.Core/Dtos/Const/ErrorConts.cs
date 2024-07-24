@@ -36,7 +36,7 @@ namespace ByteAwesome
             public const string UserNotExists = "U1006"; //User does not exist.
             public const string UserLoginFailed = "U1007"; //User login failed.
             public const string TwoFactorAlreadyEnabled = "U1008"; //Two factor authentication is already enabled.
-            // public const string GetBySessionHash = "U1009"; //Failed to get user session by session hash.
+            public const string EnableDisablePassKeyError = "U1009"; //Failed to enable or disable passkey.  (Update)
             public const string UserGetAllFailed = "U1010"; //Failed to get all users.
             public const string SendConfirmationEmail = "U1011"; //Failed to send confirmation email. 
             public const string InvalidUserLoginIdentity = "U1012"; //Invalid user login identity.
@@ -64,19 +64,25 @@ namespace ByteAwesome
             public const string GenerateAccessToken = "U1034"; //Error occurs in AccessToken GRPC server. Message: 
             public const string DecryptString = "U1035"; //Error while Decrypting.
             public const string GetMyUserLoginSessions = "U1036"; //Error while getting my user login sessions.
-            // public const string SendSMS = "U1037"; //Send SMS Failed. 
+            public const string PassKeyNotEnabled = "U1037"; // Please enable passkey to perform this action.
             public const string SaveChangesAsyncCalled = "U1038"; //SaveChanges has already been called."
             public const string SaveChangesAsync = "U1039"; //Error saving changes 
             public const string Dispose = "U1040";//Error disposing changes
             public const string GetRoleByName = "U1041";//Exception occurred while trying to getrole by name//User with role {name} not Exists.
             public const string UserWithoutPhone = "U1042";//Current user does not have a phone number!
-            // public const string UserPhoneNotMatch = "U1043";//Phone number does not match with the current phone number!"
+            public const string PendingVerifyCredential = "U1043";//Pending verify credential is required.
             public const string IdentityTypeAlreadyExists = "U1044"; //User already exists. 
             public const string OTPError = "U1045"; //OTP Error. 
             public const string PhoneAlreadyVerified = "U1046"; //Phone number was already verified.
             public const string GetUserRoleByUser = "U1047"; //Exception occurred while getting user role by user.
             public const string UserGrpcError = "U1048"; //User Grpc error. 
             public const string GetKycAccessTokenError = "U1049"; //Error getting kyc access token.
+            public const string RegisterPasskeyError = "U1050"; //Error registering passkey.
+            public const string AddPasskeyCredentialError = "U1051"; //Error adding passkey credential.
+            public const string PasskeyLoginError = "U1052"; //Error logging in through passkey credential.
+            public const string PasskeyAssertionError = "U1053"; //Error asserting passkey credential.
+            public const string PassKeyAlreadyEnabledDisabled = "U1054"; //Your passkey was already {0}.
+            public const string PleaseCreatePassKey = "U1055"; //Please register your passkey.
         }
         public static class Secret
         {

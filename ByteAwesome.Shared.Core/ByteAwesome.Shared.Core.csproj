@@ -48,5 +48,7 @@
     <PackageReference Include="UAParser" Version="3.1.47" />
     <!-- Geo Location  -->
     <PackageReference Include="MaxMind.GeoIP2" Version="5.2.0" />
+    <!-- Google Protobuf -->
+    <PackageReference Include="Google.Protobuf" Version="3.23.1" />
   </ItemGroup>
 </Project>

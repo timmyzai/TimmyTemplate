@@ -2,18 +2,31 @@ using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using System.Linq.Expressions;
-using ByteAwesome.TestAPI.DbContexts;
 
-namespace ByteAwesome.TestAPI.Repository
+namespace ByteAwesome
 {
+    public interface IBaseRepository<TEntityDto, TCreateDto, TKey>
+    {
+        Task<TEntityDto> Add(TCreateDto input);
+        Task<IEnumerable<TEntityDto>> AddRange(IEnumerable<TCreateDto> inputs);
+        Task<TEntityDto> Delete(TKey id);
+        Task<IEnumerable<TEntityDto>> DeleteRange(IEnumerable<TKey> ids);
+        Task<IEnumerable<TEntityDto>> Get(IPagedResultRequestDto filter = null, string propertyName = null);
+        Task<TEntityDto> GetById(TKey id);
+        Task<IEnumerable<TEntityDto>> GetDesc(IPagedResultRequestDto filter = null, string propertyName = null);
+        Task<TEntityDto> Update(TEntityDto input);
+        Task<IEnumerable<TEntityDto>> UpdateRange(IEnumerable<TEntityDto> inputs);
+        PagedList<Dtos> MapDtosToPagedList<Dtos>(IEnumerable<TEntityDto> items, int pageNumber, int pageSize);
+        PagedList<TEntityDto> MapDtosToPagedList(IEnumerable<TEntityDto> items, int pageNumber, int pageSize);
+    }
     public abstract class BaseRepository<TEntity, TEntityDto, TCreateDto, TKey> : IBaseRepository<TEntityDto, TCreateDto, TKey>
         where TEntity : class, IEntity<TKey>
         where TEntityDto : IEntityDto<TKey>
     {
-        protected readonly ApplicationDbContext context;
+        protected readonly DbContext context;
         protected readonly IMapper mapper;
 
-        protected BaseRepository(ApplicationDbContext context, IMapper mapper)
+        protected BaseRepository(DbContext context, IMapper mapper)
         {
             this.context = context;
             this.mapper = mapper;
@@ -76,7 +89,7 @@ namespace ByteAwesome.TestAPI.Repository
                 }
                 else
                 {
-                    EntityContext().Remove(item);
+                    context.Set<TEntity>().Remove(item);
                 }
                 await context.SaveChangesAsync();
                 return MapEntityToDto(item);
@@ -228,17 +241,13 @@ namespace ByteAwesome.TestAPI.Repository
         }
         #endregion
         #region Queries
-        public DbSet<TEntity> EntityContext()
-        {
-            return context.Set<TEntity>();
-        }
         public IQueryable<TEntity> BoQuery()
         {
-            return EntityContext().AsQueryable();
+            return context.Set<TEntity>().AsQueryable();
         }
         public IQueryable<TEntity> Query()
         {
-            var query = EntityContext().AsQueryable();
+            var query = context.Set<TEntity>().AsQueryable();
             if (typeof(IFullyAuditedEntity).IsAssignableFrom(typeof(TEntity)))
             {
                 query = query.Where(x => !((IFullyAuditedEntity)x).IsDeleted);
@@ -252,7 +261,6 @@ namespace ByteAwesome.TestAPI.Repository
             var convert = Expression.Convert(property, typeof(object));
             return Expression.Lambda<Func<TEntity, object>>(convert, parameter);
         }
-
         #endregion
     }
 }

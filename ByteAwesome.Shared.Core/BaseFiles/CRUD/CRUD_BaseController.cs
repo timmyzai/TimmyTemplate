@@ -10,10 +10,8 @@ namespace ByteAwesome
         Task<ActionResult<ResponseDto<TEntityDto>>> GetById(TKey id);
         Task<ActionResult<ResponseDto<TEntityDto>>> Update([FromBody] TEntityDto input);
     }
-    
-    [Route("api/[controller]/[action]")]
-    [Authorize]
-    public class CRUD_BaseController<TEntityDto, TCreateDto, TKey, TRepository> : Controller, ICRUD_BaseController<TEntityDto, TCreateDto, TKey> where TRepository : IBaseRepository<TEntityDto, TCreateDto, TKey>
+
+    public class CRUD_BaseController<TEntityDto, TCreateDto, TKey, TRepository> : BaseController, ICRUD_BaseController<TEntityDto, TCreateDto, TKey> where TRepository : IBaseRepository<TEntityDto, TCreateDto, TKey>
     {
         protected readonly TRepository repository;
         public CRUD_BaseController(TRepository repository) { this.repository = repository; }
