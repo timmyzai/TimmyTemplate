@@ -13,6 +13,30 @@
             ],
             "problemMatcher": "$msCompile"
         },
+        {
+            "label": "build userAPI",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/Services/ByteAwesome.UserAPI/ByteAwesome.UserAPI.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "build secretAPI",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/Services/ByteAwesome.SecretAPI/ByteAwesome.SecretAPI.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
         // Benchmark Runner
         {
             "label": "Build And Release TestAPI",
