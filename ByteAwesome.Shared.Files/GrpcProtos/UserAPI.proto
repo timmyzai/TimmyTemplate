@@ -12,11 +12,9 @@ service UserGrpcService {
 message GetUserByIdProtoDto {
   string user_id = 1;
 }
-
 message GetUserByIdentityProtoDto {
   string user_identity = 1;
 }
-
 message GetUserResultResponse {
   bool success = 1;
   string user_id = 2;
@@ -24,4 +22,35 @@ message GetUserResultResponse {
   string email_address = 4;
   string phone_number = 5;
   string error_message = 6;
+}
+
+service SecretGrpcProxyService {
+  rpc VerifyPassKey(VerifyPassKeyRequest) returns (VerifyPassKeyResponse);
+  rpc VerifyTwoFactorPin(VerifyTwoFactorPinRequest) returns (VerifyTwoFactorPinResponse);
+  rpc VerifyDataAndDecrypt(VerifyDataAndDecryptRequest) returns (VerifyDataAndDecryptResponse);
+}
+message VerifyPassKeyRequest {
+  string user_id = 1;
+  string pending_verify_credential = 2;
+}
+message VerifyPassKeyResponse {
+  bool success = 1;
+  string error_message = 2;
+}
+message VerifyTwoFactorPinRequest {
+  string user_id = 1;
+  string two_factor_pin = 2;
+}
+message VerifyTwoFactorPinResponse {
+  bool success = 1;
+  string error_message = 2;
+}
+message VerifyDataAndDecryptRequest {
+  string user_id = 1;
+  string encrypted_data = 2;
+}
+message VerifyDataAndDecryptResponse {
+  bool success = 1;
+  string decrypted_data = 2;
+  string error_message = 3;
 }

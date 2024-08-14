@@ -3,15 +3,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ByteAwesome.TestAPI.DbContexts
 {
-    public partial class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : DbContext
     {
-        private readonly DbContextOptions<ApplicationDbContext> options;
         private readonly AuditingService _auditingService;
         public ApplicationDbContext(
             DbContextOptions<ApplicationDbContext> options
         ) : base(options)
         {
-            this.options = options;
             _auditingService = new AuditingService(this);
         }
         #region Overrides
@@ -26,5 +24,10 @@ namespace ByteAwesome.TestAPI.DbContexts
             return base.SaveChangesAsync();
         }
         #endregion
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            _auditingService.ApplyGlobalFilters(modelBuilder);
+        }
     }
 }

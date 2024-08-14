@@ -2,11 +2,13 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\ByteAwesome.Shared.Core\ByteAwesome.Shared.Core.csproj" />
-    <!-- Benchmark Runner -->
-    <PackageReference Include="BenchmarkDotNet" Version="0.13.12" />
+    <!-- Grpc Client References -->
+    <PackageReference Include="Grpc.Tools" Version="2.65.0" />
+    <PackageReference Include="Grpc.Net.Client" Version="2.65.0" />
+    <PackageReference Include="Grpc.Net.ClientFactory" Version="2.65.0" />
+    <Protobuf Include="..\ByteAwesome.Shared.Files\GrpcProtos\WalletAPI.proto" GrpcServices="Client" />
   </ItemGroup>
 </Project>

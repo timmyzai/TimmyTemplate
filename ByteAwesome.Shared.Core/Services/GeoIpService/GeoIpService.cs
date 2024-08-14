@@ -1,8 +1,6 @@
 using MaxMind.Db;
 using MaxMind.GeoIP2;
 using Microsoft.AspNetCore.Http;
-using Newtonsoft.Json;
-using Serilog;
 
 namespace ByteAwesome.Services
 {
@@ -24,7 +22,7 @@ namespace ByteAwesome.Services
         {
             try
             {
-                if (IsLocalEnvironment() || IsGrpcRequest())
+                if (GeneralHelper.IsDevelopmentEnvironment() || IsGrpcRequest())
                 {
                     return LocalLocationInfo(clientIpInfo);
                 }
@@ -32,14 +30,14 @@ namespace ByteAwesome.Services
             }
             catch (Exception ex)
             {
-                Log.Error(ex, $"Error retrieving city data for IP {JsonConvert.SerializeObject(clientIpInfo)}");
+                ActionResultHandler.HandleException(ex);
                 return UnknownLocationInfo(clientIpInfo);
             }
         }
         private LocationInfo GetLocationFromDatabase(ClientIpInfo clientIpInfo)
         {
             var city = _reader.City(clientIpInfo.IpAddress);
-            if (city != null)
+            if (city is not null)
             {
                 return new LocationInfo
                 {
@@ -54,10 +52,6 @@ namespace ByteAwesome.Services
                 };
             }
             return UnknownLocationInfo(clientIpInfo);
-        }
-        private bool IsLocalEnvironment()
-        {
-            return Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development";
         }
         private LocationInfo LocalLocationInfo(ClientIpInfo clientIpInfo)
         {

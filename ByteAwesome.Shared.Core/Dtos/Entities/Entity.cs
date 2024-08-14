@@ -8,7 +8,7 @@ namespace ByteAwesome
         [Key]
         [Column(Order = 0)]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public TKey Id { get; set; }
+        public virtual TKey Id { get; set; }
     }
     public abstract class AuditedEntity<TKey> : Entity<TKey>, IAuditedEntity
     {
@@ -39,6 +39,10 @@ namespace ByteAwesome
         bool IsDeleted { get; set; }
         string DeletedBy { get; set; }
         DateTime? DeletedTime { get; set; }
+    }
+    public interface IUserIdEntity
+    {
+        Guid UserId { get; set; }
     }
     public abstract class Entity : Entity<int> { }
     public abstract class AuditedEntity : AuditedEntity<int> { }

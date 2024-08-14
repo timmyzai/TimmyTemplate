@@ -24,7 +24,6 @@ namespace ByteAwesome
         public const string CustoWalletType = "CustoWalletType";
         public const string AdminWalletGroupId = "AdminWalletGroupId";
         public const string CreateWalletGroupFee = "CreateWalletGroupFee";
-        public const string CreateWalletGroupFreeCount = "CreateWalletGroupFreeCount";
         public const string CreateMultiSignWalletGroupFee = "CreateMultiSignWalletGroupFee";
         public const string CreateWalletPolicyFee = "CreateWalletPolicyFee";
         public const string AddSobFee = "AddSobFee";
@@ -40,6 +39,7 @@ namespace ByteAwesome
         public const string UpRankFromTeamToEnterprise = "UpRankFromTeamToEnterprise";
         public const string TransferDayLimit = "TransferDayLimit";
         public const string HugeAmountHoldingValue = "HugeAmountHoldingValue";
+        public const string TransferFreeCount = "TransferFreeCount";
     }
     public static class NotifyEventNames
     {

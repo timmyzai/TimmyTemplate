@@ -19,7 +19,7 @@ namespace ByteAwesome
             try
             {
                 var clientIpInfo = ExtractRealAndForwardedIp(context);
-                if (clientIpInfo == null)
+                if (clientIpInfo is null)
                 {
                     context.Response.StatusCode = 403;
                     return;

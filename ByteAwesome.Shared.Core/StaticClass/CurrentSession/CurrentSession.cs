@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace ByteAwesome
 {
-    public class CurrentSession
+    public static class CurrentSession
     {
         private static IHttpContextAccessor _httpContextAccessor;
         public static void Configure(IHttpContextAccessor httpContextAccessor)
@@ -32,8 +32,8 @@ namespace ByteAwesome
         }
         public static DeviceInfo GetUserDeviceInfo()
         {
-            var deviceInfo = _httpContextAccessor.HttpContext.Items["DeviceInfo"] as DeviceInfo;
-            if (deviceInfo == null)
+            var deviceInfo = _httpContextAccessor?.HttpContext?.Items["DeviceInfo"] as DeviceInfo;
+            if (deviceInfo is null)
             {
                 return new DeviceInfo();
             }
@@ -41,8 +41,8 @@ namespace ByteAwesome
         }
         public static LocationInfo GetUserLocationInfo()
         {
-            var locationInfo = _httpContextAccessor.HttpContext.Items["GeoLocation"] as LocationInfo;
-            if (locationInfo == null)
+            var locationInfo = _httpContextAccessor?.HttpContext?.Items["GeoLocation"] as LocationInfo;
+            if (locationInfo is null)
             {
                 return new LocationInfo();
             }
@@ -50,19 +50,17 @@ namespace ByteAwesome
         }
         public static Guid GetUserId()
         {
-            var _user = _httpContextAccessor?.HttpContext?.User;
-            var _claim = _user?.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
-            if (_claim != null && Guid.TryParse(_claim.Value, out Guid userId))
+            var _claim = _httpContextAccessor?.HttpContext?.User.FindFirst(x => x.Type == ClaimTypes.NameIdentifier);
+            if (_claim is not null && Guid.TryParse(_claim.Value, out Guid userId) && userId != Guid.Empty)
             {
                 return userId;
-            };
-            throw new Exception($"{ErrorCodes.General.PleaseLogin} - {LanguageService.Translate(ErrorCodes.General.PleaseLogin)}");
+            }
+            throw new AppException(ErrorCodes.General.PleaseLogin);
         }
         public static string GetUserName()
         {
-            var _user = _httpContextAccessor?.HttpContext?.User;
-            var _claim = _user?.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name);
-            if (_claim != null && !String.IsNullOrEmpty(_claim.Value))
+            var _claim = _httpContextAccessor?.HttpContext?.User.FindFirst(x => x.Type == ClaimTypes.Name);
+            if (_claim is not null && !String.IsNullOrEmpty(_claim.Value))
             {
                 return _claim.Value;
             };
@@ -70,9 +68,8 @@ namespace ByteAwesome
         }
         public static string GetEmailAddress()
         {
-            var _user = _httpContextAccessor?.HttpContext?.User;
-            var _claim = _user?.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Email);
-            if (_claim != null && !String.IsNullOrEmpty(_claim.Value))
+            var _claim = _httpContextAccessor?.HttpContext?.User.FindFirst(x => x.Type == ClaimTypes.Email);
+            if (_claim is not null && !String.IsNullOrEmpty(_claim.Value))
             {
                 return _claim.Value;
             };
@@ -80,9 +77,8 @@ namespace ByteAwesome
         }
         public static string GetPhoneNumber()
         {
-            var _user = _httpContextAccessor?.HttpContext?.User;
-            var _claim = _user?.Claims.FirstOrDefault(x => x.Type == ClaimTypes.MobilePhone);
-            if (_claim != null && !String.IsNullOrEmpty(_claim.Value))
+            var _claim = _httpContextAccessor?.HttpContext?.User.FindFirst(x => x.Type == ClaimTypes.MobilePhone);
+            if (_claim is not null && !String.IsNullOrEmpty(_claim.Value))
             {
                 return _claim.Value;
             };
@@ -90,9 +86,8 @@ namespace ByteAwesome
         }
         public static string GetUserRoleName()
         {
-            var _user = _httpContextAccessor?.HttpContext?.User;
-            var _claim = _user?.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Role);
-            if (_claim != null && !String.IsNullOrEmpty(_claim.Value))
+            var _claim = _httpContextAccessor?.HttpContext?.User.FindFirst(x => x.Type == ClaimTypes.Role);
+            if (_claim is not null && !String.IsNullOrEmpty(_claim.Value))
             {
                 return _claim.Value;
             };
@@ -100,17 +95,25 @@ namespace ByteAwesome
         }
         public static string GetUserLoginSessionId()
         {
-            var _user = _httpContextAccessor?.HttpContext?.User;
-            var _claim = _user?.Claims.FirstOrDefault(x => x.Type == "UserLoginSessionId");
-            if (_claim != null && !String.IsNullOrEmpty(_claim.Value))
+            var _claim = _httpContextAccessor?.HttpContext?.User.FindFirst(x => x.Type == "UserLoginSessionId");
+            if (_claim is not null && !String.IsNullOrEmpty(_claim.Value))
             {
                 return _claim.Value;
             };
             return null;
         }
+        public static string GetUserLanguage()
+        {
+            var _languageCode = _httpContextAccessor?.HttpContext?.Items?["UserLanguage"] as string;
+            if (_languageCode is not null)
+            {
+                return _languageCode;
+            }
+            return "en";
+        }
         public class CurrentUser : UserIdentityProfileDto
         {
-            public Guid? Id { get; set; }
+            public Guid Id { get; set; }
         }
     }
 }

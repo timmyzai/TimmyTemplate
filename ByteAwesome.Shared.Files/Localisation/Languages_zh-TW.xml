@@ -30,8 +30,8 @@
         <text name="U1005">用戶添加失敗。</text>
         <text name="U1006">用戶不存在。</text>
         <text name="U1007">用戶登錄失敗。</text>
-        <!-- <text name="U1008">用戶更新失敗。</text> -->
-        <!-- <text name="U1009">用戶刪除失敗。</text> -->
+        <text name="U1008">兩因素驗證已啟用。</text>
+        <text name="U1009">啟用或禁用密鑰時失敗。</text>
         <text name="U1010">獲取所有用戶失敗。</text>
         <text name="U1011">發送確認電子郵件失敗。</text>
         <text name="U1012">無效的用戶登錄身份。</text>
@@ -46,7 +46,7 @@
         <text name="U1021">新密碼與確認密碼不匹配。</text>
         <text name="U1022">更改用戶密碼時發生異常。</text>
         <text name="U1023">更新用戶詳細信息時發生異常。</text>
-        <!-- <text name="U1024">更新電子郵件地址時發生異常。</text> -->
+        <text name="U1024">使用者登出失敗。</text>
         <text name="U1025">更新電話號碼時發生異常。</text>
         <text name="U1026">獲取兩步驗證信息時發生異常。</text>
         <text name="U1027">啓用或禁用兩步驗證信息時發生異常。</text>
@@ -58,19 +58,30 @@
         <text name="U1033">通過電子郵件更改用戶密碼時出錯。</text>
         <text name="U1034">AccessToken GRPC服務器出現錯誤。 信息：</text>
         <text name="U1035">解密時出錯。</text>
-        <!-- <text name="U1036">發送電子郵件失敗。</text> -->
-        <!-- <text name="U1037">發送短信失敗。</text> -->
+        <text name="U1036">在獲取我的使用者登入會話時出錯。</text>
+        <text name="U1037">請啟用密鑰以執行此操作。</text>
         <text name="U1038">SaveChanges已經被調用。</text>
         <text name="U1039">保存更改時出錯。</text>
         <text name="U1040">處置更改時出錯。</text>
         <text name="U1041">嘗試按名稱獲取角色時發生異常。 具有角色 {0} 的用戶不存在。</text>
         <text name="U1042">當前用戶沒有電話號碼。</text>
-        <!-- <text name="U1043">電話號碼與當前電話號碼不匹配。</text> -->
+        <text name="U1043">待驗證的憑證是必需的。</text>
         <text name="U1044">用戶已經存在。</text>
         <text name="U1045">OTP錯誤。</text>
         <text name="U1046">電話號碼已經驗證。</text>
         <text name="U1047">按使用者取得使用者角色時發生異常。</text>
         <text name="U1048">User GRPC伺服器遇到錯誤。</text>
+        <text name="U1050">註冊密鑰時出錯。</text>
+        <text name="U1051">新增密鑰憑證時出錯。</text>
+        <text name="U1052">透過密鑰憑證登錄時出錯。</text>
+        <text name="U1053">斷言密鑰憑證時出錯。</text>
+        <text name="U1054">您的通行密碼已啟用。</text>
+        <text name="U1055">請註冊您的密碼鑰匙。</text>
+        <text name="U1056">請啟用雙重身份驗證。</text>
+        <text name="U1057">驗證通行密鑰憑證時出錯。</text>
+        <text name="U1058">電子郵件已驗證。</text>
+        <text name="U1059">您的通行密碼已停用。</text>
+        <text name="U1060">您的通行密碼未在這部手機註冊。</text>
         <!-- Secret API -->
         <text name="OtpActionType.EmailVerification">首次登錄驗證電子郵件</text>
         <text name="S1001">生成訪問令牌失敗。</text>
@@ -83,12 +94,14 @@
         <text name="S1008">OTP 已過期。</text>
         <text name="S1009">OTP 已被使用。</text>
         <text name="S1010">無法創建或更新現有的雙因素認證。</text>
-        <!-- <text name="S1011">無效的用戶 ID。</text> -->
+        <text name="S1011">創建或更新KMS密鑰失敗。</text>
         <text name="S1012">無效的雙因素驗證碼。</text>
         <text name="S1013">{0}。請請求OTP。</text>
         <text name="S1014">在獲取有效 OTP 按值時發生異常。</text>
-        <!-- <text name="S1015">按用戶 ID 獲取時發生異常。</text> -->
+        <text name="S1015">驗證簽名和解密數據失敗。</text>
         <text name="S1016">60秒內已經請求過OTP。</text>
+        <text name="S1017">無法找到使用者的雙因素驗證信息。請請求進行雙因素驗證。</text>
+        <text name="S1018">請請求KMS密鑰。</text>
         <!-- Walllet API -->
         <text name="W1001">無法找到錢包組。</text>
         <text name="W1002">您無權執行此操作。</text>
@@ -98,8 +111,8 @@
         <text name="W1006">MspUsers和SobUsers必須至少為2。</text>
         <text name="W1007">Msp批准人數和Sob批准人數必須至少為2。</text>
         <text name="W1008">無效的Msp用戶 {0}。此用戶在系統中不存在。</text>
-        <text name="W1009">未經授權的訪問。</text>
-        <text name="W1010">錢包已配置為多簽。</text>
+        <text name="W1009">用戶不擁有該錢包組。</text>
+        <text name="W1010">升級用戶等級失敗。</text>
         <text name="W1011">WpUsers不能具有重複的用戶ID。</text>
         <text name="W1012">WpUsers必須包含當前用戶ID。</text>
         <text name="W1013">WpUsers不能包含委托用戶ID。</text>
@@ -113,12 +126,12 @@
         <text name="W1021">Sob批准人數必須至少為2。</text>
         <text name="W1022">SobTriggerWaitingTime必須至少為60秒。</text>
         <text name="W1023">無效的Sob用戶 {0}。此用戶在系統中不存在。</text>
-        <text name="W1024">在AddOrUpdateSobUserToMsp時需要付款。</text>
-        <text name="W1025">在AddOrUpdateSobUserToMsp時發生異常。</text>
-        <text name="W1026">在GetMultiSignPolicyByWalletGroupId時發生異常。</text>
-        <text name="W1027">找不到付款訂單。</text>
-        <text name="W1028">付款訂單不處于待處理狀態。</text>
-        <text name="W1029">無法繼續處理付款訂單。</text>
+        <text name="W1024">代簽要求無效。</text>
+        <text name="W1025">獲取訂單失敗。</text>
+        <text name="W1026">取消訂單失敗。</text>
+        <text name="W1027">找不到訂單。</text>
+        <text name="W1028">訂單不處于待處理狀態。</text>
+        <text name="W1029">無法繼續處理訂單。</text>
         <text name="W1030">錢包余額不足。</text>
         <text name="W1031">找不到多簽信息。</text>
         <text name="W1032">不允許在錢包組之間進行轉賬。</text>
@@ -149,9 +162,9 @@
         <text name="W1057">自定義錢包已存在。</text>
         <text name="W1058">在 {0} 錯誤的翻譯中包含錯誤消息。</text>
         <text name="W1059">{0} 時需要付款。</text>
-        <text name="W1060">MspUsers不能具有重複的用戶ID。重複的ID：{0}。</text>
-        <text name="W1061">MspUsers必須包含當前用戶ID。</text>
-        <text name="W1062">錢包 {0} 是一個保險庫。</text>
+        <text name="W1160">代簽批准人數不符合要求</text>
+        <text name="W1161">代簽總數不符合要求</text>
+        <text name="W1062">無法找到保險庫。</text>
         <text name="W1063">Msp批准人數必須至少為2。</text>
         <text name="W1064">在WalletGroup中找不到具有ID {0} 的金庫。</text>
         <text name="W1065">無法找到要委托的錢包。</text>
@@ -168,7 +181,7 @@
         <text name="W1076">無法找到錢包。</text>
         <text name="W1077">自定義錢包已存在。</text>
         <text name="W1078">在 {0} 錯誤的翻譯中包含錯誤消息。</text>
-        <text name="W1079">{0} 時需要付款。</text>
+        <text name="W1079">必須注明主簽</text>
         <text name="W1080">MspUsers不能具有重複的用戶ID。重複的ID：{0}。</text>
         <text name="W1081">MspUsers必須包含當前用戶ID。</text>
         <text name="W1082">MspUsers必須至少為2。</text>
@@ -317,6 +330,12 @@
         <text name="CP1020">"這不是可重新領取的活動，重新領取冷卻天數必須為空。"</text>
         <text name="CP1021">未找到獎勵。</text>
         <text name="CP1022">通過 {0} 獲取活動時發生錯誤。</text>
+        <!-- CryptoFinance API -->
+        <text name="F1001">貨幣金額和加密貨幣金額均為空。</text>
+        <text name="F1002">無效的貨幣金額或加密貨幣金額。</text>
+        <text name="F1003">無效的貨幣金額。</text>
+        <text name="F1004">無效的支付操作。</text>
+
         <!-- Messages - General -->
         <text name="Hello">你好，{0}，</text>
         <text name="VerifyPhoneNumber">電話號碼驗證</text>

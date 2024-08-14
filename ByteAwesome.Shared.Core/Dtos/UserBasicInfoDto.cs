@@ -33,8 +33,10 @@ namespace ByteAwesome
     public class UpgradeRankDto
     {
         public UserRanks Rank { get; set; }
-        [JsonIgnore]
-        public Guid? PaymentOrderId { get; set; }
-
+    }
+    public class UserIdAndUserName
+    {
+        public Guid Id { get; set; }
+        public string UserName { get; set; }
     }
 }

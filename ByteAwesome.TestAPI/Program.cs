@@ -1,25 +1,23 @@
-using BenchmarkDotNet.Running;
+using Amazon;
+using Amazon.SecretsManager;
+using Amazon.SecretsManager.Model;
+using ByteAwesome.StartupConfig;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
+using Newtonsoft.Json;
 using Serilog;
 
 namespace ByteAwesome.TestAPI
 {
     public static class Program
     {
+        private static AmazonSecretsManagerClient awsClient;
+
         public static int Main(string[] args)
         {
             Log.Logger = new LoggerConfiguration()
             .WriteTo.Console()
             .CreateBootstrapLogger();
             Log.Information("Starting Up Server");
-            
-            if (args.Contains("--benchmark"))
-            {
-                Log.Information("Running benchmarks...");
-                BenchmarkRunner.Run<WalletApiBenchmark>();
-                return 0;
-            }
-
             try
             {
                 CreateHostBuilder(args).Build().Run();
@@ -39,17 +37,22 @@ namespace ByteAwesome.TestAPI
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .UseSerilog((context, services, configuration) => configuration
-                    .ReadFrom.Configuration(context.Configuration)
-                    .ReadFrom.Services(services)
-                    .Enrich.FromLogContext()
-                    .WriteTo.Console())
+                .ConfigureAppConfiguration((context, config) =>
+                {
+                    var builtConfig = config.Build();
+                    var environmentName = context.HostingEnvironment.EnvironmentName;
+                    if(environmentName != Environments.Development)
+                    {
+                        LoadAwsSecrets(config, builtConfig["AWS:SecretManager:SecretId"], builtConfig["AWS:SecretManager:Region"]);
+                    }
+                })
+                .UseSerilog(StartUpHelper.ConfigureSerilog)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.ConfigureKestrel(
                         options =>
                         {
-                            options.ListenLocalhost(7182, listenOptions =>
+                            options.ListenLocalhost(7186, listenOptions =>
                             {
                                 listenOptions.Protocols = HttpProtocols.Http1;
                                 // listenOptions.UseHttps();//when local need to disable
@@ -57,5 +60,25 @@ namespace ByteAwesome.TestAPI
                         });
                     webBuilder.UseStartup<Startup>();
                 });
+
+        private static void LoadAwsSecrets(IConfigurationBuilder config, string secretId, string region)
+        {            
+            if (!string.IsNullOrEmpty(secretId))
+            {
+                if (awsClient is null)
+                {
+                    awsClient = new AmazonSecretsManagerClient(RegionEndpoint.GetBySystemName(region));
+                }
+                
+                var response = awsClient.GetSecretValueAsync(new GetSecretValueRequest { SecretId = secretId }).Result;
+                var secretString = response.SecretString;
+                if (secretString is not null)
+                {
+                    var secrets = JsonConvert.DeserializeObject<Dictionary<string, string>>(secretString);
+                    config.AddInMemoryCollection(secrets);
+                }
+            }
+        }
+    
     }
 }

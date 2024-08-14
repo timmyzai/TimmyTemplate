@@ -9,7 +9,6 @@ namespace ByteAwesome.TestAPI
             var mappingConfig = new MapperConfiguration(config =>
             {
             });
-
             return mappingConfig;
         }
     }

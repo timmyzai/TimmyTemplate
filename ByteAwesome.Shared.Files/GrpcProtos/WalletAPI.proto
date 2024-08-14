@@ -10,6 +10,8 @@ service WalletGrpcService {
   rpc CreateWalletGroup(CreateWalletGroupProtoDto) returns (CreateWalletGroupResponse);
   rpc GetActiveSymbol(ActiveSymbolProtoDto) returns (ActiveSymbolsResponse);
   rpc GetActiveSymbols(google.protobuf.Empty) returns (ActiveSymbolsResponse);
+  rpc GetAdminWalletAddressByNetwork(AdminWalletAddressByNetworkProtoDto) returns (AdminWalletAddressByNetworkResponse);
+  rpc UpdateAssetBalance(UpdateAssetBalanceProtoDto) returns (UpdateAssetBalanceResponse);
 }
 
 message ClaimRewardProtoDto {
@@ -41,10 +43,35 @@ message ActiveSymbolsResponse {
 
 message CreateWalletGroupProtoDto {
   string user_id = 1;
-  string languageCode = 2;
+  string user_name = 2;
+  string email_address = 3;
+  string phone_number = 4;
 }
 
 message CreateWalletGroupResponse {
+  bool success = 1;
+  string error_message = 2;
+}
+
+message AdminWalletAddressByNetworkProtoDto {
+  string userWalletGroupId = 1;
+  string userId = 2;
+  string network = 3;
+}
+
+message AdminWalletAddressByNetworkResponse {
+  string address = 1;
+  string error_message = 3;
+}
+
+message UpdateAssetBalanceProtoDto {
+  string walletGroupId = 1;
+  string symbol = 2;
+  string network = 3;
+  double amount = 4;
+}
+
+message UpdateAssetBalanceResponse {
   bool success = 1;
   string error_message = 2;
 }

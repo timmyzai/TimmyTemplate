@@ -1,9 +1,10 @@
+using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace ByteAwesome.Services
 {
-public class AuditingService
+    public class AuditingService
     {
         private readonly DbContext context;
 
@@ -18,42 +19,61 @@ public class AuditingService
             {
                 ProcessAuditedEntities(AuditedEntries);
             }
-        }
-        private void ProcessAuditedEntities(IEnumerable<EntityEntry> entries)
-        {
-            var addedEntities = entries.Where(entry => entry.State == EntityState.Added).Select(entry => entry.Entity).ToList();
-            var modifiedEntities = entries.Where(entry => entry.State == EntityState.Modified).Select(entry => entry.Entity).ToList();
-            var currentTime = DateTime.UtcNow;
-            string userName = CurrentSession.GetUserName() ?? "system";
-            if (addedEntities.Any())
+            void ProcessAuditedEntities(IEnumerable<EntityEntry> entries)
             {
-                foreach (var entity in addedEntities)
+                var addedEntities = entries.Where(entry => entry.State == EntityState.Added).Select(entry => entry.Entity).ToList();
+                var modifiedEntities = entries.Where(entry => entry.State == EntityState.Modified).Select(entry => entry.Entity).ToList();
+                var currentTime = DateTime.UtcNow;
+                string userName = CurrentSession.GetUserName() ?? "system";
+                if (addedEntities.Any())
                 {
-                    if (entity is IAuditedEntity IntAuditedEntity)
+                    foreach (var entity in addedEntities)
                     {
-                        IntAuditedEntity.CreatedTime = currentTime;
-                        IntAuditedEntity.CreatedBy = userName;
-                    }
-                }
-            }
-            if (modifiedEntities.Any())
-            {
-                foreach (var entity in modifiedEntities)
-                {
-                    if (entity is IAuditedEntity AuditedEntity)
-                    {
-                        AuditedEntity.LastModifiedTime = currentTime;
-                        AuditedEntity.LastModifiedBy = userName;
-                    }
-                    if (entity is IFullyAuditedEntity FullyAuditedEntity)
-                    {
-                        if (FullyAuditedEntity.IsDeleted == true)
+                        if (entity is IAuditedEntity IntAuditedEntity)
                         {
-                            FullyAuditedEntity.DeletedTime = currentTime;
-                            FullyAuditedEntity.DeletedBy = userName;
+                            IntAuditedEntity.CreatedTime = currentTime;
+                            IntAuditedEntity.CreatedBy = userName;
                         }
                     }
                 }
+                if (modifiedEntities.Any())
+                {
+                    foreach (var entity in modifiedEntities)
+                    {
+                        if (entity is IAuditedEntity AuditedEntity)
+                        {
+                            AuditedEntity.LastModifiedTime = currentTime;
+                            AuditedEntity.LastModifiedBy = userName;
+                        }
+                        if (entity is IFullyAuditedEntity FullyAuditedEntity)
+                        {
+                            if (FullyAuditedEntity.IsDeleted == true)
+                            {
+                                FullyAuditedEntity.DeletedTime = currentTime;
+                                FullyAuditedEntity.DeletedBy = userName;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        public void ApplyGlobalFilters(ModelBuilder modelBuilder)
+        {
+            foreach (var entityType in modelBuilder.Model.GetEntityTypes())
+            {
+                if (typeof(IFullyAuditedEntity).IsAssignableFrom(entityType.ClrType))
+                {
+                    var filter = GetFilterExpression(entityType.ClrType);
+                    modelBuilder.Entity(entityType.ClrType).HasQueryFilter(filter);
+                }
+            }
+            LambdaExpression GetFilterExpression(Type entityType) //soft delete filter
+            {
+                var parameter = Expression.Parameter(entityType, "e");
+                var property = Expression.Property(parameter, nameof(IFullyAuditedEntity.IsDeleted));
+                var condition = Expression.MakeBinary(ExpressionType.Equal, property, Expression.Constant(false));
+                var lambda = Expression.Lambda(condition, parameter);
+                return lambda;
             }
         }
     }

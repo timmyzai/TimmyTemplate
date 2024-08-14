@@ -1,75 +1,99 @@
-using System.Text.Json.Serialization;
+using System.Text;
 
 namespace ByteAwesome
 {
     public class PagedList<TEntityDto> : List<TEntityDto>
     {
-        public int CurrentPage { get; }
-        public int TotalPages { get; }
-        public int PageSize { get; }
-        public int TotalCount { get; }
-        public bool HasPrevious => CurrentPage > 1;
-        public bool HasNext => CurrentPage < TotalPages;
-        public PagedList() { }
-        public PagedList(List<TEntityDto> items, int count, int pageNumber, int pageSize)
+        public IEnumerable<TEntityDto> Items { get; private set; }
+        public int TotalCount { get; private set; }
+        public int PageSize { get; private set; }
+        public int TotalPages { get; private set; }
+        public string NextCursor { get; private set; }
+        public string PrevCursor { get; private set; }
+        public PagedList(IEnumerable<TEntityDto> items, int totalCount, int pageSize, int totalPages, string nextCursor, string prevCursor)
         {
-            TotalCount = count;
+            Items = items;
+            TotalCount = totalCount;
             PageSize = pageSize;
-            CurrentPage = pageNumber;
-            TotalPages = (int)Math.Ceiling(count / (double)pageSize);
-            AddRange(items);
+            TotalPages = totalPages;
+            NextCursor = nextCursor;
+            PrevCursor = prevCursor;
         }
-        public static PagedList<TEntityDto> ToPagedList(IEnumerable<TEntityDto> source, int pageNumber, int pageSize)
+
+        public static PagedList<TEntityDto> ToPagedList(IEnumerable<TEntityDto> items, PaginationRequestDto paging)
         {
-            var count = source.Count();
-            var items = source.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList();
-            return new PagedList<TEntityDto>(items, count, pageNumber, pageSize);
+            var totalPages = (int)Math.Ceiling(paging.TotalCount / (double)paging.PageSize);
+            string nextCursor = null;
+            string prevCursor = null;
+
+            if (typeof(IAuditedEntityDto).IsAssignableFrom(typeof(TEntityDto)) && items.Any())
+            {
+                var firstItem = items.First() as IAuditedEntityDto;
+                var lastItem = items.Last() as IAuditedEntityDto;
+                // Generate previous cursor if not on the first page
+                prevCursor = paging.HasPreviousCursor || paging.Cursor is not null || items.Count() < paging.PageSize
+                    ? CursorHelper.Encrypt(CursorConst.PrevPrefix, firstItem.CreatedTime.ToString("o"), CursorConst.PrevKey)
+                    : null;
+
+                // Generate next cursor if the page is full
+                nextCursor = items.Count() == paging.PageSize
+                    ? CursorHelper.Encrypt(CursorConst.NextPrefix, lastItem.CreatedTime.ToString("o"), CursorConst.NextKey)
+                    : null;
+            }
+            return new PagedList<TEntityDto>(
+                items,
+                paging.TotalCount,
+                paging.PageSize,
+                totalPages,
+                nextCursor,
+                prevCursor
+            );
         }
     }
-
-    public interface IPagedResultRequestDto
+    public class FilterPaginationRequestDto : PaginationRequestDto
     {
-        string Cursor { get; set; }
-        int PageNumber { get; set; }
-        bool IsUnlimited { get; set; }
-        int PageSize { get; set; }
-    }
-
-    public class PagedResultRequestDto : IPagedResultRequestDto
-    {
-        const int maxPageSize = 150;
-        public string Cursor { get; set; } = null; // Cursor can be a GUID, timestamp, or any other sortable field
-        public int PageNumber { get; set; } = 1;
-        private int _pageSize = 100;
-        [JsonIgnore]
-        public bool IsUnlimited { get; set; } = false;
-
-        public int PageSize
-        {
-            get
-            {
-                return IsUnlimited ? int.MaxValue : _pageSize;
-            }
-            set
-            {
-                _pageSize = (value > maxPageSize) ? maxPageSize : value;
-            }
-        }
-    }
-
-    public interface IAllPagedRequestDto : IPagedResultRequestDto
-    {
-        string Keyword { get; set; }
-        bool? IsActive { get; set; }
-        DateTime? FromDate { get; set; }
-        DateTime? ToDate { get; set; }
-    }
-
-    public class AllPagedRequestDto : PagedResultRequestDto, IAllPagedRequestDto
-    {
-        public string? Keyword { get; set; }
-        public bool? IsActive { get; set; }
         public DateTime? FromDate { get; set; }
         public DateTime? ToDate { get; set; }
     }
+    public class PaginationRequestDto
+    {
+        public PaginationRequestDto() { }
+        const int maxPageSize = 150;
+        public string Cursor { get; set; }
+        public List<SortParameter> SortParameters { get; set; }
+        private int _pageSize = 50;
+        public int PageSize
+        {
+            get => _pageSize;
+            set => _pageSize = value > maxPageSize ? maxPageSize : value;
+        }
+        internal bool HasPreviousCursor => Cursor is not null && Cursor.StartsWith(CursorConst.PrevPrefix);
+        internal bool HasNextCursor => Cursor is not null && Cursor.StartsWith(CursorConst.NextPrefix);
+        internal int TotalCount { get; private set; }
+        internal void SetTotalCount(int total)
+        {
+            TotalCount = total;
+        }
+    }
+    public class BO_PaginationRequestDto : PaginationRequestDto
+    {
+        public List<FilterParameter> FilterParameters { get; set; }
+    }
+    public static class CursorHelper
+    {
+        public static string Encrypt(string prefix, string text, string key)
+        {
+            byte[] bytesToEncode = Encoding.UTF8.GetBytes(text);
+            var adjusted = prefix + Convert.ToBase64String(bytesToEncode);
+            return adjusted;
+        }
+
+        public static string Decrypt(string prefix, string encodedData, string key)
+        {
+            var adjusted = encodedData.Substring(prefix.Length);
+            byte[] decodedBytes = Convert.FromBase64String(adjusted);
+            return Encoding.UTF8.GetString(decodedBytes);
+        }
+    }
+
 }

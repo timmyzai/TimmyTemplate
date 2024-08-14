@@ -5,11 +5,11 @@ namespace ByteAwesome
 {
     public class DeviceInfoMiddleware
     {
-        private readonly RequestDelegate _next;
+        private readonly RequestDelegate next;
 
         public DeviceInfoMiddleware(RequestDelegate next)
         {
-            _next = next;
+            this.next = next;
         }
 
         public async Task Invoke(HttpContext context)
@@ -17,7 +17,7 @@ namespace ByteAwesome
             var userAgent = context.Request.Headers["User-Agent"].ToString();
             var deviceInfo = ParseUserAgent(userAgent);
             context.Items["DeviceInfo"] = deviceInfo;
-            await _next(context);
+            await next(context);
         }
 
         private DeviceInfo ParseUserAgent(string userAgent)

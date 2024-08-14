@@ -17,13 +17,13 @@ namespace ByteAwesome
         }
     }
     [Route("api/v{version:apiVersion}/[controller]/[action]")]
-    public class BaseController_V2 : BaseController { }
+    public class BaseController_Version : BaseController { }
 
-    public class BaseController_V2<TEntityDto, TCreateDto, TKey, TRepository> : BaseController_V2 where TRepository : IBaseRepository<TEntityDto, TCreateDto, TKey>
+    public class BaseController_Version<TEntityDto, TCreateDto, TKey, TRepository> : BaseController_Version where TRepository : IBaseRepository<TEntityDto, TCreateDto, TKey>
     {
         protected readonly TRepository repository;
 
-        public BaseController_V2(TRepository repository)
+        public BaseController_Version(TRepository repository)
         {
             this.repository = repository;
         }
@@ -41,6 +41,7 @@ namespace ByteAwesome
             this.repository = repository;
         }
     }
+    [AllowAnonymous]
     [ApiExplorerSettings(IgnoreApi = true)]
     [Route("webhooks/[controller]/[action]")]
     public class WebHook_BaseController : BaseController { }

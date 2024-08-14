@@ -14,11 +14,8 @@ namespace ByteAwesome
     {
         protected readonly TRepository repository;
         public CRUD_AdminBaseController(TRepository repository) { this.repository = repository; }
-
-        [HttpGet]
         public virtual async Task<ActionResult<ResponseDto<TEntityDto>>> GetById(TKey id)
         {
-            string logErrorMessage = string.Format(LanguageService.Translate(ErrorCodes.General.EntityGetById), id);
             var response = new ResponseDto<TEntityDto>();
             try
             {
@@ -27,19 +24,16 @@ namespace ByteAwesome
             }
             catch (AppException ex)
             {
-                ActionResultHandler.HandleException(ex, response, logErrorMessage, ex.StatusCode, ex.JsonData);
+                ActionResultHandler.HandleException(ex, response, ex.Message, ex.StatusCode, ex.JsonData);
             }
             catch (Exception ex)
             {
-                ActionResultHandler.HandleException(ex, response, logErrorMessage);
+                ActionResultHandler.HandleException(ex, response);
             }
             return Json(response);
         }
-
-        [HttpPost]
         public virtual async Task<ActionResult<ResponseDto<TEntityDto>>> Add([FromBody] TCreateDto input)
         {
-            string logErrorMessage = LanguageService.Translate(ErrorCodes.General.EntityAdd);
             var response = new ResponseDto<TEntityDto>();
             try
             {
@@ -47,19 +41,16 @@ namespace ByteAwesome
             }
             catch (AppException ex)
             {
-                ActionResultHandler.HandleException(ex, response, logErrorMessage, ex.StatusCode, ex.JsonData);
+                ActionResultHandler.HandleException(ex, response, ex.Message, ex.StatusCode, ex.JsonData);
             }
             catch (Exception ex)
             {
-                ActionResultHandler.HandleException(ex, response, logErrorMessage);
+                ActionResultHandler.HandleException(ex, response);
             }
             return Json(response);
         }
-
-        [HttpPut]
         public virtual async Task<ActionResult<ResponseDto<TEntityDto>>> Update([FromBody] TEntityDto input)
         {
-            string logErrorMessage = LanguageService.Translate(ErrorCodes.General.EntityUpdate);
             var response = new ResponseDto<TEntityDto>();
             try
             {
@@ -68,19 +59,16 @@ namespace ByteAwesome
             }
             catch (AppException ex)
             {
-                ActionResultHandler.HandleException(ex, response, logErrorMessage, ex.StatusCode, ex.JsonData);
+                ActionResultHandler.HandleException(ex, response, ex.Message, ex.StatusCode, ex.JsonData);
             }
             catch (Exception ex)
             {
-                ActionResultHandler.HandleException(ex, response, logErrorMessage);
+                ActionResultHandler.HandleException(ex, response);
             }
             return Json(response);
         }
-
-        [HttpDelete]
         public virtual async Task<ActionResult<ResponseDto<TEntityDto>>> Delete(TKey id)
         {
-            string logErrorMessage = LanguageService.Translate(ErrorCodes.General.EntityDelete);
             var response = new ResponseDto<TEntityDto>();
             try
             {
@@ -89,11 +77,11 @@ namespace ByteAwesome
             }
             catch (AppException ex)
             {
-                ActionResultHandler.HandleException(ex, response, logErrorMessage, ex.StatusCode, ex.JsonData);
+                ActionResultHandler.HandleException(ex, response, ex.Message, ex.StatusCode, ex.JsonData);
             }
             catch (Exception ex)
             {
-                ActionResultHandler.HandleException(ex, response, logErrorMessage);
+                ActionResultHandler.HandleException(ex, response);
             }
             return Json(response);
         }

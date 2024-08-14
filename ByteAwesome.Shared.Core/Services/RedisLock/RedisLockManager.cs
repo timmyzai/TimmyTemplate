@@ -1,3 +1,4 @@
+using Polly.Retry;
 using RedLockNet;
 using RedLockNet.SERedis;
 using RedLockNet.SERedis.Configuration;
@@ -13,30 +14,40 @@ namespace ByteAwesome.Services
 
     public class RedisLockManager : IRedisLockManager
     {
-        private readonly RedLockFactory redLockFactory;
+        private readonly RedLockFactory _redLockFactory;
+        private readonly AsyncRetryPolicy<IRedLock> _retryPolicy;
 
         public RedisLockManager(IConnectionMultiplexer redis)
         {
+            var configurationOptions = ConfigurationOptions.Parse(redis.Configuration);
             var endPoints = redis.GetEndPoints();
-            var redisLockEndPoints = endPoints.Select(endpoint => new RedLockEndPoint { EndPoint = endpoint }).ToList();
-            this.redLockFactory = RedLockFactory.Create(redisLockEndPoints);
+            var redisLockEndPoints = endPoints.Select(endpoint =>
+                new RedLockEndPoint
+                {
+                    EndPoint = endpoint,
+                    Password = configurationOptions.Password
+                }).ToList();
+            _redLockFactory = RedLockFactory.Create(redisLockEndPoints);
+            _retryPolicy = PolicyBuilder.CreateRedisLockRetryPolicy(retryCount: 5);
         }
 
         public async Task<IDisposable> WaitAsync(string key, TimeSpan? expiry = null)
         {
-            expiry = expiry ?? TimeSpan.FromMinutes(2);
-            IRedLock redisLock;
-            do
+            expiry ??= TimeSpan.FromMinutes(2);
+
+            IRedLock redisLock = await _retryPolicy.ExecuteAsync(async () =>
             {
-                redisLock = await this.redLockFactory.CreateLockAsync(key, expiry.Value);
-                if (!redisLock.IsAcquired)
-                {
-                    await Task.Delay(500);
-                }
+                return await _redLockFactory.CreateLockAsync(key, expiry.Value);
+            });
+
+            if (!redisLock.IsAcquired)
+            {
+                throw new Exception("Failed to acquire Redis lock after multiple retries.");
             }
-            while (!redisLock.IsAcquired);
+
             return redisLock;
         }
+
         public async Task<bool> ReleaseAsync(IDisposable redisLock)
         {
             redisLock?.Dispose();
