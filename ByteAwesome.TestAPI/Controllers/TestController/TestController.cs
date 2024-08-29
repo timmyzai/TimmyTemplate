@@ -1,7 +1,4 @@
-using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Authorization;
-using ByteAwesome.Services;
 
 namespace ByteAwesome.TestAPI.Controllers
 {
@@ -10,12 +7,11 @@ namespace ByteAwesome.TestAPI.Controllers
 
         public TestController()
         { }
-        public ActionResult<ResponseDto<string>> GetCampaignById()
+        public ActionResult<ResponseDto<string>> GetHelloWorld()
         {
             var response = new ResponseDto<string>();
             try
             {
-                var currentUserId = CurrentSession.GetUserId();
                 response.Result = "Hello World";
             }
             catch (AppException ex)

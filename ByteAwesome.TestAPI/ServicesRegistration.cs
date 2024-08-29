@@ -1,5 +1,3 @@
-using ByteAwesome.TestAPI.GrpcClient;
-using ByteAwesome.WalletAPI.Grpc;
 using ByteAwesome.Services;
 using ByteAwesome.TestAPI.Services;
 using ByteAwesome.TestAPI.Modules;
