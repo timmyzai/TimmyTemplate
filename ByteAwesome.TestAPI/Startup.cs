@@ -61,8 +61,7 @@ namespace ByteAwesome.TestAPI
             //Validare Required Field For All API Methods
             services.AddMvc(options => options.Filters.Add(new ValidateModelAttribute()));
             services.AddScoped<ProductRepository>();
-            services.AddScoped( typeof( ICRUD_BaseController<ProductDto, ProductCreate, int>), typeof(CRUD_BaseController<ProductDto, ProductCreate, int,ProductRepository>));
-        }
+         }
         public void Configure(IApplicationBuilder app)
         {
             IHttpContextAccessor httpContextAccessor = app.ApplicationServices.GetService<IHttpContextAccessor>();
