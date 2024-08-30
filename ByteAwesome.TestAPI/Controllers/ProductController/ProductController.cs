@@ -1,4 +1,5 @@
 using ByteAwesome.TestAPI.Models;
+using ByteAwesome.TestAPI.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,12 +9,34 @@ namespace ByteAwesome.TestAPI.Controllers.ProductController;
 public class ProductController : BaseController
 {
     private readonly ICRUD_BaseController<ProductDto, ProductCreate, int> _productController;
-
-    public ProductController(ICRUD_BaseController<ProductDto, ProductCreate, int> productController)
+    private readonly ProductRepository _repository;
+    
+    public ProductController(ICRUD_BaseController<ProductDto, ProductCreate, int> productController,ProductRepository repository)
     {
         _productController = productController;
+        _repository = repository;
     }
 
+    
+    public virtual async Task<ActionResult<ResponseDto<IEnumerable<ProductDto>>>> GetAllProduct()
+    {
+        var response = new ResponseDto<IEnumerable<ProductDto>>();
+        try
+        {
+            var result = await _repository.Get();
+            response.Result = result;
+        }
+        catch (AppException ex)
+        {
+            ActionResultHandler.HandleException(ex, response, ex.Message, ex.StatusCode, ex.JsonData);
+        }
+        catch (Exception ex)
+        {
+            ActionResultHandler.HandleException(ex, response);
+        }
+        return Json(response);
+    }
+    
     [HttpGet]
     public async Task<ActionResult<ResponseDto<ProductDto>>> GetProduct([FromQuery] int productId)
     {
