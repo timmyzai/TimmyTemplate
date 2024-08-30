@@ -4,6 +4,9 @@ using Serilog;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using ByteAwesome.StartupConfig;
+using ByteAwesome.TestAPI.entity;
+using ByteAwesome.TestAPI.Models;
+using ByteAwesome.TestAPI.Repository;
 
 namespace ByteAwesome.TestAPI
 {
@@ -57,6 +60,8 @@ namespace ByteAwesome.TestAPI
             PreInitialize(services);
             //Validare Required Field For All API Methods
             services.AddMvc(options => options.Filters.Add(new ValidateModelAttribute()));
+            services.AddScoped<ProductRepository>();
+            services.AddScoped( typeof( ICRUD_BaseController<ProductDto, ProductCreate, int>), typeof(CRUD_BaseController<ProductDto, ProductCreate, int,ProductRepository>));
         }
         public void Configure(IApplicationBuilder app)
         {
@@ -81,6 +86,12 @@ namespace ByteAwesome.TestAPI
             app.UseMiddleware<LocationInfoMiddleware>();
             app.UseMiddleware<RequestLogContextMiddleware>();
             app.UseMiddleware<LanguageMiddleware>();
+            
+            using (var scope = app.ApplicationServices.CreateScope())
+            {
+                var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+                DbInitializer.Initialize(context);
+            }
 
             StartUpHelper.RegisterEndpoints(ApiVersions, _microServiceApiName, app, RegisterGRPCendpoint);
         }
