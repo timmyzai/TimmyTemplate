@@ -57,9 +57,9 @@ namespace ByteAwesome.TestAPI.Migrations
 
             modelBuilder.Entity("ByteAwesome.TestAPI.entity.Product", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
+                        .HasColumnType("char(36)")
                         .HasColumnOrder(0);
 
                     b.Property<int>("BrandId")

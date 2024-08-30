@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ByteAwesome.TestAPI.Models
 {
-    public class ProductCreate : FullyAuditedEntityDto
+    public class ProductCreate : FullyAuditedEntityDto<Guid>
     {
         [Required(ErrorMessage = "Name is required")]
         public string Name { get; set; }
@@ -30,7 +30,7 @@ namespace ByteAwesome.TestAPI.Models
             get
             {
                 // Convert each int to a byte array
-                byte[] typeBytes = BitConverter.GetBytes(Id);
+                byte[] typeBytes = BitConverter.GetBytes(0);
                 byte[] brandsBytes = BitConverter.GetBytes(BrandId);
                 byte[] supplierBytes = BitConverter.GetBytes(SupplierId);
                 byte[] productidBytes = BitConverter.GetBytes(ProductTypeId);

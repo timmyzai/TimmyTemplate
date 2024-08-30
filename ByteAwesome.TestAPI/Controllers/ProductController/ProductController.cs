@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace ByteAwesome.TestAPI.Controllers.ProductController;
 
 [AllowAnonymous]
-public class ProductController : CRUD_BaseController<ProductDto, ProductCreate, int,ProductRepository>
+public class ProductController : CRUD_BaseController<ProductDto, ProductCreate, Guid,ProductRepository>
 {
      private readonly ProductRepository _repository;
      public virtual async Task<ActionResult<ResponseDto<IEnumerable<ProductDto>>>> GetAllProduct()

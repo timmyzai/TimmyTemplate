@@ -5,7 +5,7 @@ using ByteAwesome.TestAPI.Models;
 namespace ByteAwesome.TestAPI.entity
 {
 
-    public class Product: FullyAuditedEntity
+    public class Product: FullyAuditedEntity<Guid>
     {
         public string Name { get; set; }
         

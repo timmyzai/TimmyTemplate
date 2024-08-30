@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ByteAwesome.TestAPI.Models
 {
-    public class ProductDto : FullyAuditedEntityDto
+    public class ProductDto : FullyAuditedEntityDto<Guid>
     {
         #region Properties
         

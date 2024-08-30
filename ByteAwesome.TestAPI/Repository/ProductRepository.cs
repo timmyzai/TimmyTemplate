@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 namespace ByteAwesome.TestAPI.Repository
 {
     
-    public class ProductRepository :BaseRepository<Product,ProductDto,ProductCreate,int>
+    public class ProductRepository :BaseRepository<Product,ProductDto,ProductCreate,Guid>
     {
         public ProductRepository(ApplicationDbContext context, IMapper mapper) : base(context, mapper)
         {
