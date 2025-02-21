@@ -1,16 +1,13 @@
 using System.Xml.Linq;
-using Microsoft.AspNetCore.Http;
 
 namespace ByteAwesome
 {
     public static class LanguageService
     {
-        public static Dictionary<string, Dictionary<string, string>> translations = new();
-        private static IHttpContextAccessor _httpContextAccessor;
-        private static HashSet<string> availableCultures = new();
-        public static void Configure(IHttpContextAccessor httpContextAccessor)
+        public static Dictionary<string, Dictionary<string, string>> translations = [];
+        private static readonly HashSet<string> availableCultures = [];
+        public static void Configure()
         {
-            _httpContextAccessor = httpContextAccessor;
             LoadLanguages();
         }
         private static void LoadLanguages()
@@ -29,7 +26,7 @@ namespace ByteAwesome
                         string value = element.Value;
                         if (!translations.ContainsKey(key))
                         {
-                            translations[key] = new Dictionary<string, string>();
+                            translations[key] = [];
                         }
                         translations[key][culture] = value;
                     }
@@ -49,23 +46,21 @@ namespace ByteAwesome
             var primaryLanguageCode = CurrentSession.GetUserLanguage();
             if (primaryLanguageCode is not null)
             {
-                string cultureCode = primaryLanguageCode;
-                if (availableCultures.Contains(cultureCode) && TryGetTranslation(key, cultureCode, out translation))
+                if (availableCultures.Contains(primaryLanguageCode) &&
+                    TryGetTranslation(key, primaryLanguageCode, out translation))
                 {
                     return translation;
                 }
-                else
+                string baseLang = primaryLanguageCode.Split('-')[0];
+                if (baseLang != primaryLanguageCode && availableCultures.Contains(baseLang) &&
+                    TryGetTranslation(key, baseLang, out translation))
                 {
-                    string baseLang = cultureCode.Split('-')[0];
-                    if (availableCultures.Contains(baseLang) && TryGetTranslation(key, baseLang, out translation))
-                    {
-                        return translation;
-                    }
+                    return translation;
                 }
             }
-
             return TryGetTranslation(key, "en", out translation) ? translation : key;
         }
+
         public static string DeterminePrimaryLanguageCode(string languages)
         {
             var primaryLanguage = languages

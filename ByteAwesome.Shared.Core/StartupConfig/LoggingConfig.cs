@@ -1,7 +1,8 @@
-using System.Text.RegularExpressions;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 using Serilog.Enrichers.Sensitive;
+using Serilog.Events;
 using Serilog.Sinks.OpenTelemetry;
 
 namespace ByteAwesome.StartupConfig
@@ -10,67 +11,51 @@ namespace ByteAwesome.StartupConfig
     {
         public static void ConfigureSerilog(HostBuilderContext context, IServiceProvider service, LoggerConfiguration configuration)
         {
-            var phoneRegex = new Regex(@"\+(\d{1,3})(?:[ -]?\d){6,14}\d", RegexOptions.Compiled);
-            var customOperators = new List<IMaskingOperator>
-            {
-                new RegexMaskingOperator(phoneRegex)
-            };
             configuration
-            .Enrich.FromLogContext()
+                .MinimumLevel.Information()
+                .MinimumLevel.Override("Microsoft.EntityFrameworkCore.Database.Command", LogEventLevel.Warning)
                 .Enrich.FromLogContext()
                 .Enrich.WithMemoryUsage()
                 .Enrich.WithSensitiveDataMasking(options =>
                 {
-                    options.Mode = MaskingMode.Globally;
-                    options.MaskingOperators.AddRange(customOperators);
+                    options.MaskingOperators.Add(new EmailMaskingOperator());
+                    options.MaskingOperators.Add(new PhoneNumberMaskingOperator());
                 })
                 .Enrich.WithClientIp()
                 .Enrich.WithProperty("ApplicationName", context.HostingEnvironment.ApplicationName)
+                .Enrich.WithProperty("Environment", context.HostingEnvironment.EnvironmentName)
                 .ReadFrom.Configuration(context.Configuration)
-                .ReadFrom.Services(service)
-                .WriteTo.Console()
-                .WriteTo.OpenTelemetry(x =>
-                    {
-                        x.Endpoint = "http://localhost:5341/ingest/otlp/v1/logs";
-                        x.Protocol = OtlpProtocol.HttpProtobuf;
-                        x.Headers = new Dictionary<string, string>
-                        {
-                            { "X-Seq-ApiKey", "El8YicnRjkyN87PoTzXm" }
-                        };
-                    }
-                );
-
+                .ReadFrom.Services(service);
+            ConfigureSinks(context, configuration);
         }
-        public class RegexMaskingOperator : IMaskingOperator
+        private static void ConfigureSinks(HostBuilderContext context, LoggerConfiguration configuration)
         {
-            private readonly Regex _regex;
-            private readonly string _mask;
-
-            public RegexMaskingOperator(Regex regex, string mask = "***MASKED***")
+            var config = context.Configuration;
+            var useSeq = config.GetValue<bool>("Seq:IsEnabled");
+            var useLog = config.GetValue<bool>("Seq:IsEnabledLog");
+            if (useSeq)
             {
-                _regex = regex ?? throw new ArgumentNullException(nameof(regex));
-                _mask = mask;
+                var seqEndpoint = config.GetValue<string>("Seq:Endpoint");
+                var seqApiKey = config.GetValue<string>("Seq:ApiKey");
+                configuration.WriteTo.OpenTelemetry(x =>
+                {
+                    x.Endpoint = seqEndpoint;
+                    x.Protocol = OtlpProtocol.HttpProtobuf;
+                    x.Headers = new Dictionary<string, string> { { "X-Seq-ApiKey", seqApiKey } };
+                });
             }
-
-            public MaskingResult Mask(string input, string mask)
+            if (useLog)
             {
-                if (input is null)
-                {
-                    throw new ArgumentNullException(nameof(input));
-                }
-
-                var match = _regex.IsMatch(input);
-                if (!match)
-                {
-                    return MaskingResult.NoMatch;
-                }
-
-                var result = _regex.Replace(input, _mask);
-                return new MaskingResult
-                {
-                    Match = true,
-                    Result = result
-                };
+                configuration.WriteTo.File(
+                    path: "Logs/log-.txt",
+                    rollingInterval: RollingInterval.Hour,
+                    fileSizeLimitBytes: 10485760, // 10MB
+                    outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} {CorrelationId} {Level:u3} {Username} {Message:lj}{Exception}{NewLine}"
+                );
+            }
+            if (context.HostingEnvironment.IsDevelopment())
+            {
+                configuration.WriteTo.Console();
             }
         }
     }

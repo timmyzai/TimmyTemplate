@@ -12,7 +12,7 @@ namespace ByteAwesome
             int underscoreIndex = name.IndexOf("_V");
             if (underscoreIndex > -1)
             {
-                name = name.Substring(0, underscoreIndex);
+                name = name[..underscoreIndex];
                 if(name.EndsWith("Controller"))
                 {
                     name = name[..^10];

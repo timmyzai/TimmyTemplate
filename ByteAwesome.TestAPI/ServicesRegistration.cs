@@ -1,9 +1,11 @@
-using ByteAwesome.TestAPI.GrpcClient;
-using ByteAwesome.WalletAPI.Grpc;
 using ByteAwesome.Services;
-using ByteAwesome.TestAPI.Services;
 using ByteAwesome.TestAPI.Modules;
 using ByteAwesome.StartupConfig;
+using Microsoft.Extensions.DependencyInjection;
+using System.IO;
+using System;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 
 namespace ByteAwesome.TestAPI
 {
@@ -14,11 +16,7 @@ namespace ByteAwesome.TestAPI
             //Load Startup Services
             PreLoadServices(services);
 
-            //Services
-            services.AddScoped<ITimerService, TimerService>();
-            services.AddScoped<IUnitOfWorkManager, UnitOfWorkManager>();
-            services.AddScoped<ICurrentUnitOfWork, CurrentUnitOfWork>();
-            services.AddScoped<ICacheService, CacheService>();
+            //Repositories
 
             //Singleton Services
             services.AddSingleton<IRedisCacheService, RedisCacheService>();
@@ -63,19 +61,6 @@ namespace ByteAwesome.TestAPI
         }
         protected void RegisterGRPC(IServiceCollection services)
         {
-            // services.AddScoped<IWalletGrpcClient, WalletGrpcClient>();
-
-            // var walletGrpcUrl = configuration["GRPC:WalletURL"];
-            // AddGrpcClient<WalletGrpcService.WalletGrpcServiceClient>(walletGrpcUrl);
-
-            // void AddGrpcClient<TClient>(string url) where TClient : class
-            // {
-            //     services.AddGrpcClient<TClient>(o => o.Address = new Uri(url))
-            //     .ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler
-            //     {
-            //         ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
-            //     });
-            // }
         }
         protected void RegisterHttpClient(IServiceCollection services)
         {

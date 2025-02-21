@@ -10,6 +10,7 @@ namespace ByteAwesome
         Task<TEntityDto> Add(TCreateDto input);
         Task<TEntityDto> Update(TEntityDto input);
         Task<TEntityDto> Delete(TKey id);
+        Task<bool> HasExistingRow();
         Task<TEntityDto> GetById(TKey id, bool isBoRequest = false);
         Task<IEnumerable<TEntityDto>> Get(PaginationRequestDto pagingFilter = null, bool isBoRequest = false);
         Task<IEnumerable<TEntityDto>> AddRange(IEnumerable<TCreateDto> inputs);
@@ -42,7 +43,7 @@ namespace ByteAwesome
             var item = await ContextEntity().FindAsync(input.Id);
             if (item is null)
             {
-                throw new AppException(ErrorCodes.General.EntityNameNotFound, args: typeof(TEntity).Name);
+                throw new Exception(ErrorCodes.General.EntityNameNotFound);
             }
             mapper.Map(input, item);
             await context.SaveChangesAsync();
@@ -55,7 +56,7 @@ namespace ByteAwesome
             {
                 throw new AppException(ErrorCodes.General.EntityNameNotFound, args: typeof(TEntity).Name);
             }
-            MarkAsDeleted(item);
+            context.Remove(item);
             await context.SaveChangesAsync();
             return mapper.Map<TEntityDto>(item); //make sure it is not overriden
         }
@@ -144,7 +145,7 @@ namespace ByteAwesome
 
             await ProcessInBatches(itemsToDelete, async (batch) =>
             {
-                MarkAsDeleted(batch);
+                context.RemoveRange(batch);
                 await context.SaveChangesAsync();
                 results.AddRange(batch);
             });
@@ -152,6 +153,10 @@ namespace ByteAwesome
         }
         #endregion
         #region Queries
+        public virtual async Task<bool> HasExistingRow()
+        {
+            return await ContextEntity().AsNoTracking().AnyAsync();
+        }
         public virtual async Task<TEntityDto> GetById(TKey id, bool isBoRequest = false)
         {
             var item = await Query(isBoRequest: isBoRequest).FirstOrDefaultAsync(r => Equals(r.Id, id));
@@ -185,21 +190,41 @@ namespace ByteAwesome
             {
                 query = query.IgnoreQueryFilters();
             }
-            else if (UserContext.CurrentUserId.HasValue && typeof(IUserIdEntity).IsAssignableFrom(typeof(TEntity)))
+            else if (CurrentSession.GetUserId() is not null && typeof(IUserIdEntity).IsAssignableFrom(typeof(TEntity)))
             {
-                var parameter = Expression.Parameter(typeof(TEntity), "x");
-                var property = Expression.Property(parameter, "UserId");
-                var value = Expression.Constant(UserContext.CurrentUserId.Value, typeof(Guid));
-                var equals = Expression.Equal(property, value);
-                var lambda = Expression.Lambda<Func<TEntity, bool>>(equals, parameter);
-
-                query = query.Where(lambda);
+                query = query.Where(x => ((IUserIdEntity)x).UserId == CurrentSession.GetUser().Id);
+            }
+            return query;
+        }
+        protected virtual IQueryable<T> Query<T>(bool isBoRequest = false) where T : class
+        {
+            var query = ContextEntity<T>().AsNoTracking().AsQueryable();
+            if (isBoRequest)
+            {
+                query = query.IgnoreQueryFilters();
+            }
+            else if (CurrentSession.GetUserId() is not null && typeof(IUserIdEntity).IsAssignableFrom(typeof(T)))
+            {
+                query = query.Where(x => ((IUserIdEntity)x).UserId == CurrentSession.GetUser().Id);
             }
             return query;
         }
         protected virtual IQueryable<TEntity> CursorPagination(IQueryable<TEntity> query, PaginationRequestDto pagingFilter = null)
         {
             pagingFilter ??= new PaginationRequestDto();
+
+            if (pagingFilter is FilterPaginationRequestDto filter)
+            {
+                if (filter.FromDate.HasValue)
+                {
+                    query = query.Where(x => (x as IAuditedEntity).CreatedTime >= filter.FromDate.Value);
+                }
+                if (filter.ToDate.HasValue)
+                {
+                    var endDate = filter.ToDate.Value.Date.AddDays(1).AddTicks(-1); //23:59:59.9999999 of end date
+                    query = query.Where(x => (x as IAuditedEntity).CreatedTime <= endDate);
+                }
+            }
             pagingFilter.SetTotalCount(query.Count());
             if (typeof(IAuditedEntity).IsAssignableFrom(typeof(TEntity)))
             {
@@ -217,13 +242,12 @@ namespace ByteAwesome
                     if (DateTime.TryParse(cursor, out DateTime cursorTime))
                     {
                         query = query.Where(x => (x as IAuditedEntity).CreatedTime > cursorTime);
-                        query = query.Take(pagingFilter.PageSize);
-                        return Sort(query, pagingFilter.SortParameters);
                     }
                 }
             }
             query = Sort(query, pagingFilter.SortParameters);
-            return query.Take(pagingFilter.PageSize);
+            query = query.Take(pagingFilter.PageSize);
+            return query;
         }
         #endregion
         #region Convertors
@@ -234,10 +258,6 @@ namespace ByteAwesome
         protected virtual IEnumerable<TEntityDto> MapEntitiesToDtos(IEnumerable<TEntity> entities)
         {
             return mapper.Map<IEnumerable<TEntityDto>>(entities);
-        }
-        protected virtual IEnumerable<T> MapEntitiesToDtos<T>(IEnumerable<TEntity> entities)
-        {
-            return mapper.Map<IEnumerable<T>>(entities);
         }
         protected IQueryable<TEntity> Filter(IQueryable<TEntity> query, IEnumerable<FilterParameter> filterParameters)
         {
@@ -276,9 +296,11 @@ namespace ByteAwesome
 
             return query;
         }
-        protected IQueryable<TEntity> Sort(IQueryable<TEntity> query, IEnumerable<SortParameter> sortParameters)
+        protected IQueryable<TEntity> Sort(IQueryable<TEntity> query, IEnumerable<SortParameter> sortParameters = null)
         {
-            if (sortParameters is null) return query;
+            IOrderedQueryable<TEntity> orderedQuery = null;
+            bool isFirstSort = true;
+            if (sortParameters == null) return query;
             foreach (var param in sortParameters)
             {
                 if (!PropertyExists(param.PropertyName))
@@ -286,9 +308,18 @@ namespace ByteAwesome
                     throw new ArgumentException($"Property '{param.PropertyName}' does not exist on {typeof(TEntity).Name}");
                 }
                 var lambda = PropertySelector<TEntity>.GetKeySelector(param.PropertyName);
-                query = param.Order == EntitySortOrder.Asc ? query.OrderBy(lambda) : query.OrderByDescending(lambda);
+
+                if (isFirstSort)
+                {
+                    orderedQuery = param.Order == EntitySortOrder.Asc ? query.OrderBy(lambda) : query.OrderByDescending(lambda);
+                    isFirstSort = false;
+                }
+                else if (orderedQuery != null)
+                {
+                    orderedQuery = param.Order == EntitySortOrder.Asc ? orderedQuery.ThenBy(lambda) : orderedQuery.ThenByDescending(lambda);
+                }
             }
-            return query;
+            return orderedQuery ?? query;
         }
         #endregion
         #region Helpers
@@ -304,41 +335,6 @@ namespace ByteAwesome
             }
 
             return existingEntitiesDict;
-        }
-        private void MarkAsDeleted(IEnumerable<TEntity> entities)
-        {
-            var entitiesToRemove = new List<TEntity>();
-            foreach (var entity in entities)
-            {
-                if (!CheckAndMarkEntityAsDeleted(entity))
-                {
-                    entitiesToRemove.Add(entity);
-                }
-            }
-            if (entitiesToRemove.Any())
-            {
-                context.RemoveRange(entitiesToRemove);
-            }
-        }
-        private void MarkAsDeleted(TEntity entity)
-        {
-            if (!CheckAndMarkEntityAsDeleted(entity))
-            {
-                context.Remove(entity);
-            }
-        }
-        private bool CheckAndMarkEntityAsDeleted(TEntity entity)
-        {
-            if (entity is IFullyAuditedEntity fullyAuditedEntity)
-            {
-                if (fullyAuditedEntity.IsDeleted)
-                {
-                    throw new AppException(ErrorCodes.General.EntityAlreadyDeleted, args: typeof(TEntity).Name);
-                }
-                fullyAuditedEntity.IsDeleted = true;
-                return true;
-            }
-            return false;
         }
         private async Task ProcessInBatches<T>(IEnumerable<T> entities, Func<IEnumerable<T>, Task> processBatch, int batchSize = 100)
         {

@@ -23,11 +23,11 @@ namespace ByteAwesome.StartupConfig
                     c.RoutePrefix = "swagger";
                     c.DocumentTitle = $"ByteAwesome.{microServiceApiName} - Swagger UI";
                     c.DefaultModelsExpandDepth(-1);
-                    c.ConfigObject.AdditionalItems["authorization"] = new
+                    c.ConfigObject.AdditionalItems["authorization"] = new Dictionary<string, object>
                     {
-                        enabled = true,
-                        name = "Authorization",
-                        value = "Bearer {JWT token}"
+                        { "enabled", true },
+                        { "name", "Authorization" },
+                        { "value", "Bearer {JWT token}" }
                     };
                     c.OAuthUsePkce();
                     c.DisplayRequestDuration();

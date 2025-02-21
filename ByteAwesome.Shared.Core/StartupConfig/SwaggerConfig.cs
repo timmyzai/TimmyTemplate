@@ -1,92 +1,108 @@
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
-using Microsoft.OpenApi.Any;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using Microsoft.OpenApi.Any;
 
 namespace ByteAwesome.StartupConfig
 {
-    public partial class StartUpHelper
+    public static class SwaggerConfig
     {
-        public static void ConfigureSwagger(List<string> ApiVersions, string _microServiceApiName, IServiceCollection services)
+        public static void RegisterSwagger(this IServiceCollection services, List<string> apiVersions, string microServiceApiName)
         {
             services.AddSwaggerGen(options =>
             {
-                foreach (var version in ApiVersions)
+                // Create Swagger documents for each API version
+                foreach (var version in apiVersions)
                 {
-                    options.SwaggerDoc(version, new OpenApiInfo { Title = $"ByteAwesome.{_microServiceApiName}", Version = version });
+                    options.SwaggerDoc(version, new OpenApiInfo
+                    {
+                        Title = $"ByteAwesome.{microServiceApiName}",
+                        Version = version
+                    });
                 }
-
+                options.UseInlineDefinitionsForEnums();
+                // Enable support for adding annotations to API operations
                 options.EnableAnnotations();
+
+                // Define the security scheme for Bearer tokens
                 options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
-                    Description = "Enter 'Bearer' [space] and your token",
+                    Description = "Enter 'Bearer' followed by your token",
                     Name = "Authorization",
                     In = ParameterLocation.Header,
                     Type = SecuritySchemeType.ApiKey,
                     Scheme = "Bearer"
                 });
-                options.AddSecurityRequirement(CreateSecurityRequirement());
+
+                // Apply security requirements globally
+                options.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            },
+                            Scheme = "oauth2",
+                            Name = "Bearer",
+                            In = ParameterLocation.Header
+                        },
+                        new List<string>()
+                    }
+                });
+
+                // Apply custom filters
                 options.SchemaFilter<SwaggerEnumSchemaFilter>();
                 options.DocumentFilter<ReplaceVersionWithExactValueInPath>();
-                options.DocInclusionPredicate((version, desc) => HasValidApiVersion(version, desc));
+                options.DocInclusionPredicate((version, desc) => IsApiVersionValid(version, desc));
                 options.OperationFilter<RemoveVersionFromParameter>();
                 options.OperationFilter<AddAcceptLanguageHeaderParameter>();
                 options.OperationFilter<InjectFromHeaderOperationFilter>();
             });
         }
-        private static bool HasValidApiVersion(string version, ApiDescription desc)
+
+        private static bool IsApiVersionValid(string version, ApiDescription desc)
         {
-            if (!desc.TryGetMethodInfo(out MethodInfo methodInfo)) return false;
-            var versions = new List<ApiVersion>();
-            for (var type = methodInfo.DeclaringType; type is not null; type = type.BaseType)
-            {
-                versions.AddRange(type.GetCustomAttributes<ApiVersionAttribute>(true)
-                                       .SelectMany(attr => attr.Versions));
-            }
-            return versions.Any(v => $"v{v}" == version) || (versions.Count == 0 && version == "v1.0");
+            // Check if the method info has a valid API version
+            if (!desc.TryGetMethodInfo(out MethodInfo methodInfo))
+                return false;
+
+            var versions = methodInfo.DeclaringType?.GetCustomAttributes<ApiVersionAttribute>(true).SelectMany(attr => attr.Versions) ?? [];
+
+            // Return true if the version matches or if no version is specified, default to v1.0
+            return versions.Any(v => $"v{v}" == version) || (versions.Count() == 0 && version == "v1.0");
         }
-        private static OpenApiSecurityRequirement CreateSecurityRequirement() => new OpenApiSecurityRequirement
-        {
-            {
-                new OpenApiSecurityScheme
-                {
-                    Reference = new OpenApiReference
-                    {
-                        Type = ReferenceType.SecurityScheme,
-                        Id = "Bearer"
-                    },
-                    Scheme = "oauth2",
-                    Name = "Bearer",
-                    In = ParameterLocation.Header
-                },
-                new List<string>()
-            }
-        };
         private class SwaggerEnumSchemaFilter : ISchemaFilter
         {
             public void Apply(OpenApiSchema schema, SchemaFilterContext context)
             {
-                var type = context.Type;
-                if (!type.IsEnum || schema.Extensions.ContainsKey("x-enumNames"))
+                var type = Nullable.GetUnderlyingType(context.Type) ?? context.Type;
+                if (type.IsEnum)
                 {
-                    return;
-                }
+                    schema.Type = "string";
+                    schema.Enum = Enum.GetNames(type)
+                                      .Select(n => new OpenApiString(n))
+                                      .ToList<IOpenApiAny>();
 
-                var enumNames = new OpenApiArray();
-                enumNames.AddRange(Enum.GetNames(type).Select(name => new OpenApiString(name)));
-                schema.Extensions.Add("x-enumNames", enumNames);
+                    // Add a null option for nullable enums
+                    if (Nullable.GetUnderlyingType(context.Type) != null)
+                    {
+                        schema.Nullable = true;
+                    }
+                }
             }
         }
+        // Operation filter to add Accept-Language header parameter
         private class AddAcceptLanguageHeaderParameter : IOperationFilter
         {
             public void Apply(OpenApiOperation operation, OperationFilterContext context)
             {
-                if (operation.Parameters is null)
-                    operation.Parameters = new List<OpenApiParameter>();
-
+                operation.Parameters ??= [];
                 operation.Parameters.Add(new OpenApiParameter
                 {
                     Name = "Accept-Language",
@@ -97,34 +113,40 @@ namespace ByteAwesome.StartupConfig
                 });
             }
         }
+
+        // Operation filter to remove version parameter from the operation
         private class RemoveVersionFromParameter : IOperationFilter
         {
             public void Apply(OpenApiOperation operation, OperationFilterContext context)
             {
                 var versionParameter = operation.Parameters.SingleOrDefault(p => p.Name == "version");
                 if (versionParameter is not null)
+                {
                     operation.Parameters.Remove(versionParameter);
+                }
             }
         }
+
+        // Document filter to replace version placeholder in paths
         private class ReplaceVersionWithExactValueInPath : IDocumentFilter
         {
             public void Apply(OpenApiDocument swaggerDoc, DocumentFilterContext context)
             {
-                var paths = new OpenApiPaths();
+                var updatedPaths = new OpenApiPaths();
                 foreach (var path in swaggerDoc.Paths)
                 {
-                    paths.Add(path.Key.Replace("v{version}", swaggerDoc.Info.Version), path.Value);
+                    updatedPaths.Add(path.Key.Replace("v{version}", swaggerDoc.Info.Version), path.Value);
                 }
-                swaggerDoc.Paths = paths;
+                swaggerDoc.Paths = updatedPaths;
             }
         }
+
+        // Operation filter to inject custom headers from attributes
         private class InjectFromHeaderOperationFilter : IOperationFilter
         {
             public void Apply(OpenApiOperation operation, OperationFilterContext context)
             {
-                var methodInfo = context.MethodInfo;
-                var injectHeaderAttributes = methodInfo.GetCustomAttributes<InjectFromHeaderAttribute>(true);
-
+                var injectHeaderAttributes = context.MethodInfo.GetCustomAttributes<InjectFromHeaderAttribute>(true);
                 foreach (var attr in injectHeaderAttributes)
                 {
                     foreach (var header in attr.headers)
@@ -132,21 +154,16 @@ namespace ByteAwesome.StartupConfig
                         var existingParam = operation.Parameters.FirstOrDefault(p => p.Name == header.Name);
                         if (existingParam is not null)
                         {
-                            // Update existing parameter if already added (e.g., by another filter or previous operations)
-                            existingParam.Required = existingParam.Required || header.IsRequired;
+                            existingParam.Required |= header.IsRequired;
                         }
                         else
                         {
-                            // Add new parameter
                             operation.Parameters.Add(new OpenApiParameter
                             {
                                 Name = header.Name,
                                 In = ParameterLocation.Header,
                                 Required = header.IsRequired,
-                                Schema = new OpenApiSchema
-                                {
-                                    Type = "string"
-                                },
+                                Schema = new OpenApiSchema { Type = "string" },
                                 Description = header.IsRequired ? "Required header" : "Optional header"
                             });
                         }

@@ -1,9 +1,0 @@
-*obj
-*bin
-*appsettings
-*appsettings.Production.json
-*logs
-*test
-*appsettings.Development.json
-*kiv
-*wwwroot

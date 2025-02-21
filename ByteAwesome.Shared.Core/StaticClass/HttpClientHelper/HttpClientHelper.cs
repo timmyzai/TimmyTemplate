@@ -29,11 +29,9 @@ namespace ByteAwesome
             T result = default;
             try
             {
-                using (var response = await client.SendAsync(request, HttpCompletionOption.ResponseContentRead))
-                {
-                    result = await ProcessResponse<T>(response);
-                    response.EnsureSuccessStatusCode();
-                }
+                using var response = await client.SendAsync(request, HttpCompletionOption.ResponseContentRead);
+                result = await ProcessResponse<T>(response);
+                response.EnsureSuccessStatusCode();
             }
             catch (HttpRequestException ex)
             {
@@ -41,19 +39,31 @@ namespace ByteAwesome
             }
             return result;
         }
-        public static async Task<(T, Err)> SendRequestAsync<T, Err>(HttpClient client, HttpRequestMessage request)
+        public static async Task SendRequestAsync(HttpClient client, HttpRequestMessage request)
         {
-            (T, Err) result = default;
+            try
+            {
+                using var response = await client.SendAsync(request, HttpCompletionOption.ResponseContentRead);
+                response.EnsureSuccessStatusCode();
+            }
+            catch (HttpRequestException ex)
+            {
+                Log.Error(ex, "HTTP request exception: {Method} {Uri}", request.Method, request.RequestUri);
+            }
+        }
+        public static async Task<(T Response, Err Error)> SendRequestAsync<T, Err>(HttpClient client, HttpRequestMessage request)
+        {
+            (T Response, Err Error) result = default;
             HttpResponseMessage response = null;
             try
             {
                 response = await client.SendAsync(request, HttpCompletionOption.ResponseContentRead);
                 response.EnsureSuccessStatusCode();
-                result.Item1 = await ProcessResponse<T>(response);
+                result.Response = await ProcessResponse<T>(response);
             }
             catch (HttpRequestException ex)
             {
-                result.Item2 = await ProcessResponse<Err>(response);
+                result.Error = await ProcessResponse<Err>(response);
                 Log.Error(ex, "HTTP request exception: {Method} {Uri}", request.Method, request.RequestUri);
             }
             finally
@@ -69,15 +79,23 @@ namespace ByteAwesome
 
             if (responseContent == "Fallback response")
             {
-                return Activator.CreateInstance<T>();
+                if (typeof(T) == typeof(byte[]))
+                {
+                    return (T)(object)new byte[0]; // Return an empty byte array for fallback.
+                }
+                else
+                {
+                    return Activator.CreateInstance<T>(); // Fallback for other types.
+                }
             }
+
             if (typeof(T) == typeof(string))
             {
                 return (T)(object)responseContent;
             }
             else if (typeof(T) == typeof(byte[]))
             {
-                return (T)(object)await response.Content.ReadAsByteArrayAsync();
+                return (T)(object)await response.Content.ReadAsByteArrayAsync(); // Directly read the byte array from the response.
             }
             else if (typeof(T) == typeof(JObject))
             {
@@ -85,8 +103,9 @@ namespace ByteAwesome
             }
             else
             {
-                return JsonConvert.DeserializeObject<T>(responseContent);
+                return JsonConvert.DeserializeObject<T>(responseContent); // Handle other types through JSON deserialization.
             }
         }
+
     }
 }

@@ -1,5 +1,4 @@
 using AutoMapper;
-
 namespace ByteAwesome.TestAPI
 {
     public static class MappingConfig

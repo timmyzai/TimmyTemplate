@@ -26,7 +26,7 @@ namespace ByteAwesome
             string nextCursor = null;
             string prevCursor = null;
 
-            if (typeof(IAuditedEntityDto).IsAssignableFrom(typeof(TEntityDto)) && items.Any())
+            if (typeof(IAuditedEntityDto).IsAssignableFrom(typeof(TEntityDto)) && items.Any() && totalPages > 1)
             {
                 var firstItem = items.First() as IAuditedEntityDto;
                 var lastItem = items.Last() as IAuditedEntityDto;

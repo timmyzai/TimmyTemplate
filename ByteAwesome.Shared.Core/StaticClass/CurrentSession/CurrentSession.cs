@@ -7,110 +7,61 @@ namespace ByteAwesome
     public static class CurrentSession
     {
         private static IHttpContextAccessor _httpContextAccessor;
+        private const string CurrentUserKey = "CurrentUser";
+
         public static void Configure(IHttpContextAccessor httpContextAccessor)
         {
             _httpContextAccessor = httpContextAccessor;
         }
+
+        public static void SetUser(HttpContext context, Guid userId, ClaimsPrincipal user)
+        {
+            context.Items[CurrentUserKey] = new CurrentUser
+            {
+                Id = userId,
+                UserName = user.FindFirstValue(ClaimTypes.Name),
+                EmailAddress = user.FindFirstValue(ClaimTypes.Email),
+                PhoneNumber = user.FindFirstValue(ClaimTypes.MobilePhone),
+                RoleNames = user.FindAll(ClaimTypes.Role).Select(x => x.Value).ToList()
+            };
+        }
+
         public static CurrentUser GetUser()
         {
-            return new CurrentUser()
-            {
-                Id = GetUserId(),
-                UserName = GetUserName(),
-                EmailAddress = GetEmailAddress(),
-                PhoneNumber = GetPhoneNumber()
-            };
+            var currentUser = _httpContextAccessor?.HttpContext?.Items[CurrentUserKey] as CurrentUser;
+            if (currentUser == null)
+                throw new AppException(ErrorCodes.General.PleaseLogin);
+
+            return currentUser;
         }
-        public static string GetCurrentToken()
-        {
-            var authorizationHeader = _httpContextAccessor?.HttpContext?.Request.Headers["Authorization"].FirstOrDefault();
-            if (!string.IsNullOrEmpty(authorizationHeader) && authorizationHeader.StartsWith("Bearer "))
-            {
-                return authorizationHeader.Substring(7);
-            }
-            return null;
-        }
+
         public static DeviceInfo GetUserDeviceInfo()
-        {
-            var deviceInfo = _httpContextAccessor?.HttpContext?.Items["DeviceInfo"] as DeviceInfo;
-            if (deviceInfo is null)
-            {
-                return new DeviceInfo();
-            }
-            return deviceInfo;
-        }
+            => _httpContextAccessor?.HttpContext?.Items["DeviceInfo"] as DeviceInfo ?? new DeviceInfo();
+
         public static LocationInfo GetUserLocationInfo()
-        {
-            var locationInfo = _httpContextAccessor?.HttpContext?.Items["GeoLocation"] as LocationInfo;
-            if (locationInfo is null)
-            {
-                return new LocationInfo();
-            }
-            return locationInfo;
-        }
-        public static Guid GetUserId()
-        {
-            var _claim = _httpContextAccessor?.HttpContext?.User.FindFirst(x => x.Type == ClaimTypes.NameIdentifier);
-            if (_claim is not null && Guid.TryParse(_claim.Value, out Guid userId) && userId != Guid.Empty)
-            {
-                return userId;
-            }
-            throw new AppException(ErrorCodes.General.PleaseLogin);
-        }
+            => _httpContextAccessor?.HttpContext?.Items["GeoLocation"] as LocationInfo ?? new LocationInfo();
+
+        public static Guid? GetUserId()
+            => (_httpContextAccessor?.HttpContext?.Items[CurrentUserKey] as CurrentUser)?.Id;
+
         public static string GetUserName()
-        {
-            var _claim = _httpContextAccessor?.HttpContext?.User.FindFirst(x => x.Type == ClaimTypes.Name);
-            if (_claim is not null && !String.IsNullOrEmpty(_claim.Value))
-            {
-                return _claim.Value;
-            };
-            return null;
-        }
+            => (_httpContextAccessor?.HttpContext?.Items[CurrentUserKey] as CurrentUser)?.UserName;
+
         public static string GetEmailAddress()
-        {
-            var _claim = _httpContextAccessor?.HttpContext?.User.FindFirst(x => x.Type == ClaimTypes.Email);
-            if (_claim is not null && !String.IsNullOrEmpty(_claim.Value))
-            {
-                return _claim.Value;
-            };
-            return null;
-        }
+            => (_httpContextAccessor?.HttpContext?.Items[CurrentUserKey] as CurrentUser)?.EmailAddress;
+
         public static string GetPhoneNumber()
-        {
-            var _claim = _httpContextAccessor?.HttpContext?.User.FindFirst(x => x.Type == ClaimTypes.MobilePhone);
-            if (_claim is not null && !String.IsNullOrEmpty(_claim.Value))
-            {
-                return _claim.Value;
-            };
-            return null;
-        }
-        public static string GetUserRoleName()
-        {
-            var _claim = _httpContextAccessor?.HttpContext?.User.FindFirst(x => x.Type == ClaimTypes.Role);
-            if (_claim is not null && !String.IsNullOrEmpty(_claim.Value))
-            {
-                return _claim.Value;
-            };
-            return null;
-        }
+            => (_httpContextAccessor?.HttpContext?.Items[CurrentUserKey] as CurrentUser)?.PhoneNumber;
+
+        public static IList<string> GetUserRoles()
+            => (_httpContextAccessor?.HttpContext?.Items[CurrentUserKey] as CurrentUser)?.RoleNames;
+
         public static string GetUserLoginSessionId()
-        {
-            var _claim = _httpContextAccessor?.HttpContext?.User.FindFirst(x => x.Type == "UserLoginSessionId");
-            if (_claim is not null && !String.IsNullOrEmpty(_claim.Value))
-            {
-                return _claim.Value;
-            };
-            return null;
-        }
+            => _httpContextAccessor?.HttpContext?.User.FindFirst("UserLoginSessionId")?.Value;
+
         public static string GetUserLanguage()
-        {
-            var _languageCode = _httpContextAccessor?.HttpContext?.Items?["UserLanguage"] as string;
-            if (_languageCode is not null)
-            {
-                return _languageCode;
-            }
-            return "en";
-        }
+            => _httpContextAccessor?.HttpContext?.Items["UserLanguage"] as string ?? "en";
+
         public class CurrentUser : UserIdentityProfileDto
         {
             public Guid Id { get; set; }

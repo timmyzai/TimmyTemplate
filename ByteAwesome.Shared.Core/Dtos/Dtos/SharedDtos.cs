@@ -3,6 +3,11 @@ using Fido2NetLib;
 
 namespace ByteAwesome
 {
+    public interface IBaseUserDto
+    {
+        Guid UserId { get; set; }
+        string UserName { get; set; }
+    }
     public class RequiredTwoFactorPin
     {
         [Required]
@@ -25,7 +30,7 @@ namespace ByteAwesome
         public EntitySortOrder Order { get; set; }
 
         private static readonly List<SortParameter> _createdTimeDesc =
-            new List<SortParameter> { new SortParameter(nameof(IAuditedEntity.CreatedTime), EntitySortOrder.Desc) };
+            [new SortParameter(nameof(IAuditedEntity.CreatedTime), EntitySortOrder.Desc)];
 
         public SortParameter(string propertyName, EntitySortOrder order = EntitySortOrder.Asc)
         {
@@ -34,7 +39,7 @@ namespace ByteAwesome
         }
         public static List<SortParameter> Create(string propertyName, EntitySortOrder order = EntitySortOrder.Asc)
         {
-            return new List<SortParameter> { new SortParameter(propertyName, order) };
+            return [new SortParameter(propertyName, order)];
         }
         public static List<SortParameter> Create(params (string PropertyName, EntitySortOrder Order)[] sortParams)
         {
@@ -64,7 +69,7 @@ namespace ByteAwesome
         }
         public static List<FilterParameter> Create(string propertyName, object value, FilterOperator filterOperator = FilterOperator.Equal)
         {
-            return new List<FilterParameter> { new FilterParameter(propertyName, value, filterOperator) };
+            return [new FilterParameter(propertyName, value, filterOperator)];
         }
         public static List<FilterParameter> Create(params (string PropertyName, object Value, FilterOperator Operator)[] filterParams)
         {

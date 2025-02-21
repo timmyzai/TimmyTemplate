@@ -12,22 +12,17 @@ namespace ByteAwesome
         {
             _next = next;
         }
-
         public async Task Invoke(HttpContext httpContext)
         {
-            try
+            if (httpContext.User.Identity.IsAuthenticated)
             {
-                var _claim = httpContext?.User.FindFirst(x => x.Type == ClaimTypes.NameIdentifier);
-                if (_claim is not null && Guid.TryParse(_claim.Value, out Guid userId) && userId != Guid.Empty)
+                var userIdClaim = httpContext.User.FindFirst(ClaimTypes.NameIdentifier);
+                if (userIdClaim != null && Guid.TryParse(userIdClaim.Value, out Guid userId))
                 {
-                    UserContext.CurrentUserId = userId;
+                    CurrentSession.SetUser(httpContext, userId, httpContext.User);
                 }
-                await _next(httpContext);
             }
-            finally
-            {
-                UserContext.CurrentUserId = null;
-            }
+            await _next(httpContext);
         }
     }
 }

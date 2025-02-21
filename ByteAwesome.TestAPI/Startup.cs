@@ -4,6 +4,15 @@ using Serilog;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using ByteAwesome.StartupConfig;
+using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Hosting;
+using System.Collections.Generic;
+using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Linq;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Routing;
 
 namespace ByteAwesome.TestAPI
 {
@@ -21,8 +30,10 @@ namespace ByteAwesome.TestAPI
         public void ConfigureServices(IServiceCollection services)
         {
             var connectionString = configuration.GetConnectionString("DefaultConnection");
-            services.AddDbContext<ApplicationDbContext>(options =>
+            services.AddDbContextPool<ApplicationDbContext>(options =>
                 options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+            services.AddPooledDbContextFactory<ApplicationDbContext>(options =>
+               options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
             var CorsOrigins = configuration.GetSection("CorsOrigins").Value;
             services.AddCors(
@@ -53,7 +64,7 @@ namespace ByteAwesome.TestAPI
             });
             services.AddDistributedMemoryCache();
             services.AddHttpContextAccessor();
-            StartUpHelper.ConfigureSwagger(ApiVersions, _microServiceApiName, services);
+            services.RegisterSwagger(ApiVersions, _microServiceApiName);
             PreInitialize(services);
             //Validare Required Field For All API Methods
             services.AddMvc(options => options.Filters.Add(new ValidateModelAttribute()));
@@ -62,7 +73,7 @@ namespace ByteAwesome.TestAPI
         {
             IHttpContextAccessor httpContextAccessor = app.ApplicationServices.GetService<IHttpContextAccessor>();
             CurrentSession.Configure(httpContextAccessor);
-            LanguageService.Configure(httpContextAccessor);
+            LanguageService.Configure();
 
             app.UseHttpsRedirection();
             app.UseApiVersioning();
@@ -74,13 +85,15 @@ namespace ByteAwesome.TestAPI
             app.UseExceptionHandler(c => c.Run(async context =>
             {
                 var exception = context.Features.Get<IExceptionHandlerPathFeature>().Error;
-                await ContextResponseHelper.SetInternalServerErrorResponse(context, exception.Message);
+                var actionResult = ContextResponseHelper.CreateInternalServerErrorResponse(exception.Message);
+                await context.SetResponseToHttpContext(actionResult);
             }));
             //register middleware
             app.UseMiddleware<DeviceInfoMiddleware>();
             app.UseMiddleware<LocationInfoMiddleware>();
             app.UseMiddleware<RequestLogContextMiddleware>();
             app.UseMiddleware<LanguageMiddleware>();
+            app.UseMiddleware<UserContextMiddleware>();
 
             StartUpHelper.RegisterEndpoints(ApiVersions, _microServiceApiName, app, RegisterGRPCendpoint);
         }

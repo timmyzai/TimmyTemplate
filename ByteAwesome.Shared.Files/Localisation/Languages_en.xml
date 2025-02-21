@@ -24,8 +24,8 @@
         <text name="9999">Hello! 🚀 Our platform is currently in beta testing mode and access is limited to beta testers. Thank you for your patience; stay tuned for updates!</text>
         <!-- User API -->
         <text name="U1001">Role already exists.</text>
-        <text name="U1002">Exception occured while adding new Role.</text>
-        <text name="U1003">Failed to retrieve my KYC info.</text> #
+        <text name="U1002">Not allowed to proceed further because KYC is in final rejected.</text>
+        <text name="U1003">Not allowed to proceed further because KYC is in approved.</text>
         <text name="U1004">Exception occurred while getting user by id - {0}.</text>
         <text name="U1005">Failed to add user.</text>
         <text name="U1006">User does not exist.</text>
@@ -60,9 +60,9 @@
         <text name="U1035">Error while Decrypting.</text>
         <text name="U1036">Error while getting my user login sessions. </text>
         <text name="U1037">Please enable passkey to perform this action.</text>
-        <text name="U1038">SaveChanges has already been called.</text>
-        <text name="U1039">Error saving changes.</text>
-        <text name="U1040">Error disposing changes.</text>
+        <text name="U1038">User name already exists.</text>
+        <text name="U1039">Email address already exists.</text>
+        <text name="U1040">Phone number already exists.</text>
         <text name="U1041">Exception occurred while trying to get role by name. User with role {0} not Exists.</text>
         <text name="U1042">Current user does not have a phone number.</text>
         <text name="U1043">Pending verify credential is required.</text>
@@ -105,10 +105,10 @@
         <text name="W1001">Cannot find wallet group.</text>
         <text name="W1002">You are not authorized to perform this action.</text>
         <text name="W1003">The number of Sob users cannot be reduced below the maximum capacity of {0} due to your upgraded Sob capacity.</text>
-        <text name="W1004">MspUsers cannot have repeated user ids.</text>
+        <text name="W1004">You have existing payment order. Please make payment first.</text>
         <text name="W1005">Please make payment</text>
-        <text name="W1006">MspUsers and SobUsers must be at least 2.</text>
-        <text name="W1007">Msp Approvals HeadCount and Sob Approvals HeadCount must be at least 2.</text>
+        <text name="W1006">Wallet Policy is already active.</text>
+        <text name="W1007">Wallet Policy is already inactive.</text>
         <text name="W1008">Invalid msp user {0}. This user does not exist in the system.</text>
         <text name="W1009">User does not own the walletgroup.</text>
         <text name="W1010">Failed to upgrade user rank.</text>
@@ -133,10 +133,10 @@
         <text name="W1029">Failed to proceed order.</text>
         <text name="W1030">Wallet balance is not enough.</text>
         <text name="W1031">MultiSign info not found.</text>
-        <text name="W1032">Wallet group in-between transfer is not allowed.</text>
+        <text name="W1032">No changes found in Sign on Behalf Users list.</text>
         <text name="W1033">Sender and receiver must belong to the same owner.</text>
         <text name="W1034">Failed due to negative balance.</text>
-        <text name="W1035">Transfer target address is required.</text>
+        <text name="W1035">Symbol is not supported.</text>
         <text name="W1036">Cannot find symbols.</text>
         <text name="W1037">Amount with invalid decimal places.</text>
         <text name="W1038">Exceed minimum transfer amount.</text>
@@ -172,7 +172,7 @@
         <text name="W1068">Can select your own wallet group as ATT only.</text>
         <text name="W1069">Invalid Wallet group with id {0} is a vault.</text>
         <text name="W1070">Invalid ATT Wallet group with id {0} is a vault.</text>
-        <text name="W1071">Can not find wallet group to set as vault.</text>
+        <text name="W1071">Can not find network.</text>
         <text name="W1072">You are not authorized.</text>
         <text name="W1073">Duplicate WalletGroupsIds found: {0}.</text>
         <text name="W1074">Input wallet group Ids are all existed in current category {0}.</text>
@@ -232,8 +232,6 @@
         <text name="W1128">Unhandled error in WalletGroupRepository.</text>
         <text name="W1129">Unhandled error in WalletPolicyRepository.</text>
         <text name="W1130">Unhandled error in WalletRepository.</text>
-
-        <text name="W1132">Exception occurred while Getting WalletGroupCategories.</text>
         <text name="W1133">Exception occurred while Adding WalletGroup to category.</text>
         <text name="W1134">Category with {0} does not exist.</text>
         <text name="W1135">The following IDs are not existed: {0} in WalletGroups.</text>
@@ -262,7 +260,7 @@
         <text name="W1158">Transfer limit must be greater than or equal to 0.</text>
         <text name="W1159">Invalid Crypto currency Address Length.</text>
         <text name="W1160">Sob approval head count does not meet requirement</text>
-        <text name="W1161">Total number of SOB does not meet requirement</text> 
+        <text name="W1161">Total number of SOB does not meet requirement</text>
         <text name="W1162">Expiry date must be at least 1 day.</text>
         <text name="W1163">Input wallet group Ids are all existed in current category {0}.</text>
         <text name="W1164">Failed to execute co-sign transfer, can not get Tx Id. Please check CoSign Transfer GRPC.</text>
@@ -278,11 +276,11 @@
         <text name="W1174">Current wallet group has {0} asset already.</text>
         <text name="W1175">Cannot transfer to the same wallet group.</text>
         <text name="W1176">Failed to proceed refund. Please contact customer service.</text>
-        <text name="W1177">Please ask admin to configure CustoWalletType</text>
+        <text name="W1177">RemainAmount must not exceed {0}% of the Threshold.</text>
         <text name="W1178">User does not have {0} wallet.</text>
         <text name="W1179">Cannot delete main, multi sign,vault, vault target wallet.</text>
         <text name="W1180">Different CallBackTransactionId from Cosign GRPC.</text>
-        <text name="W1181">Invalid Amount</text>
+        <text name="W1181">RemainAmount must not exceed the Threshold.</text>
         <text name="W1182">Can not find user transfer limit.</text>
         <text name="W1183">Can not input yourself.</text>
         <text name="W1184">Can not transfer to the same wallet.</text>
@@ -330,10 +328,18 @@
         <text name="CP1021">Reward not found.</text>
         <text name="CP1022">Error while getting campaign by {0}.</text>
         <!-- CryptoFinance API -->
-        <text name="F1001">Fiat amount and Crypto amount are both empty.</text>
-        <text name="F1002">Invalid Fiat amount or Crypto amount.</text>
+        <text name="F1001">Fiat amount and crypto amount are both empty.</text>
+        <text name="F1002">Invalid fiat amount or crypto amount.</text>
         <text name="F1003">Invalid fiat amount.</text>
         <text name="F1004">Invalid payment action.</text>
+        <text name="F1005">Invalid crypto amount.</text>
+        <text name="F1006">Failed to retrieve countries and currencies.</text>
+        <text name="F1007">Failed to retrieve payment methods</text>
+        <text name="F1008">Failed to retrieve the estimated price</text>
+        <text name="F1009">Failed to retrieve orders.</text>
+        <text name="F1010">Failed to create order.</text>
+        <text name="F1011">Failed to sell token.</text>
+        <text name="F1012">Invalid fiat currency or country.</text>
         <!-- Messages - General -->
         <text name="Hello">Hello {0},</text>
         <text name="VerifyPhoneNumber">Phone Number Verification</text>

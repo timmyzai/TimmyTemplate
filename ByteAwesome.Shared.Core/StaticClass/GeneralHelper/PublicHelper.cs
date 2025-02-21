@@ -1,7 +1,9 @@
 using System.ComponentModel;
-using System.IdentityModel.Tokens.Jwt;
 using System.Reflection;
+using System.Text.Json;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 
 namespace ByteAwesome
 {
@@ -21,11 +23,6 @@ namespace ByteAwesome
             {
                 throw new InvalidOperationException("Failed to retrieve enum description.", ex);
             }
-        }
-        public static string GenerateCustomGuid(string input)
-        {
-            if (string.IsNullOrWhiteSpace(input)) throw new ArgumentException("Input cannot be null or empty.", nameof(input));
-            return input + Guid.NewGuid().ToString();
         }
         public static decimal TrimZeroAfterDecimal(decimal number)
         {
@@ -57,20 +54,6 @@ namespace ByteAwesome
             }
             enumValue = result;
             return value;
-        }
-        public static bool IsJwtTokenFormat(string token)
-        {
-            if (string.IsNullOrEmpty(token)) throw new ArgumentException("Token cannot be null or empty.", nameof(token));
-            try
-            {
-                var handler = new JwtSecurityTokenHandler();
-                var jwtToken = handler.ReadToken(token) as JwtSecurityToken;
-                return jwtToken is not null;
-            }
-            catch (Exception ex)
-            {
-                throw new InvalidOperationException("Invalid JWT format.", ex);
-            }
         }
         public static List<string> DiscoverApiVersions<Startup>(string microServiceApiName, string defaultVersion = "v1.0")
         {
@@ -119,6 +102,52 @@ namespace ByteAwesome
 
             return str.Length > 1 ? char.ToLowerInvariant(str[0]) + str.Substring(1) : str.ToLowerInvariant();
         }
+        public static decimal? SafeParseDecimal(string value)
+        {
+            if (decimal.TryParse(value, out decimal parsedValue))
+            {
+                return parsedValue;
+            }
+            return null;
+        }
+        public static string MaskPhoneNumber(string input)
+        {
+            if (string.IsNullOrWhiteSpace(input)) return string.Empty;
+            if (input.Length <= 6)
+            {
+                return new string('*', input.Length);
+            }
+
+            string firstThree = input[..3];
+            string lastThree = input.Substring(input.Length - 3, 3);
+            string maskedMiddle = new('*', input.Length - 6);
+
+            return firstThree + maskedMiddle + lastThree;
+        }
+        public static string MaskEmail(string email)
+        {
+            if (string.IsNullOrWhiteSpace(email)) return string.Empty;
+
+            int atIndex = email.IndexOf('@');
+            if (atIndex <= 1) return email; // Ensure there's at least one character before '@'
+
+            string localPart = email.Substring(0, atIndex);
+            string domainPart = email.Substring(atIndex);
+
+            if (localPart.Length <= 4)
+            {
+                // If the local part is very short, show only the first character and mask the rest
+                return localPart[0] + new string('*', localPart.Length - 1) + domainPart;
+            }
+
+            // Show the first two and last two characters, mask the rest
+            string visibleStart = localPart.Substring(0, 2);
+            string visibleEnd = localPart.Substring(localPart.Length - 2);
+            string maskedMiddle = new string('*', localPart.Length - 4);
+
+            return visibleStart + maskedMiddle + visibleEnd + domainPart;
+        }
+
         public static bool IsDevelopmentEnvironment()
         {
             return Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development";
@@ -127,9 +156,16 @@ namespace ByteAwesome
         {
             return Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production";
         }
-        public static bool IsStagingEnvironment()
+        public static string DecryptAccessToken(HttpRequest request, string encryptionKey)
         {
-            return Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Staging";
+            string result = null;
+            string header = request.Headers["Authorization"];
+            var encryptedToken = header?.Replace("Bearer ", string.Empty);
+            if (!string.IsNullOrEmpty(encryptedToken) && encryptedToken != "null" && encryptedToken != "[object Object]")
+            {
+                result = AesEncoder.DecryptString(encryptedToken, encryptionKey);
+            }
+            return result;
         }
     }
 }

@@ -30,20 +30,15 @@ namespace ByteAwesome
     }
     [Authorize(Roles = RoleNames.Admin)]
     [ApiExplorerSettings(IgnoreApi = true)]
-    public class AdminBaseController : BaseController { }
+    public class BaseAdminController : BaseController { }
 
-    public class AdminBaseController<TEntityDto, TCreateDto, TKey, TRepository> : AdminBaseController where TRepository : IBaseRepository<TEntityDto, TCreateDto, TKey>
+    public class BaseAdminController<TEntityDto, TCreateDto, TKey, TRepository> : BaseAdminController where TRepository : IBaseRepository<TEntityDto, TCreateDto, TKey>
     {
         protected readonly TRepository repository;
 
-        public AdminBaseController(TRepository repository)
+        public BaseAdminController(TRepository repository)
         {
             this.repository = repository;
         }
     }
-    [AllowAnonymous]
-    [ApiExplorerSettings(IgnoreApi = true)]
-    [Route("webhooks/[controller]/[action]")]
-    public class WebHook_BaseController : BaseController { }
-
 }

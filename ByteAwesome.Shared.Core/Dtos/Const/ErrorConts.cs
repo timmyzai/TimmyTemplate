@@ -31,9 +31,9 @@ namespace ByteAwesome
         public static class User
         {
             public const string RoleAlreadyExists = "U1001";
-            // public const string RoleCreationFailed = "U1002";
-            // public const string GetMyKycError = "U1003";
-            // public const string UserGetById = "U1004";
+            public const string KycFinalRejected = "U1002";
+            public const string KycApproved = "U1003";
+            public const string KycLevelAlreadyApproved = "U1004";
             public const string UserAddFailed = "U1005";
             public const string UserNotExists = "U1006";
             public const string UserLoginFailed = "U1007";
@@ -67,13 +67,13 @@ namespace ByteAwesome
             // public const string DecryptString = "U1035";
             public const string GetMyUserLoginSessions = "U1036";
             public const string PassKeyNotEnabled = "U1037";
-            // public const string SaveChangesAsyncCalled = "U1038";
-            // public const string SaveChangesAsync = "U1039";
-            // public const string Dispose = "U1040";
+            public const string UserNameAlreadyExists = "U1038";
+            public const string EmailAddressAlreadyExists = "U1039";
+            public const string PhoneNumberAlreadyExists = "U1040";
             // public const string GetRoleByName = "U1041";
             public const string UserWithoutPhone = "U1042";
             public const string PendingVerifyCredential = "U1043";
-            public const string IdentityTypeAlreadyExists = "U1044";
+            // public const string IdentityTypeAlreadyExists = "U1044";
             // public const string OTPError = "U1045";
             public const string PhoneAlreadyVerified = "U1046";
             // public const string GetUserRoleByUser = "U1047";
@@ -117,10 +117,10 @@ namespace ByteAwesome
             public const string WalletGroupNotFound = "W1001";
             public const string WalletGroupExisted = "W1002";
             public const string SobUserCapacityError = "W1003";
-            // public const string RepeatedMspUserIds = "W1004";
+            public const string HasPendingPayment = "W1004";
             public const string PaymentRequired = "W1005";
-            // public const string MinMspUserCount = "W1006";
-            // public const string MinApprovalsHeadCount = "W1007";
+            public const string WalletPolicyAlreadyActive = "W1006";
+            public const string WalletPolicyAlreadyInactive = "W1007";
             public const string InvalidMspUser = "W1008";
             public const string InvalidOwner = "W1009";
             public const string UpgradeRank = "W1010";
@@ -145,10 +145,10 @@ namespace ByteAwesome
             public const string ProceedPaymentOrderFailed = "W1029";
             public const string WalletBalanceNotEnough = "W1030";
             public const string MultiSignInfoNotFound = "W1031";
-            // public const string WalletGroupInBetweenTransferNotAllowed = "W1032";
+            public const string SobUsersSameAsExisting = "W1032";
             // public const string SenderAndReceiverMustBelongToSameOwner = "W1033";
             // public const string FailedDueToNegativeBalance = "W1034";
-            // public const string TransferTargetAddressRequired = "W1035";
+            public const string SymbolNotSupport = "W1035";
             public const string SymbolNotFound = "W1036";
             public const string InvalidDecimalPlaces = "W1037";
             public const string ExceedMinTransferAmount = "W1038";
@@ -184,13 +184,12 @@ namespace ByteAwesome
             public const string InvalidAttWalletGroupSelection = "W1068";
             public const string InvalidVaultWalletGroup = "W1069";
             public const string InvalidAttVaultWalletGroup = "W1070";
-            // public const string CanNotFindWalletGroup = "W1071"; // "Cannot find wallet group to set as vault."
             // public const string Unauthorized = "W1072"; // "You are not authorized."
             // public const string DuplicateWalletGroups = "W1073"; // "Duplicate WalletGroupsIds found: {duplicateIdsString}"
             // public const string AllIdsExistInCurrentCategory = "W1074"; // "Input wallet group Ids are all existed in current category {existingCategory.Name}."
             // public const string WalletExists = "W1075"; // "{existingWallet.WalletData
+            public const string NetworkNotFound = "W1071";
             public const string WalletNotFound = "W1076";
-            public const string NetworkNotFound = "W1076";
             public const string CustomWalletExists = "W1077";
             public const string FailedToAddCustomWallet = "W1078";
             public const string MspUsersRequired = "W1079";
@@ -283,19 +282,19 @@ namespace ByteAwesome
             public const string RequirementMinTotalNumberOfSob = "W1166";
             public const string NotAllowToTransferMspRequirementNotFulfilled = "W1167";
             public const string CurrentUserNotAllowToTransferMspRequirementNotFulfilled = "W1168";
-            public const string TransactionNotPendingCosignGrpc = "W1169";
+            // public const string TransactionNotPendingWithdrawalCallback = "W1169";
             // public const string NotAllowTransferMultiSignPendingTransaction = "W1170";
             public const string InvalidCallBackId = "W1171";
             public const string VaultAttWalletGroup = "W1172";
             public const string Vault_InvalidAmount = "W1173";
             public const string DuplicateAsset = "W1174";
-            public const string SameWalletGroupTransferFailed = "W1175";
+            // public const string SameWalletGroupTransferFailed = "W1175";
             // public const string RefundFailed = "W1176";
-            // public const string CustoWalletTypeConfig = "W1177";
+            public const string ExceedsPercentThreshold = "W1177";
             public const string UserNoNetworkWallet = "W1178";
             public const string CannotDeleteMainWalletGroup = "W1179";
             public const string DifferentCallBackTransactionId = "W1180";
-            public const string InvalidAmount = "W1181";
+            public const string RemainAmountExceedsThreshold = "W1181";
             public const string UserTransferLimitNotFound = "W1182";
             public const string CanNotInputSelf = "W1183";
             public const string SameTransferDestination = "W1184";
@@ -348,9 +347,17 @@ namespace ByteAwesome
         public static class CryptoFinance
         {
             public const string FiatAndCryptoEmpty = "F1001";
-            public const string FiatAndCryptoAmountInvalid = "F1002";
+            public const string FiatOrCryptoAmountInvalid = "F1002";
             public const string FiatAmountInvalid = "F1003";
             public const string PaymentActionInvalid = "F1004";
+            public const string CryptoAmountInvalid = "F1005";
+            public const string GetCountriesAndCurrenciesError = "F1006";
+            public const string GetPaymentMethodsByFiatAndCryptoError = "F1007";
+            public const string GetBestEstimatedPriceOrCryptoAmountError = "F1008";
+            public const string GetOrdersError = "F1009";
+            public const string CreateOrderError = "F1010";
+            public const string SellTokenError = "F1011";
+            public const string FiatCurrencyOrCountryInvalid = "F1012";
         }
     }
 }

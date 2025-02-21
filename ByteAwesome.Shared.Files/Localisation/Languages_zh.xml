@@ -24,8 +24,8 @@
         <text name="9999">您好！🚀 我们的平台目前处于测试版模式中，仅限测试用户访问。感谢您的耐心，敬请关注后续更新！</text>
         <!-- User API -->
         <text name="U1001">角色已存在。</text>
-        <text name="U1002">添加新角色时发生异常。</text>
-        <text name="U1003">无法获取我的KYC信息。</text>
+        <text name="U1002">由于KYC已最终被拒绝，不允许继续进行。</text>
+        <text name="U1003">由于KYC已最终被批准，不允许继续进行。</text>
         <text name="U1004">通过ID获取用户时发生异常 - {0}。</text>
         <text name="U1005">用户添加失败。</text>
         <text name="U1006">用户不存在。</text>
@@ -60,9 +60,9 @@
         <text name="U1035">解密时出错。</text>
         <text name="U1036">获取用户登录会话时出错。</text>
         <text name="U1037">请启用密钥以执行此操作。</text>
-        <text name="U1038">SaveChanges已经被调用。</text>
-        <text name="U1039">保存更改时出错。</text>
-        <text name="U1040">处置更改时出错。</text>
+        <text name="U1038">用户名已存在。</text>
+        <text name="U1039">电子邮件地址已存在。</text>
+        <text name="U1040">电话号码已存在。</text>
         <text name="U1041">尝试按名称获取角色时发生异常。 具有角色 {0} 的用户不存在。</text>
         <text name="U1042">当前用户没有电话号码。</text>
         <text name="U1043">待验证的凭证是必需的。</text>
@@ -75,10 +75,13 @@
         <text name="U1051">添加密钥凭据时出错。</text>
         <text name="U1052">通过密钥凭据登录时出错。</text>
         <text name="U1053">断言密钥凭据时出错。</text>
-        <text name="U1054">您的密码钥匙已经是 {0}。</text>
+        <text name="U1054">您的通行密钥已启用。</text>
         <text name="U1055">请注册您的密码钥匙。</text>
         <text name="U1056">请启用双重身份验证。</text>
         <text name="U1057">验证通行密钥凭证时出错。</text>
+        <text name="U1058">邮箱已验证。</text>
+        <text name="U1059">您的通行密钥已禁用。</text>
+        <text name="U1060">您的通行密钥未在此手机上注册。</text>
         <!-- Secret API -->
         <text name="S1001">生成访问令牌失败。</text>
         <text name="S1002">创建访问令牌失败。</text>
@@ -101,13 +104,13 @@
         <!-- Walllet API -->
         <text name="W1001">无法找到钱包组。</text>
         <text name="W1002">您无权执行此操作。</text>
-        <text name="W1003">由于您升级了代签容量，代签用户数量不能减少到低于最大容量 {0}。</text>
-        <text name="W1004">MspUsers不能具有重复的用户ID。</text>
-        <text name="W1005">{0}时需要付款。</text>
-        <text name="W1006">MspUsers和SobUsers必须至少为2。</text>
-        <text name="W1007">Msp批准人数和Sob批准人数必须至少为2。</text>
+        <text name="W1003">由於您升級了代簽容量，代簽使用者數量不能減少到低於最大容量 {0}。</text>
+        <text name="W1004">您有现有的付款订单。请先付款。</text>
+        <text name="W1005">需要付款。</text>
+        <text name="W1006">钱包策略已激活。</text>
+        <text name="W1007">钱包策略已停用。</text>
         <text name="W1008">无效的Msp用户 {0}。此用户在系统中不存在。</text>
-        <text name="W1009">未经授权的访问。</text>
+        <text name="W1009">用户不拥有该钱包组。</text>
         <text name="W1010">升级用户等级失败。</text>
         <text name="W1011">WpUsers不能具有重复的用户ID。</text>
         <text name="W1012">WpUsers必须包含当前用户ID。</text>
@@ -130,10 +133,10 @@
         <text name="W1029">无法继续处理订单。</text>
         <text name="W1030">钱包余额不足。</text>
         <text name="W1031">找不到多签信息。</text>
-        <text name="W1032">不允许在钱包组之间进行转账。</text>
+        <text name="W1032">未发现代签用户列表的变更。</text>
         <text name="W1033">发送者和接收者必须属于同一所有者。</text>
         <text name="W1034">由于余额为负，操作失败。</text>
-        <text name="W1035">转账目标地址是必需的。</text>
+        <text name="W1035">符号不支持。</text>
         <text name="W1036">无法找到符号。</text>
         <text name="W1037">金额具有无效的小数位数。</text>
         <text name="W1038">超过最小转账金额。</text>
@@ -169,7 +172,7 @@
         <text name="W1068">无法同时将相同的钱包组设置为Vault和Auto Transfer目标。</text>
         <text name="W1069">找到重复的AttWalletGroupId值：{0}。</text>
         <text name="W1070">只能选择自己的钱包组作为ATT。</text>
-        <text name="W1071">无法找到设置为金库的钱包组。</text>
+        <text name="W1071">无法找到区块链网络。</text>
         <text name="W1072">您未经授权。</text>
         <text name="W1073">找到重复的WalletGroupsIds值：{0}。</text>
         <text name="W1074">输入的钱包组ID在当前类别 {0} 中都存在。</text>
@@ -275,11 +278,11 @@
         <text name="W1174">当前钱包组已经包含 {0} 资产。</text>
         <text name="W1175">无法转移到相同的钱包组。</text>
         <text name="W1176">无法处理退款。请联系客户服务。</text>
-        <text name="W1177">请联系管理员配置CustoWalletType</text>
+        <text name="W1177">剩余金额不得超过阈值的{0}%。</text>
         <text name="W1178">用户没有 {0} 钱包。</text>
         <text name="W1179">无法删除主，多签，保险柜，保险柜目标钱包。</text>
         <text name="W1180">与Cosign GRPC不同的CallBackTransactionId。</text>
-        <text name="W1181">无效的金额。</text>
+        <text name="W1181">剩余金额不得超过阈值。</text>
         <text name="W1182">无法找到用户转账限额。</text>
         <text name="W1183">不能输入自己。</text>
         <text name="W1184">不能转账至相同的钱包。</text>
@@ -326,6 +329,19 @@
         <text name="CP1020">"这不是可重新领取的活动，重新领取冷却天数必须为空。"</text>
         <text name="CP1021">未找到奖励。</text>
         <text name="CP1022">通过 {0} 获取活动时发生错误。</text>
+        <!-- CryptoFinance API -->
+        <text name="F1001">货币金额和加密货币金额均为空。</text>
+        <text name="F1002">无效的货币金额或加密货币金额。</text>
+        <text name="F1003">无效的货币金额。</text>
+        <text name="F1004">无效的支付操作。</text>
+        <text name="F1005">无效的加密货币金额。</text>
+        <text name="F1006">获取国家和货币信息失败。</text>
+        <text name="F1007">获取支付方式失败。</text>
+        <text name="F1008">获取价格失败。</text>
+        <text name="F1009">获取订单失败。</text>
+        <text name="F1010">创建订单失败。</text>
+        <text name="F1011">出售代币失败。</text>
+        <text name="F1012">无效的法币或国家。</text>
         <!-- Messages - General -->
         <text name="Hello">你好，{0}，</text>
         <text name="VerifyPhoneNumber">电话号码验证</text>

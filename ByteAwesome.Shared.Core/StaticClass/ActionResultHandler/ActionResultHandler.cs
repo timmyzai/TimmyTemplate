@@ -1,6 +1,9 @@
+using System.Net;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Serilog;
 
 namespace ByteAwesome
@@ -44,7 +47,7 @@ namespace ByteAwesome
     }
     public static class ContextResponseHelper
     {
-        public static async Task SetErrorResponse(HttpContext httpContext, string displayMessage, string errorMessage, string statusCode, int httpStatusCode)
+        public static IActionResult CreateErrorResponse(string displayMessage, string errorMessage, string statusCode, int httpStatusCode)
         {
             var response = new ResponseDto<object>
             {
@@ -57,19 +60,46 @@ namespace ByteAwesome
                 },
                 Result = null
             };
-            httpContext.Response.StatusCode = httpStatusCode;
-            httpContext.Response.ContentType = "application/json";
-            await httpContext.Response.WriteAsync(JsonSerializer.Serialize(response));
+            var result = new ObjectResult(response)
+            {
+                StatusCode = httpStatusCode,
+                DeclaredType = typeof(ResponseDto<object>)
+            };
+            result.ContentTypes.Add("application/json");
+            return result;
         }
 
-        public static async Task SetUnauthorizedResponse(HttpContext httpContext, string errorMessage = "Authentication failed. Invalid Token.")
+        public static IActionResult CreateUnauthorizedResponse(string errorMessage = "Authentication failed. Invalid Token.")
         {
-            await SetErrorResponse(httpContext, "Unauthorized access.", errorMessage, ErrorCodes.General.PleaseLogin, StatusCodes.Status401Unauthorized);
+            return CreateErrorResponse("Unauthorized access.", errorMessage, ErrorCodes.General.PleaseLogin, StatusCodes.Status401Unauthorized);
         }
 
-        public static async Task SetInternalServerErrorResponse(HttpContext httpContext, string errorMessage = "Internal Server Error. Please try again later.")
+        public static IActionResult CreateInternalServerErrorResponse(string errorMessage = "Internal Server Error. Please try again later.")
         {
-            await SetErrorResponse(httpContext, "An error occurred while processing your request.", errorMessage, ErrorCodes.General.UnhandledError, StatusCodes.Status500InternalServerError);
+            return CreateErrorResponse("An error occurred while processing your request.", errorMessage, ErrorCodes.General.UnhandledError, StatusCodes.Status500InternalServerError);
+        }
+
+        public static async Task SetResponseToHttpContext(this HttpContext context, IActionResult actionResult)
+        {
+            await context.Response.WriteAsync(JsonSerializer.Serialize(actionResult));
+        }
+        public static async Task HandleAccessTokenDecryptionFailure(this MessageReceivedContext context, Exception ex)
+        {
+            Log.Error(ex, "Unauthorized Access.");
+            context.Fail("Unauthorized Access.");
+            await WriteUnauthorizedResponse(context);
+        }
+        private static async Task WriteUnauthorizedResponse(MessageReceivedContext context)
+        {
+            context.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+            context.Response.ContentType = "application/json";
+            IActionResult actionResult = CreateUnauthorizedResponse();
+            if (actionResult is ObjectResult objectResult)
+            {
+                var response = JsonSerializer.Serialize(objectResult.Value, new JsonSerializerOptions { WriteIndented = true });
+                await context.Response.WriteAsync(response);
+            }
+            await context.Response.CompleteAsync();
         }
     }
     public static class GrpcResponseValidator

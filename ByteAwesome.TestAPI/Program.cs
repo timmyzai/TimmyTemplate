@@ -1,17 +1,14 @@
-using Amazon;
-using Amazon.SecretsManager;
-using Amazon.SecretsManager.Model;
+using System;
 using ByteAwesome.StartupConfig;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
-using Newtonsoft.Json;
+using Microsoft.Extensions.Hosting;
 using Serilog;
 
 namespace ByteAwesome.TestAPI
 {
     public static class Program
     {
-        private static AmazonSecretsManagerClient awsClient;
-
         public static int Main(string[] args)
         {
             Log.Logger = new LoggerConfiguration()
@@ -37,15 +34,6 @@ namespace ByteAwesome.TestAPI
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureAppConfiguration((context, config) =>
-                {
-                    var builtConfig = config.Build();
-                    var environmentName = context.HostingEnvironment.EnvironmentName;
-                    if(environmentName != Environments.Development)
-                    {
-                        LoadAwsSecrets(config, builtConfig["AWS:SecretManager:SecretId"], builtConfig["AWS:SecretManager:Region"]);
-                    }
-                })
                 .UseSerilog(StartUpHelper.ConfigureSerilog)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
@@ -55,30 +43,10 @@ namespace ByteAwesome.TestAPI
                             options.ListenLocalhost(7186, listenOptions =>
                             {
                                 listenOptions.Protocols = HttpProtocols.Http1;
-                                // listenOptions.UseHttps();//when local need to disable
                             });
                         });
                     webBuilder.UseStartup<Startup>();
                 });
 
-        private static void LoadAwsSecrets(IConfigurationBuilder config, string secretId, string region)
-        {            
-            if (!string.IsNullOrEmpty(secretId))
-            {
-                if (awsClient is null)
-                {
-                    awsClient = new AmazonSecretsManagerClient(RegionEndpoint.GetBySystemName(region));
-                }
-                
-                var response = awsClient.GetSecretValueAsync(new GetSecretValueRequest { SecretId = secretId }).Result;
-                var secretString = response.SecretString;
-                if (secretString is not null)
-                {
-                    var secrets = JsonConvert.DeserializeObject<Dictionary<string, string>>(secretString);
-                    config.AddInMemoryCollection(secrets);
-                }
-            }
-        }
-    
     }
 }

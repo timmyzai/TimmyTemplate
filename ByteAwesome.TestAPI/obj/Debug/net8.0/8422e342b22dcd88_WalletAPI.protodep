@@ -1,0 +1,4 @@
+obj/Debug/net8.0/WalletAPI.cs \
+obj/Debug/net8.0/WalletAPIGrpc.cs: /Users/myav/.nuget/packages/grpc.tools/2.66.0/build/native/include/google/protobuf/empty.proto\
+ ../ByteAwesome.Shared.Files/GrpcProtos/Base.proto\
+ ../ByteAwesome.Shared.Files/GrpcProtos/WalletAPI.proto

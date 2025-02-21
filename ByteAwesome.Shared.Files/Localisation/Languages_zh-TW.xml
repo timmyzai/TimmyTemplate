@@ -24,8 +24,8 @@
         <text name="9999">您好！🚀 我們的平台目前處于測試版模式中，僅限測試用戶訪問。感謝您的耐心，敬請關注後續更新！</text>
         <!-- User API -->
         <text name="U1001">角色已存在。</text>
-        <text name="U1002">添加新角色時發生異常。</text>
-        <text name="U1003">無法取得我的KYC資訊。</text>
+        <text name="U1002">由於KYC已最終被拒絕，不允許繼續進行。</text>
+        <text name="U1003">由於KYC已最終被批准，不允許繼續進行。</text>
         <text name="U1004">通過ID獲取用戶時發生異常 - {0}。</text>
         <text name="U1005">用戶添加失敗。</text>
         <text name="U1006">用戶不存在。</text>
@@ -60,9 +60,9 @@
         <text name="U1035">解密時出錯。</text>
         <text name="U1036">在獲取我的使用者登入會話時出錯。</text>
         <text name="U1037">請啟用密鑰以執行此操作。</text>
-        <text name="U1038">SaveChanges已經被調用。</text>
-        <text name="U1039">保存更改時出錯。</text>
-        <text name="U1040">處置更改時出錯。</text>
+        <text name="U1038">用戶名已存在。</text>
+        <text name="U1039">電子郵件地址已存在。</text>
+        <text name="U1040">電話號碼已存在。</text>
         <text name="U1041">嘗試按名稱獲取角色時發生異常。 具有角色 {0} 的用戶不存在。</text>
         <text name="U1042">當前用戶沒有電話號碼。</text>
         <text name="U1043">待驗證的憑證是必需的。</text>
@@ -106,10 +106,10 @@
         <text name="W1001">無法找到錢包組。</text>
         <text name="W1002">您無權執行此操作。</text>
         <text name="W1003">具有ID {0}的錢包組已經是多簽錢包。</text>
-        <text name="W1004">MspUsers不能具有重複的用戶ID。</text>
-        <text name="W1005">{0}時需要付款。</text>
-        <text name="W1006">MspUsers和SobUsers必須至少為2。</text>
-        <text name="W1007">Msp批准人數和Sob批准人數必須至少為2。</text>
+        <text name="W1004">您有現有的付款訂單。請先付款。</text>
+        <text name="W1005">需要付款。</text>
+        <text name="W1006">錢包策略已激活。</text>
+        <text name="W1007">錢包策略已停用。</text>
         <text name="W1008">無效的Msp用戶 {0}。此用戶在系統中不存在。</text>
         <text name="W1009">用戶不擁有該錢包組。</text>
         <text name="W1010">升級用戶等級失敗。</text>
@@ -134,10 +134,10 @@
         <text name="W1029">無法繼續處理訂單。</text>
         <text name="W1030">錢包余額不足。</text>
         <text name="W1031">找不到多簽信息。</text>
-        <text name="W1032">不允許在錢包組之間進行轉賬。</text>
+        <text name="W1032">未發現代簽用戶列表的變更。</text>
         <text name="W1033">發送者和接收者必須屬于同一所有者。</text>
         <text name="W1034">由于余額為負，操作失敗。</text>
-        <text name="W1035">轉賬目標地址是必需的。</text>
+        <text name="W1035">符號不支援。</text>
         <text name="W1036">無法找到符號。</text>
         <text name="W1037">金額具有無效的小數位數。</text>
         <text name="W1038">超過最小轉賬金額。</text>
@@ -173,7 +173,7 @@
         <text name="W1068">無法同時將相同的錢包組設置為Vault和Auto Transfer目標。</text>
         <text name="W1069">找到重複的AttWalletGroupId值：{0}。</text>
         <text name="W1070">只能選擇自己的錢包組作為ATT。</text>
-        <text name="W1071">無法找到設置為金庫的錢包組。</text>
+        <text name="W1071">無法找到區塊鏈網絡。</text>
         <text name="W1072">您未經授權。</text>
         <text name="W1073">找到重複的WalletGroupsIds值：{0}。</text>
         <text name="W1074">輸入的錢包組ID在當前類別 {0} 中都存在。</text>
@@ -279,11 +279,11 @@
         <text name="W1174">當前錢包組已經包含 {0} 資產。</text>
         <text name="W1175">無法轉移到相同的錢包組。</text>
         <text name="W1176">無法處理退款。請聯繫客戶服務。</text>
-        <text name="W1177">請聯繫管理員配置CustoWalletType</text>
+        <text name="W1177">剩餘金額不得超過閾值的{0}%。</text>
         <text name="W1178">用戶沒有 {0} 錢包。</text>
         <text name="W1179">無法刪除主，多簽，保險櫃，保險櫃目標錢包。</text>
         <text name="W1180">與Cosign GRPC不同的CallBackTransactionId。</text>
-        <text name="W1181">無效的金額。</text>
+        <text name="W1181">剩餘金額不得超過閾值。</text>
         <text name="W1182">無法找到用戶轉帳限額。</text>
         <text name="W1183">不能輸入自己。</text>
         <text name="W1184">不能轉帳至相同的錢包。</text>
@@ -335,7 +335,14 @@
         <text name="F1002">無效的貨幣金額或加密貨幣金額。</text>
         <text name="F1003">無效的貨幣金額。</text>
         <text name="F1004">無效的支付操作。</text>
-
+        <text name="F1005">無效的加密貨幣金額。</text>
+        <text name="F1006">獲取國家和貨幣信息失敗。</text>
+        <text name="F1007">獲取支付方式失敗。</text>
+        <text name="F1008">獲取價格失敗。</text>
+        <text name="F1009">獲取訂單失敗。</text>
+        <text name="F1010">創建訂單失敗。</text>
+        <text name="F1011">出售代幣失敗。</text>
+        <text name="F1012">無效的法幣或國家。</text>
         <!-- Messages - General -->
         <text name="Hello">你好，{0}，</text>
         <text name="VerifyPhoneNumber">電話號碼驗證</text>

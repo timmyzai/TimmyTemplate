@@ -27,13 +27,13 @@ namespace ByteAwesome
                     },
                     Result = null
                 };
-                context.Result = new BadRequestObjectResult(errorResponse);
+                context.Result = new OkObjectResult(errorResponse);
             }
         }
     }
     public class InjectFromHeaderAttribute : ActionFilterAttribute
     {
-        public List<HeaderRequirement> headers = new List<HeaderRequirement>();
+        public List<HeaderRequirement> headers = [];
         public override void OnActionExecuting(ActionExecutingContext context)
         {
             foreach (var header in headers)
@@ -55,7 +55,7 @@ namespace ByteAwesome
                         },
                         Result = null
                     };
-                    context.Result = new BadRequestObjectResult(errorResponse);
+                    context.Result = new OkObjectResult(errorResponse);
                     return; // Stop further execution as a required header is missing
                 }
             }

@@ -15,7 +15,7 @@ namespace ByteAwesome
             {
                 var assertion = JsonSerializer.Deserialize<AuthenticatorAssertionRawResponse>(jsonStr);
             }
-            catch (Exception ex)
+            catch
             {
                 throw new AppException(ErrorCodes.User.PasskeyAssertionError);
             }
@@ -30,7 +30,7 @@ namespace ByteAwesome
             {
                 var attestation = JsonSerializer.Deserialize<AuthenticatorAttestationRawResponse>(jsonStr);
             }
-            catch (Exception ex)
+            catch
             {
                 throw new AppException(ErrorCodes.User.PasskeyAttestationError);
             }

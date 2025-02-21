@@ -22,6 +22,7 @@ namespace ByteAwesome
     public class ConfigSettingsConst
     {
         public const string CustoWalletType = "CustoWalletType";
+        public const string AdminUserId = "AdminUserId";
         public const string AdminWalletGroupId = "AdminWalletGroupId";
         public const string CreateWalletGroupFee = "CreateWalletGroupFee";
         public const string CreateMultiSignWalletGroupFee = "CreateMultiSignWalletGroupFee";
@@ -34,6 +35,7 @@ namespace ByteAwesome
         public const string VaultMinFee = "VaultMinFee";
         public const string VaultMaxFee = "VaultMaxFee";
         public const string VaultFeeType = "VaultFeeType";
+        public const string ThresholdMultiplier = "ThresholdMultiplier";
         public const string UpRankFromFreeToTeam = "UpRankFromFreeToTeam";
         public const string UpRankFromFreeToEnterprise = "UpRankFromFreeToEnterprise";
         public const string UpRankFromTeamToEnterprise = "UpRankFromTeamToEnterprise";

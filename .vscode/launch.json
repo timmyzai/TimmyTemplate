@@ -6,7 +6,7 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/ByteAwesome.TestAPI/bin/Debug/net6.0/ByteAwesome.TestAPI.dll",
+            "program": "${workspaceFolder}/ByteAwesome.TestAPI/bin/Debug/net8.0/ByteAwesome.TestAPI.dll",
             "args": [],
             "cwd": "${workspaceFolder}/ByteAwesome.TestAPI",
             "stopAtEntry": false,
@@ -19,63 +19,6 @@
             },
             "sourceFileMap": {
                 "/Views": "${workspaceFolder}/Views"
-            }
-        },
-        {
-            "name": "UserAPI",
-            "type": "coreclr",
-            "request": "launch",
-            "preLaunchTask": "build userAPI",
-            "program": "${workspaceFolder}/Services/ByteAwesome.UserAPI/bin/Debug/net6.0/ByteAwesome.UserAPI.dll",
-            "args": [],
-            "cwd": "${workspaceFolder}/Services/ByteAwesome.UserAPI",
-            "stopAtEntry": false,
-            "serverReadyAction": {
-                "action": "openExternally",
-                "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
-            },
-            "env": {
-                "ASPNETCORE_ENVIRONMENT": "Development"
-            },
-            "sourceFileMap": {
-                "/Views": "${workspaceFolder}/Views"
-            }
-        },
-        {
-            "name": "SecretAPI",
-            "type": "coreclr",
-            "request": "launch",
-            "preLaunchTask": "build secretAPI",
-            "program": "${workspaceFolder}/Services/ByteAwesome.SecretAPI/bin/Debug/net6.0/ByteAwesome.SecretAPI.dll",
-            "args": [],
-            "cwd": "${workspaceFolder}/Services/ByteAwesome.SecretAPI",
-            "stopAtEntry": false,
-            "serverReadyAction": {
-                "action": "openExternally",
-                "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
-            },
-            "env": {
-                "ASPNETCORE_ENVIRONMENT": "Development"
-            },
-            "sourceFileMap": {
-                "/Views": "${workspaceFolder}/Views"
-            }
-        },
-        // Benchmark Runner
-        {
-            "name": "Run Test API Benchmarks",
-            "type": "coreclr",
-            "request": "launch",
-            "preLaunchTask": "Build And Release TestAPI",
-            "program": "${workspaceFolder}/Services/ByteAwesome.TestAPI/bin/Release/net6.0/ByteAwesome.TestAPI.dll",
-            "args": [
-                "--benchmark"
-            ],
-            "cwd": "${workspaceFolder}/Services/ByteAwesome.TestAPI",
-            "stopAtEntry": false,
-            "console": "integratedTerminal",
-            "env": {
-                "ASPNETCORE_ENVIRONMENT": "Development"
             }
         }
     ]

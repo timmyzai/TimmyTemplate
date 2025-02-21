@@ -2,18 +2,18 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ByteAwesome
 {
-    public interface ICRUD_AdminBaseController<TEntityDto, TCreateDto, TKey>
+    public interface ICRUD_BaseAdminController<TEntityDto, TCreateDto, TKey>
     {
         Task<ActionResult<ResponseDto<TEntityDto>>> Add([FromBody] TCreateDto input);
         Task<ActionResult<ResponseDto<TEntityDto>>> Delete(TKey id);
         Task<ActionResult<ResponseDto<TEntityDto>>> GetById(TKey id);
         Task<ActionResult<ResponseDto<TEntityDto>>> Update([FromBody] TEntityDto input);
     }
-    
-    public class CRUD_AdminBaseController<TEntityDto, TCreateDto, TKey, TRepository> : AdminBaseController, ICRUD_AdminBaseController<TEntityDto, TCreateDto, TKey> where TRepository : IBaseRepository<TEntityDto, TCreateDto, TKey>
+
+    public class CRUD_BaseAdminController<TEntityDto, TCreateDto, TKey, TRepository> : BaseAdminController, ICRUD_BaseAdminController<TEntityDto, TCreateDto, TKey> where TRepository : IBaseRepository<TEntityDto, TCreateDto, TKey>
     {
         protected readonly TRepository repository;
-        public CRUD_AdminBaseController(TRepository repository) { this.repository = repository; }
+        public CRUD_BaseAdminController(TRepository repository) { this.repository = repository; }
         public virtual async Task<ActionResult<ResponseDto<TEntityDto>>> GetById(TKey id)
         {
             var response = new ResponseDto<TEntityDto>();

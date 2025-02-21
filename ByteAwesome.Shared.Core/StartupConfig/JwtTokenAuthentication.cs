@@ -1,7 +1,5 @@
-
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
@@ -10,9 +8,9 @@ namespace ByteAwesome.StartupConfig
 {
     public partial class StartUpHelper
     {
-        public static TokenConfiguration ConfigureAuthentication(IConfiguration configuration, IServiceCollection services)
+        public static TokenConfigurationDto ConfigureAuthentication(IConfiguration configuration, IServiceCollection services)
         {
-            var tokenConfig = new TokenConfiguration
+            var tokenConfig = new TokenConfigurationDto
             {
                 IsEnabled = bool.Parse(configuration["Authorization:IsEnabled"]),
                 SecurityKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(configuration["Authorization:SecurityKey"])),
@@ -23,6 +21,10 @@ namespace ByteAwesome.StartupConfig
             if (double.TryParse(configuration["Authorization:TokenExpiry"], out double tokenExpiryMinutes))
             {
                 tokenConfig.Expiration = TimeSpan.FromMinutes(tokenExpiryMinutes);
+            }
+            if (int.TryParse(configuration["Authorization:RefreshTokenExpiryDays"], out int refreshTokenExpiryDays))
+            {
+                tokenConfig.RefreshTokenExpirationDays = refreshTokenExpiryDays;
             }
             if (tokenConfig.IsEnabled)
             {
@@ -39,7 +41,7 @@ namespace ByteAwesome.StartupConfig
             }
             return tokenConfig;
         }
-        protected static void SetTokenValidationParameters(JwtBearerOptions options, TokenConfiguration tokenConfig)
+        protected static void SetTokenValidationParameters(JwtBearerOptions options, TokenConfigurationDto tokenConfig)
         {
             options.Audience = tokenConfig.Audience;
             options.TokenValidationParameters = new TokenValidationParameters
@@ -59,22 +61,17 @@ namespace ByteAwesome.StartupConfig
             string encryptionKey = configuration["App:EncryptSecretKey"];
             options.Events = new JwtBearerEvents
             {
-                OnMessageReceived = context =>
+                OnMessageReceived = async context =>
                 {
-                    var encryptedToken = context.Request.Headers["Authorization"].FirstOrDefault()?.Replace("Bearer ", string.Empty);
-                    if (!string.IsNullOrEmpty(encryptedToken) && encryptedToken != "null")
+                    try
                     {
-                        try
-                        {
-                            context.Token = AesEncoder.DecryptString(encryptedToken, encryptionKey);
-                            context.HttpContext.Items["DecryptedToken"] = context.Token;
-                        }
-                        catch
-                        {
-                            context.Response.StatusCode = StatusCodes.Status401Unauthorized;
-                        }
+                        context.Token = GeneralHelper.DecryptAccessToken(context.Request, encryptionKey);
+                        context.HttpContext.Items["DecryptedToken"] = context.Token;
                     }
-                    return Task.CompletedTask;
+                    catch (Exception ex)
+                    {
+                        await context.HandleAccessTokenDecryptionFailure(ex); 
+                    }
                 }
             };
         }

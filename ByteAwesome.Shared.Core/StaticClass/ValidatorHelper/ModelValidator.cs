@@ -8,7 +8,7 @@ namespace ByteAwesome
         public static ActionResult Validate<T>(T model)
         {
             ValidationContext context = new ValidationContext(model);
-            List<ValidationResult> results = new List<ValidationResult>();
+            List<ValidationResult> results = [];
             bool isValid = Validator.TryValidateObject(model, context, results, true);
 
             if (!isValid)
@@ -25,7 +25,7 @@ namespace ByteAwesome
                     },
                     Result = null
                 };
-                return new BadRequestObjectResult(errorResponse);
+                return new OkObjectResult(errorResponse);
             }
             return null;
         }

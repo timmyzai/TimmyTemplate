@@ -8,7 +8,7 @@ namespace ByteAwesome
     {
         private readonly RequestDelegate next;
         private readonly IGeoIPService geoIPService;
-        private readonly List<string> blacklistIpAddresses = new List<string>();
+        private readonly List<string> blacklistIpAddresses = [];
         public LocationInfoMiddleware(RequestDelegate next, IGeoIPService geoIPService)
         {
             this.next = next;

@@ -37,18 +37,17 @@ namespace ByteAwesome
     }
     public class ParquetDataService<T> where T : class, new()
     {
-        public static async Task<IList<T>> DeserializeAsync(string filePath, Func<T, bool> predicate = null)
+        public static async Task<List<T>> DeserializeAsync(string filePath, Func<T, bool> predicate = null)
         {
             if (!File.Exists(filePath))
             {
-                return new List<T>();
+                return [];
             }
 
-            using (Stream fileStream = File.OpenRead(filePath))
-            {
-                var data = await ParquetSerializer.DeserializeAsync<T>(fileStream);
-                return predicate is null ? data : data.Where(predicate).ToList();
-            }
+            using FileStream fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read);
+            var data = await ParquetSerializer.DeserializeAsync<T>(fileStream);
+            return [.. data];
+
         }
 
         public static async Task SerializeAsync(string filePath, IList<T> data)
