@@ -1,4 +1,7 @@
+using System.ComponentModel.DataAnnotations;
 using ByteAwesome.Services;
+using ByteAwesome.TestAPI.entity;
+using ByteAwesome.TestAPI.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace ByteAwesome.TestAPI.DbContexts
@@ -12,6 +15,12 @@ namespace ByteAwesome.TestAPI.DbContexts
         {
             _auditingService = new AuditingService(this);
         }
+        
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Brand> Brands { get; set; }
+        public DbSet<Supplier> Suppliers { get; set; }
+        public DbSet<ProductType> ProductTypes { get; set; }
+        
         #region Overrides
         public override int SaveChanges()
         {
