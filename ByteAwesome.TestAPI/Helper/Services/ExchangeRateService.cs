@@ -47,7 +47,7 @@ public class ExchangeRateService : IExchangeRateService
                 throw new AppException("W1008");
             }
             
-            var countryCurrencyCode = countryCurrency.CountryCode_2.ToUpper();
+            var countryCurrencyCode = countryCurrency.CurrencyCode.ToUpper();
 
             var response =
                 await _httpClient.GetAsync($"/latest?access_key={_apiSettings.AccessKey}&symbols={countryCurrencyCode},USD");
