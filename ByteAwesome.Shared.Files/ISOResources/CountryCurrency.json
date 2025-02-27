@@ -1,0 +1,1962 @@
+[
+  {
+    "Country": "Afghanistan",
+    "Country Code": "AF",
+    "Dialling Code": "93",
+    "Currency Name": "Afghan Afghani",
+    "Currency Code": "afn",
+    "Numeric Currency Code": "971"
+  },
+  {
+    "Country": "Åland Islands",
+    "Country Code": "AX",
+    "Dialling Code": "358",
+    "Currency Name": "Euro",
+    "Currency Code": "eur",
+    "Numeric Currency Code": "978"
+  },
+  {
+    "Country": "Albania",
+    "Country Code": "AL",
+    "Dialling Code": "355",
+    "Currency Name": "Albanian Lek",
+    "Currency Code": "all",
+    "Numeric Currency Code": "008"
+  },
+  {
+    "Country": "Algeria",
+    "Country Code": "DZ",
+    "Dialling Code": "213",
+    "Currency Name": "Algerian Dinar",
+    "Currency Code": "dzd",
+    "Numeric Currency Code": "012"
+  },
+  {
+    "Country": "American Samoa",
+    "Country Code": "AS",
+    "Dialling Code": "1 684",
+    "Currency Name": "United States Dollar",
+    "Currency Code": "usd",
+    "Numeric Currency Code": "840"
+  },
+  {
+    "Country": "Andorra",
+    "Country Code": "AD",
+    "Dialling Code": "376",
+    "Currency Name": "Euro",
+    "Currency Code": "eur",
+    "Numeric Currency Code": "978"
+  },
+  {
+    "Country": "Angola",
+    "Country Code": "AO",
+    "Dialling Code": "244",
+    "Currency Name": "Angolan Kwanza",
+    "Currency Code": "aoa",
+    "Numeric Currency Code": "973"
+  },
+  {
+    "Country": "Anguilla",
+    "Country Code": "AI",
+    "Dialling Code": "1 264",
+    "Currency Name": "Eastern Caribbean Dollar",
+    "Currency Code": "xcd",
+    "Numeric Currency Code": "951"
+  },
+  {
+    "Country": "Antigua and Barbuda",
+    "Country Code": "AG",
+    "Dialling Code": "1 268",
+    "Currency Name": "Eastern Caribbean Dollar",
+    "Currency Code": "xcd",
+    "Numeric Currency Code": "951"
+  },
+  {
+    "Country": "Argentina",
+    "Country Code": "AR",
+    "Dialling Code": "54",
+    "Currency Name": "Argentine Peso",
+    "Currency Code": "ars",
+    "Numeric Currency Code": "032"
+  },
+  {
+    "Country": "Armenia",
+    "Country Code": "AM",
+    "Dialling Code": "374",
+    "Currency Name": "Armenian Dram",
+    "Currency Code": "amd",
+    "Numeric Currency Code": "051"
+  },
+  {
+    "Country": "Aruba",
+    "Country Code": "AW",
+    "Dialling Code": "297",
+    "Currency Name": "Aruban Florin",
+    "Currency Code": "awg",
+    "Numeric Currency Code": "533"
+  },
+  {
+    "Country": "Australia",
+    "Country Code": "AU",
+    "Dialling Code": "61",
+    "Currency Name": "Australian Dollar",
+    "Currency Code": "aud",
+    "Numeric Currency Code": "036"
+  },
+  {
+    "Country": "Austria",
+    "Country Code": "AT",
+    "Dialling Code": "43",
+    "Currency Name": "Euro",
+    "Currency Code": "eur",
+    "Numeric Currency Code": "978"
+  },
+  {
+    "Country": "Azerbaijan",
+    "Country Code": "AZ",
+    "Dialling Code": "994",
+    "Currency Name": "Azerbaijanian Manat",
+    "Currency Code": "azn",
+    "Numeric Currency Code": "944"
+  },
+  {
+    "Country": "Bahamas",
+    "Country Code": "BS",
+    "Dialling Code": "242",
+    "Currency Name": "Bahamian Dollar",
+    "Currency Code": "bds",
+    "Numeric Currency Code": "044"
+  },
+  {
+    "Country": "Bahrain",
+    "Country Code": "BH",
+    "Dialling Code": "973",
+    "Currency Name": "Bahraini Dinar",
+    "Currency Code": "bhd",
+    "Numeric Currency Code": "048"
+  },
+  {
+    "Country": "Bangladesh",
+    "Country Code": "BD",
+    "Dialling Code": "880",
+    "Currency Name": "Taka",
+    "Currency Code": "bdt",
+    "Numeric Currency Code": "050"
+  },
+  {
+    "Country": "Barbados",
+    "Country Code": "BB",
+    "Dialling Code": "246",
+    "Currency Name": "Barbados Dollar",
+    "Currency Code": "bbd",
+    "Numeric Currency Code": "052"
+  },
+  {
+    "Country": "Belarus",
+    "Country Code": "BY",
+    "Dialling Code": "375",
+    "Currency Name": "Belarussian Ruble",
+    "Currency Code": "byn",
+    "Numeric Currency Code": "933"
+  },
+  {
+    "Country": "Belgium",
+    "Country Code": "BE",
+    "Dialling Code": "32",
+    "Currency Name": "Euro",
+    "Currency Code": "eur",
+    "Numeric Currency Code": "978"
+  },
+  {
+    "Country": "Belize",
+    "Country Code": "BZ",
+    "Dialling Code": "501",
+    "Currency Name": "Belize Dollar",
+    "Currency Code": "bzd",
+    "Numeric Currency Code": "084"
+  },
+  {
+    "Country": "Benin",
+    "Country Code": "BJ",
+    "Dialling Code": "229",
+    "Currency Name": "CFA Franc BCEAO",
+    "Currency Code": "xof",
+    "Numeric Currency Code": "952"
+  },
+  {
+    "Country": "Bermuda",
+    "Country Code": "BM",
+    "Dialling Code": "809",
+    "Currency Name": "Bermudian Dollar",
+    "Currency Code": "bmd",
+    "Numeric Currency Code": "060"
+  },
+  {
+    "Country": "Bhutan",
+    "Country Code": "BT",
+    "Dialling Code": "975",
+    "Currency Name": "Ngultrum",
+    "Currency Code": "btn",
+    "Numeric Currency Code": "064"
+  },
+  {
+    "Country": "Bolivia, Plurinational State of",
+    "Country Code": "BO",
+    "Dialling Code": "591",
+    "Currency Name": "Boliviano",
+    "Currency Code": "bob",
+    "Numeric Currency Code": "068"
+  },
+  {
+    "Country": "Bonaire, Sint Eustatius and Saba",
+    "Country Code": "BQ",
+    "Dialling Code": "599",
+    "Currency Name": "United States Dollar",
+    "Currency Code": "usd",
+    "Numeric Currency Code": "840"
+  },
+  {
+    "Country": "Bosnia and Herzegovina",
+    "Country Code": "BA",
+    "Dialling Code": "387",
+    "Currency Name": "Convertible Mark",
+    "Currency Code": "bam",
+    "Numeric Currency Code": "977"
+  },
+  {
+    "Country": "Botswana",
+    "Country Code": "BW",
+    "Dialling Code": "267",
+    "Currency Name": "Pula",
+    "Currency Code": "bwp",
+    "Numeric Currency Code": "072"
+  },
+  {
+    "Country": "Bouvet Island",
+    "Country Code": "BV",
+    "Dialling Code": "47",
+    "Currency Name": "Norwegian Krone",
+    "Currency Code": "nok",
+    "Numeric Currency Code": "578"
+  },
+  {
+    "Country": "Brazil",
+    "Country Code": "BR",
+    "Dialling Code": "55",
+    "Currency Name": "Brazilian Real",
+    "Currency Code": "brl",
+    "Numeric Currency Code": "986"
+  },
+  {
+    "Country": "British Indian Ocean Territory",
+    "Country Code": "IO",
+    "Dialling Code": "246",
+    "Currency Name": "United States Dollar",
+    "Currency Code": "usd",
+    "Numeric Currency Code": "840"
+  },
+  {
+    "Country": "Brunei Darussalam",
+    "Country Code": "BN",
+    "Dialling Code": "673",
+    "Currency Name": "Brunei Dollar",
+    "Currency Code": "bnd",
+    "Numeric Currency Code": "096"
+  },
+  {
+    "Country": "Bulgaria",
+    "Country Code": "BG",
+    "Dialling Code": "359",
+    "Currency Name": "Bulgarian Lev",
+    "Currency Code": "bgn",
+    "Numeric Currency Code": "975"
+  },
+  {
+    "Country": "Burkina Faso",
+    "Country Code": "BF",
+    "Dialling Code": "226",
+    "Currency Name": "CFA Franc BCEAO",
+    "Currency Code": "xof",
+    "Numeric Currency Code": "952"
+  },
+  {
+    "Country": "Burundi",
+    "Country Code": "BI",
+    "Dialling Code": "257",
+    "Currency Name": "Burundi Franc",
+    "Currency Code": "bif",
+    "Numeric Currency Code": "108"
+  },
+  {
+    "Country": "Cambodia",
+    "Country Code": "KH",
+    "Dialling Code": "855",
+    "Currency Name": "Riel",
+    "Currency Code": "khr",
+    "Numeric Currency Code": "116"
+  },
+  {
+    "Country": "Cameroon",
+    "Country Code": "CM",
+    "Dialling Code": "237",
+    "Currency Name": "CFA Franc BEAC",
+    "Currency Code": "xaf",
+    "Numeric Currency Code": "950"
+  },
+  {
+    "Country": "Canada",
+    "Country Code": "CA",
+    "Dialling Code": "1",
+    "Currency Name": "Canadian Dollar",
+    "Currency Code": "cad",
+    "Numeric Currency Code": "124"
+  },
+  {
+    "Country": "Cabo Verde",
+    "Country Code": "CV",
+    "Dialling Code": "238",
+    "Currency Name": "Cabo Verde Escudo",
+    "Currency Code": "cve",
+    "Numeric Currency Code": "132"
+  },
+  {
+    "Country": "Cayman Islands",
+    "Country Code": "KY",
+    "Dialling Code": "345",
+    "Currency Name": "Cayman Islands Dollar",
+    "Currency Code": "kyd",
+    "Numeric Currency Code": "136"
+  },
+  {
+    "Country": "Central African Republic",
+    "Country Code": "CF",
+    "Dialling Code": "236",
+    "Currency Name": "CFA Franc BEAC",
+    "Currency Code": "xaf",
+    "Numeric Currency Code": "950"
+  },
+  {
+    "Country": "Chad",
+    "Country Code": "TD",
+    "Dialling Code": "235",
+    "Currency Name": "CFA Franc BEAC",
+    "Currency Code": "xaf",
+    "Numeric Currency Code": "950"
+  },
+  {
+    "Country": "Chile",
+    "Country Code": "CL",
+    "Dialling Code": "56",
+    "Currency Name": "Chilean Peso",
+    "Currency Code": "clp",
+    "Numeric Currency Code": "152"
+  },
+  {
+    "Country": "China",
+    "Country Code": "CN",
+    "Dialling Code": "86",
+    "Currency Name": "Yuan Renminbi",
+    "Currency Code": "cny",
+    "Numeric Currency Code": "156"
+  },
+  {
+    "Country": "Christmas Island",
+    "Country Code": "CX",
+    "Dialling Code": "61",
+    "Currency Name": "Australian Dollar",
+    "Currency Code": "aud",
+    "Numeric Currency Code": "036"
+  },
+  {
+    "Country": "Cocos (Keeling) Islands",
+    "Country Code": "CC",
+    "Dialling Code": "61",
+    "Currency Name": "Australian Dollar",
+    "Currency Code": "aud",
+    "Numeric Currency Code": "036"
+  },
+  {
+    "Country": "Colombia",
+    "Country Code": "CO",
+    "Dialling Code": "57",
+    "Currency Name": "Colombian Peso",
+    "Currency Code": "cop",
+    "Numeric Currency Code": "170"
+  },
+  {
+    "Country": "Comoros",
+    "Country Code": "KM",
+    "Dialling Code": "269",
+    "Currency Name": "Comoro Franc",
+    "Currency Code": "kmf",
+    "Numeric Currency Code": "174"
+  },
+  {
+    "Country": "Congo",
+    "Country Code": "CG",
+    "Dialling Code": "242",
+    "Currency Name": "CFA Franc BEAC",
+    "Currency Code": "xaf",
+    "Numeric Currency Code": "950"
+  },
+  {
+    "Country": "Congo, the Democratic Republic of the",
+    "Country Code": "CD",
+    "Dialling Code": "242",
+    "Currency Name": "Congolese Franc",
+    "Currency Code": "cdf",
+    "Numeric Currency Code": "976"
+  },
+  {
+    "Country": "Cook Islands",
+    "Country Code": "CK",
+    "Dialling Code": "682",
+    "Currency Name": "New Zealand Dollar",
+    "Currency Code": "nzd",
+    "Numeric Currency Code": "554"
+  },
+  {
+    "Country": "Costa Rica",
+    "Country Code": "CR",
+    "Dialling Code": "506",
+    "Currency Name": "Costa Rican Colon",
+    "Currency Code": "crc",
+    "Numeric Currency Code": "188"
+  },
+  {
+    "Country": "Cote D Ivoire",
+    "Country Code": "CI",
+    "Dialling Code": "225",
+    "Currency Name": "CFA Franc BCEAO",
+    "Currency Code": "xof",
+    "Numeric Currency Code": "952"
+  },
+  {
+    "Country": "Croatia",
+    "Country Code": "HR",
+    "Dialling Code": "385",
+    "Currency Name": "Kuna",
+    "Currency Code": "hrk",
+    "Numeric Currency Code": "191"
+  },
+  {
+    "Country": "Cuba",
+    "Country Code": "CU",
+    "Dialling Code": "53",
+    "Currency Name": "Cuban Peso",
+    "Currency Code": "cup",
+    "Numeric Currency Code": "192"
+  },
+  {
+    "Country": "Curaçao",
+    "Country Code": "CW",
+    "Dialling Code": "599",
+    "Currency Name": "Netherlands Antillean Guilder",
+    "Currency Code": "ang",
+    "Numeric Currency Code": "532"
+  },
+  {
+    "Country": "Cyprus",
+    "Country Code": "CY",
+    "Dialling Code": "357",
+    "Currency Name": "Euro",
+    "Currency Code": "eur",
+    "Numeric Currency Code": "978"
+  },
+  {
+    "Country": "Czech Republic",
+    "Country Code": "CZ",
+    "Dialling Code": "420",
+    "Currency Name": "Czech Koruna",
+    "Currency Code": "czk",
+    "Numeric Currency Code": "203"
+  },
+  {
+    "Country": "Denmark",
+    "Country Code": "DK",
+    "Dialling Code": "45",
+    "Currency Name": "Danish Krone",
+    "Currency Code": "dkk",
+    "Numeric Currency Code": "208"
+  },
+  {
+    "Country": "Djibouti",
+    "Country Code": "DJ",
+    "Dialling Code": "253",
+    "Currency Name": "Djibouti Franc",
+    "Currency Code": "djf",
+    "Numeric Currency Code": "262"
+  },
+  {
+    "Country": "Dominica",
+    "Country Code": "DM",
+    "Dialling Code": "767",
+    "Currency Name": "East Caribbean Dollar",
+    "Currency Code": "xcd",
+    "Numeric Currency Code": "951"
+  },
+  {
+    "Country": "Dominican Republic",
+    "Country Code": "DO",
+    "Dialling Code": "809",
+    "Currency Name": "Dominican Peso",
+    "Currency Code": "dop",
+    "Numeric Currency Code": "214"
+  },
+  {
+    "Country": "Ecuador",
+    "Country Code": "EC",
+    "Dialling Code": "593",
+    "Currency Name": "United States Dollar",
+    "Currency Code": "usd",
+    "Numeric Currency Code": "840"
+  },
+  {
+    "Country": "Egypt",
+    "Country Code": "EG",
+    "Dialling Code": "20",
+    "Currency Name": "Egyptian Pound",
+    "Currency Code": "egp",
+    "Numeric Currency Code": "818"
+  },
+  {
+    "Country": "El Salvador",
+    "Country Code": "SV",
+    "Dialling Code": "503",
+    "Currency Name": "United States Dollar",
+    "Currency Code": "usd",
+    "Numeric Currency Code": "840"
+  },
+  {
+    "Country": "Equatorial Guinea",
+    "Country Code": "GQ",
+    "Dialling Code": "240",
+    "Currency Name": "CFA Franc BEAC",
+    "Currency Code": "xaf",
+    "Numeric Currency Code": "950"
+  },
+  {
+    "Country": "Eritrea",
+    "Country Code": "ER",
+    "Dialling Code": "291",
+    "Currency Name": "Nakfa",
+    "Currency Code": "ern",
+    "Numeric Currency Code": "232"
+  },
+  {
+    "Country": "Estonia",
+    "Country Code": "EE",
+    "Dialling Code": "372",
+    "Currency Name": "Euro",
+    "Currency Code": "eur",
+    "Numeric Currency Code": "978"
+  },
+  {
+    "Country": "Ethiopia",
+    "Country Code": "ET",
+    "Dialling Code": "251",
+    "Currency Name": "Ethiopian Birr",
+    "Currency Code": "etb",
+    "Numeric Currency Code": "230"
+  },
+  {
+    "Country": "Falkland Islands (Malvinas)",
+    "Country Code": "FK",
+    "Dialling Code": "500",
+    "Currency Name": "Falkland Islands Pound",
+    "Currency Code": "fkp",
+    "Numeric Currency Code": "238"
+  },
+  {
+    "Country": "Faroe Islands",
+    "Country Code": "FO",
+    "Dialling Code": "298",
+    "Currency Name": "Danish Krone",
+    "Currency Code": "dkk",
+    "Numeric Currency Code": "208"
+  },
+  {
+    "Country": "Fiji",
+    "Country Code": "FJ",
+    "Dialling Code": "679",
+    "Currency Name": "Fiji Dollar",
+    "Currency Code": "fjd",
+    "Numeric Currency Code": "242"
+  },
+  {
+    "Country": "Finland",
+    "Country Code": "FI",
+    "Dialling Code": "358",
+    "Currency Name": "Euro",
+    "Currency Code": "eur",
+    "Numeric Currency Code": "978"
+  },
+  {
+    "Country": "France",
+    "Country Code": "FR",
+    "Dialling Code": "33",
+    "Currency Name": "Euro",
+    "Currency Code": "eur",
+    "Numeric Currency Code": "978"
+  },
+  {
+    "Country": "French Guiana",
+    "Country Code": "FG",
+    "Dialling Code": "594",
+    "Currency Name": "Euro",
+    "Currency Code": "eur",
+    "Numeric Currency Code": "978"
+  },
+  {
+    "Country": "French Polynesia",
+    "Country Code": "PF",
+    "Dialling Code": "689",
+    "Currency Name": "CFP Franc",
+    "Currency Code": "xpf",
+    "Numeric Currency Code": "953"
+  },
+  {
+    "Country": "French Southern Territories",
+    "Country Code": "TF",
+    "Dialling Code": "262",
+    "Currency Name": "Euro",
+    "Currency Code": "eur",
+    "Numeric Currency Code": "978"
+  },
+  {
+    "Country": "Gabon",
+    "Country Code": "GA",
+    "Dialling Code": "241",
+    "Currency Name": "CFA Franc BEAC",
+    "Currency Code": "xaf",
+    "Numeric Currency Code": "950"
+  },
+  {
+    "Country": "Gambia",
+    "Country Code": "GM",
+    "Dialling Code": "220",
+    "Currency Name": "Dalasi",
+    "Currency Code": "gmd",
+    "Numeric Currency Code": "270"
+  },
+  {
+    "Country": "Georgia",
+    "Country Code": "GE",
+    "Dialling Code": "995",
+    "Currency Name": "Lari",
+    "Currency Code": "gel",
+    "Numeric Currency Code": "981"
+  },
+  {
+    "Country": "Germany",
+    "Country Code": "DE",
+    "Dialling Code": "49",
+    "Currency Name": "Euro",
+    "Currency Code": "eur",
+    "Numeric Currency Code": "978"
+  },
+  {
+    "Country": "Ghana",
+    "Country Code": "GH",
+    "Dialling Code": "233",
+    "Currency Name": "Ghana Cedi",
+    "Currency Code": "ghs",
+    "Numeric Currency Code": "936"
+  },
+  {
+    "Country": "Gibraltar",
+    "Country Code": "GI",
+    "Dialling Code": "350",
+    "Currency Name": "Gibraltar Pound",
+    "Currency Code": "gip",
+    "Numeric Currency Code": "292"
+  },
+  {
+    "Country": "Greece",
+    "Country Code": "GR",
+    "Dialling Code": "30",
+    "Currency Name": "Euro",
+    "Currency Code": "eur",
+    "Numeric Currency Code": "978"
+  },
+  {
+    "Country": "Greenland",
+    "Country Code": "GL",
+    "Dialling Code": "299",
+    "Currency Name": "Danish Krone",
+    "Currency Code": "dkk",
+    "Numeric Currency Code": "208"
+  },
+  {
+    "Country": "Grenada",
+    "Country Code": "GD",
+    "Dialling Code": "473",
+    "Currency Name": "East Caribbean Dollar",
+    "Currency Code": "xcd",
+    "Numeric Currency Code": "951"
+  },
+  {
+    "Country": "Guadeloupe",
+    "Country Code": "GP",
+    "Dialling Code": "590",
+    "Currency Name": "Euro",
+    "Currency Code": "eur",
+    "Numeric Currency Code": "978"
+  },
+  {
+    "Country": "Guam",
+    "Country Code": "GU",
+    "Dialling Code": "671",
+    "Currency Name": "United States Dollar",
+    "Currency Code": "usd",
+    "Numeric Currency Code": "840"
+  },
+  {
+    "Country": "Guatemala",
+    "Country Code": "GT",
+    "Dialling Code": "502",
+    "Currency Name": "Quetzal",
+    "Currency Code": "gtq",
+    "Numeric Currency Code": "320"
+  },
+  {
+    "Country": "Guernsey",
+    "Country Code": "GG",
+    "Dialling Code": "44 1481",
+    "Currency Name": "Pound Sterling",
+    "Currency Code": "gbp",
+    "Numeric Currency Code": "826"
+  },
+  {
+    "Country": "Guinea",
+    "Country Code": "GN",
+    "Dialling Code": "224",
+    "Currency Name": "Guinea Franc",
+    "Currency Code": "gnf",
+    "Numeric Currency Code": "324"
+  },
+  {
+    "Country": "Guinea-Bissau",
+    "Country Code": "GW",
+    "Dialling Code": "245",
+    "Currency Name": "CFA Franc BCEAO",
+    "Currency Code": "xof",
+    "Numeric Currency Code": "952"
+  },
+  {
+    "Country": "Guyana",
+    "Country Code": "GY",
+    "Dialling Code": "592",
+    "Currency Name": "Guyana Dollar",
+    "Currency Code": "gyd",
+    "Numeric Currency Code": "328"
+  },
+  {
+    "Country": "Haiti",
+    "Country Code": "HT",
+    "Dialling Code": "509",
+    "Currency Name": "Gourde",
+    "Currency Code": "htg",
+    "Numeric Currency Code": "332"
+  },
+  {
+    "Country": "Holy See (Vatican City State)",
+    "Country Code": "VA",
+    "Dialling Code": "379",
+    "Currency Name": "Euro",
+    "Currency Code": "eur",
+    "Numeric Currency Code": "978"
+  },
+  {
+    "Country": "Honduras",
+    "Country Code": "HN",
+    "Dialling Code": "504",
+    "Currency Name": "Lempira",
+    "Currency Code": "hnl",
+    "Numeric Currency Code": "340"
+  },
+  {
+    "Country": "Hong Kong",
+    "Country Code": "HK",
+    "Dialling Code": "852",
+    "Currency Name": "Hong Kong Dollar",
+    "Currency Code": "hkd",
+    "Numeric Currency Code": "344"
+  },
+  {
+    "Country": "Hungary",
+    "Country Code": "HU",
+    "Dialling Code": "36",
+    "Currency Name": "Forint",
+    "Currency Code": "huf",
+    "Numeric Currency Code": "348"
+  },
+  {
+    "Country": "Iceland",
+    "Country Code": "IS",
+    "Dialling Code": "354",
+    "Currency Name": "Iceland Krona",
+    "Currency Code": "isk",
+    "Numeric Currency Code": "352"
+  },
+  {
+    "Country": "India",
+    "Country Code": "IN",
+    "Dialling Code": "91",
+    "Currency Name": "Indian Rupee",
+    "Currency Code": "inr",
+    "Numeric Currency Code": "356"
+  },
+  {
+    "Country": "Indonesia",
+    "Country Code": "ID",
+    "Dialling Code": "62",
+    "Currency Name": "Rupiah",
+    "Currency Code": "idr",
+    "Numeric Currency Code": "360"
+  },
+  {
+    "Country": "Iran, Islamic Republic of",
+    "Country Code": "IR",
+    "Dialling Code": "98",
+    "Currency Name": "Iranian Rial",
+    "Currency Code": "irr",
+    "Numeric Currency Code": "364"
+  },
+  {
+    "Country": "Iraq",
+    "Country Code": "IQ",
+    "Dialling Code": "964",
+    "Currency Name": "Iraqi Dinar",
+    "Currency Code": "iqd",
+    "Numeric Currency Code": "368"
+  },
+  {
+    "Country": "Ireland",
+    "Country Code": "IE",
+    "Dialling Code": "353",
+    "Currency Name": "Euro",
+    "Currency Code": "eur",
+    "Numeric Currency Code": "978"
+  },
+  {
+    "Country": "Isle of Man",
+    "Country Code": "IM",
+    "Dialling Code": "44",
+    "Currency Name": "Pound Sterling",
+    "Currency Code": "gbp",
+    "Numeric Currency Code": "826"
+  },
+  {
+    "Country": "Israel",
+    "Country Code": "IL",
+    "Dialling Code": "972",
+    "Currency Name": "New Israeli Sheqel",
+    "Currency Code": "ils",
+    "Numeric Currency Code": "376"
+  },
+  {
+    "Country": "Italy",
+    "Country Code": "IT",
+    "Dialling Code": "39",
+    "Currency Name": "Euro",
+    "Currency Code": "eur",
+    "Numeric Currency Code": "978"
+  },
+  {
+    "Country": "Jamaica",
+    "Country Code": "JM",
+    "Dialling Code": "876",
+    "Currency Name": "Jamaican Dollar",
+    "Currency Code": "jmd",
+    "Numeric Currency Code": "388"
+  },
+  {
+    "Country": "Japan",
+    "Country Code": "JP",
+    "Dialling Code": "81",
+    "Currency Name": "Yen",
+    "Currency Code": "jpy",
+    "Numeric Currency Code": "392"
+  },
+  {
+    "Country": "Jersey",
+    "Country Code": "JE",
+    "Dialling Code": "44",
+    "Currency Name": "Pound Sterling",
+    "Currency Code": "gbp",
+    "Numeric Currency Code": "826"
+  },
+  {
+    "Country": "Jordan",
+    "Country Code": "JO",
+    "Dialling Code": "962",
+    "Currency Name": "Jordanian Dinar",
+    "Currency Code": "jod",
+    "Numeric Currency Code": "400"
+  },
+  {
+    "Country": "Kazakhstan",
+    "Country Code": "KZ",
+    "Dialling Code": "7",
+    "Currency Name": "Tenge",
+    "Currency Code": "kzt",
+    "Numeric Currency Code": "398"
+  },
+  {
+    "Country": "Kenya",
+    "Country Code": "KE",
+    "Dialling Code": "254",
+    "Currency Name": "Kenyan Shilling",
+    "Currency Code": "kes",
+    "Numeric Currency Code": "404"
+  },
+  {
+    "Country": "Kiribati",
+    "Country Code": "KI",
+    "Dialling Code": "686",
+    "Currency Name": "Australian Dollar",
+    "Currency Code": "aud",
+    "Numeric Currency Code": "036"
+  },
+  {
+    "Country": "Korea, Democratic People's Republic of",
+    "Country Code": "KP",
+    "Dialling Code": "850",
+    "Currency Name": "North Korean Won",
+    "Currency Code": "kpw",
+    "Numeric Currency Code": "408"
+  },
+  {
+    "Country": "Korea, Republic of",
+    "Country Code": "KR",
+    "Dialling Code": "82",
+    "Currency Name": "Won",
+    "Currency Code": "krw",
+    "Numeric Currency Code": "410"
+  },
+  {
+    "Country": "Kosovo",
+    "Country Code": "XK",
+    "Dialling Code": "383",
+    "Currency Name": "Euro",
+    "Currency Code": "eur",
+    "Numeric Currency Code": "978"
+  },
+  {
+    "Country": "Kuwait",
+    "Country Code": "KW",
+    "Dialling Code": "965",
+    "Currency Name": "Kuwaiti Dinar",
+    "Currency Code": "kwd",
+    "Numeric Currency Code": "414"
+  },
+  {
+    "Country": "Kyrgyzstan",
+    "Country Code": "KG",
+    "Dialling Code": "996",
+    "Currency Name": "Som",
+    "Currency Code": "kgs",
+    "Numeric Currency Code": "417"
+  },
+  {
+    "Country": "Lao People's Democratic Republic",
+    "Country Code": "LA",
+    "Dialling Code": "856",
+    "Currency Name": "Kip",
+    "Currency Code": "lak",
+    "Numeric Currency Code": "418"
+  },
+  {
+    "Country": "Latvia",
+    "Country Code": "LV",
+    "Dialling Code": "371",
+    "Currency Name": "Euro",
+    "Currency Code": "eur",
+    "Numeric Currency Code": "978"
+  },
+  {
+    "Country": "Lebanon",
+    "Country Code": "LB",
+    "Dialling Code": "961",
+    "Currency Name": "Lebanese Pound",
+    "Currency Code": "lbp",
+    "Numeric Currency Code": "422"
+  },
+  {
+    "Country": "Lesotho",
+    "Country Code": "LS",
+    "Dialling Code": "266",
+    "Currency Name": "Loti",
+    "Currency Code": "lsl",
+    "Numeric Currency Code": "426"
+  },
+  {
+    "Country": "Liberia",
+    "Country Code": "LR",
+    "Dialling Code": "231",
+    "Currency Name": "Liberian Dollar",
+    "Currency Code": "lrd",
+    "Numeric Currency Code": "430"
+  },
+  {
+    "Country": "Libya",
+    "Country Code": "LY",
+    "Dialling Code": "218",
+    "Currency Name": "Libyan Dinar",
+    "Currency Code": "lyd",
+    "Numeric Currency Code": "434"
+  },
+  {
+    "Country": "Liechtenstein",
+    "Country Code": "LI",
+    "Dialling Code": "423",
+    "Currency Name": "Swiss Franc",
+    "Currency Code": "chf",
+    "Numeric Currency Code": "756"
+  },
+  {
+    "Country": "Lithuania",
+    "Country Code": "LT",
+    "Dialling Code": "370",
+    "Currency Name": "Euro",
+    "Currency Code": "eur",
+    "Numeric Currency Code": "978"
+  },
+  {
+    "Country": "Luxembourg",
+    "Country Code": "LU",
+    "Dialling Code": "352",
+    "Currency Name": "Euro",
+    "Currency Code": "eur",
+    "Numeric Currency Code": "978"
+  },
+  {
+    "Country": "Macao",
+    "Country Code": "MO",
+    "Dialling Code": "853",
+    "Currency Name": "Pataca",
+    "Currency Code": "mop",
+    "Numeric Currency Code": "446"
+  },
+  {
+    "Country": "Macedonia, the former Yugoslav Republic of",
+    "Country Code": "MK",
+    "Dialling Code": "389",
+    "Currency Name": "Macedonian Denar",
+    "Currency Code": "mkd",
+    "Numeric Currency Code": "807"
+  },
+  {
+    "Country": "Madagascar",
+    "Country Code": "MG",
+    "Dialling Code": "261",
+    "Currency Name": "Malagasy Ariary",
+    "Currency Code": "mga",
+    "Numeric Currency Code": "969"
+  },
+  {
+    "Country": "Malawi",
+    "Country Code": "MW",
+    "Dialling Code": "265",
+    "Currency Name": "Kwacha",
+    "Currency Code": "mwk",
+    "Numeric Currency Code": "454"
+  },
+  {
+    "Country": "Malaysia",
+    "Country Code": "MY",
+    "Dialling Code": "60",
+    "Currency Name": "Malaysian Ringgit",
+    "Currency Code": "myr",
+    "Numeric Currency Code": "458"
+  },
+  {
+    "Country": "Maldives",
+    "Country Code": "MV",
+    "Dialling Code": "960",
+    "Currency Name": "Rufiyaa",
+    "Currency Code": "mvr",
+    "Numeric Currency Code": "462"
+  },
+  {
+    "Country": "Mali",
+    "Country Code": "ML",
+    "Dialling Code": "223",
+    "Currency Name": "CFA Franc BCEAO",
+    "Currency Code": "xof",
+    "Numeric Currency Code": "952"
+  },
+  {
+    "Country": "Malta",
+    "Country Code": "MT",
+    "Dialling Code": "356",
+    "Currency Name": "Euro",
+    "Currency Code": "eur",
+    "Numeric Currency Code": "978"
+  },
+  {
+    "Country": "Marshall Islands",
+    "Country Code": "MH",
+    "Dialling Code": "692",
+    "Currency Name": "United States Dollar",
+    "Currency Code": "usd",
+    "Numeric Currency Code": "840"
+  },
+  {
+    "Country": "Martinique",
+    "Country Code": "MQ",
+    "Dialling Code": "596",
+    "Currency Name": "Euro",
+    "Currency Code": "eur",
+    "Numeric Currency Code": "978"
+  },
+  {
+    "Country": "Mauritania",
+    "Country Code": "MR",
+    "Dialling Code": "222",
+    "Currency Name": "Ouguiya",
+    "Currency Code": "mru",
+    "Numeric Currency Code": "929"
+  },
+  {
+    "Country": "Mauritius",
+    "Country Code": "MU",
+    "Dialling Code": "230",
+    "Currency Name": "Mauritius Rupee",
+    "Currency Code": "mur",
+    "Numeric Currency Code": "480"
+  },
+  {
+    "Country": "Mayotte",
+    "Country Code": "YT",
+    "Dialling Code": "269",
+    "Currency Name": "Euro",
+    "Currency Code": "eur",
+    "Numeric Currency Code": "978"
+  },
+  {
+    "Country": "Mexico",
+    "Country Code": "MX",
+    "Dialling Code": "52",
+    "Currency Name": "Mexican Peso",
+    "Currency Code": "mxn",
+    "Numeric Currency Code": "484"
+  },
+  {
+    "Country": "Micronesia, Federated States of",
+    "Country Code": "FM",
+    "Dialling Code": "691",
+    "Currency Name": "United States Dollar",
+    "Currency Code": "usd",
+    "Numeric Currency Code": "840"
+  },
+  {
+    "Country": "Moldova, Republic of",
+    "Country Code": "MD",
+    "Dialling Code": "373",
+    "Currency Name": "Moldovan Leu",
+    "Currency Code": "mdl",
+    "Numeric Currency Code": "498"
+  },
+  {
+    "Country": "Monaco",
+    "Country Code": "MC",
+    "Dialling Code": "33",
+    "Currency Name": "Euro",
+    "Currency Code": "eur",
+    "Numeric Currency Code": "978"
+  },
+  {
+    "Country": "Mongolia",
+    "Country Code": "MN",
+    "Dialling Code": "976",
+    "Currency Name": "Tugrik",
+    "Currency Code": "mnt",
+    "Numeric Currency Code": "496"
+  },
+  {
+    "Country": "Montenegro",
+    "Country Code": "ME",
+    "Dialling Code": "382",
+    "Currency Name": "Euro",
+    "Currency Code": "eur",
+    "Numeric Currency Code": "978"
+  },
+  {
+    "Country": "Montserrat",
+    "Country Code": "MS",
+    "Dialling Code": "473",
+    "Currency Name": "East Caribbean Dollar",
+    "Currency Code": "xcd",
+    "Numeric Currency Code": "951"
+  },
+  {
+    "Country": "Morocco",
+    "Country Code": "MA",
+    "Dialling Code": "212",
+    "Currency Name": "Moroccan Dirham",
+    "Currency Code": "mad",
+    "Numeric Currency Code": "504"
+  },
+  {
+    "Country": "Mozambique",
+    "Country Code": "MZ",
+    "Dialling Code": "258",
+    "Currency Name": "Mozambique Metical",
+    "Currency Code": "mzn",
+    "Numeric Currency Code": "943"
+  },
+  {
+    "Country": "Myanmar",
+    "Country Code": "MM",
+    "Dialling Code": "95",
+    "Currency Name": "Kyat",
+    "Currency Code": "mmk",
+    "Numeric Currency Code": "104"
+  },
+  {
+    "Country": "Namibia",
+    "Country Code": "NA",
+    "Dialling Code": "264",
+    "Currency Name": "Namibia Dollar",
+    "Currency Code": "nad",
+    "Numeric Currency Code": "516"
+  },
+  {
+    "Country": "Nauru",
+    "Country Code": "NR",
+    "Dialling Code": "674",
+    "Currency Name": "Australian Dollar",
+    "Currency Code": "aud",
+    "Numeric Currency Code": "036"
+  },
+  {
+    "Country": "Nepal",
+    "Country Code": "NP",
+    "Dialling Code": "977",
+    "Currency Name": "Nepalese Rupee",
+    "Currency Code": "npr",
+    "Numeric Currency Code": "524"
+  },
+  {
+    "Country": "Netherlands",
+    "Country Code": "NL",
+    "Dialling Code": "31",
+    "Currency Name": "Euro",
+    "Currency Code": "eur",
+    "Numeric Currency Code": "978"
+  },
+  {
+    "Country": "New Caledonia",
+    "Country Code": "NC",
+    "Dialling Code": "687",
+    "Currency Name": "CFP Franc",
+    "Currency Code": "xpf",
+    "Numeric Currency Code": "953"
+  },
+  {
+    "Country": "New Zealand",
+    "Country Code": "NZ",
+    "Dialling Code": "64",
+    "Currency Name": "New Zealand Dollar",
+    "Currency Code": "nzd",
+    "Numeric Currency Code": "554"
+  },
+  {
+    "Country": "Nicaragua",
+    "Country Code": "NI",
+    "Dialling Code": "505",
+    "Currency Name": "Cordoba Oro",
+    "Currency Code": "nio",
+    "Numeric Currency Code": "558"
+  },
+  {
+    "Country": "Niger",
+    "Country Code": "NE",
+    "Dialling Code": "227",
+    "Currency Name": "CFA Franc BCEAO",
+    "Currency Code": "xof",
+    "Numeric Currency Code": "952"
+  },
+  {
+    "Country": "Nigeria",
+    "Country Code": "NG",
+    "Dialling Code": "234",
+    "Currency Name": "Naira",
+    "Currency Code": "ngn",
+    "Numeric Currency Code": "566"
+  },
+  {
+    "Country": "Niue",
+    "Country Code": "NU",
+    "Dialling Code": "683",
+    "Currency Name": "New Zealand Dollar",
+    "Currency Code": "nzd",
+    "Numeric Currency Code": "554"
+  },
+  {
+    "Country": "Norfolk Island",
+    "Country Code": "NF",
+    "Dialling Code": "672",
+    "Currency Name": "Australian Dollar",
+    "Currency Code": "aud",
+    "Numeric Currency Code": "978"
+  },
+  {
+    "Country": "Northern Mariana Islands",
+    "Country Code": "MP",
+    "Dialling Code": "1 670",
+    "Currency Name": "United States Dollar",
+    "Currency Code": "usd",
+    "Numeric Currency Code": "840"
+  },
+  {
+    "Country": "Norway",
+    "Country Code": "NO",
+    "Dialling Code": "47",
+    "Currency Name": "Norwegian Krone",
+    "Currency Code": "nok",
+    "Numeric Currency Code": "578"
+  },
+  {
+    "Country": "Oman",
+    "Country Code": "OM",
+    "Dialling Code": "968",
+    "Currency Name": "Rial Omani",
+    "Currency Code": "omr",
+    "Numeric Currency Code": "512"
+  },
+  {
+    "Country": "Pakistan",
+    "Country Code": "PK",
+    "Dialling Code": "92",
+    "Currency Name": "Pakistan Rupee",
+    "Currency Code": "pkr",
+    "Numeric Currency Code": "586"
+  },
+  {
+    "Country": "Palau",
+    "Country Code": "PW",
+    "Dialling Code": "680",
+    "Currency Name": "United States Dollar",
+    "Currency Code": "usd",
+    "Numeric Currency Code": "840"
+  },
+  {
+    "Country": "Panama",
+    "Country Code": "PA",
+    "Dialling Code": "507",
+    "Currency Name": "Balboa",
+    "Currency Code": "pab",
+    "Numeric Currency Code": "590"
+  },
+  {
+    "Country": "Papua New Guinea",
+    "Country Code": "PG",
+    "Dialling Code": "675",
+    "Currency Name": "Kina",
+    "Currency Code": "pgk",
+    "Numeric Currency Code": "598"
+  },
+  {
+    "Country": "Paraguay",
+    "Country Code": "PY",
+    "Dialling Code": "595",
+    "Currency Name": "Guarani",
+    "Currency Code": "pyg",
+    "Numeric Currency Code": "600"
+  },
+  {
+    "Country": "Peru",
+    "Country Code": "PE",
+    "Dialling Code": "51",
+    "Currency Name": "Nuevo Sol",
+    "Currency Code": "pen",
+    "Numeric Currency Code": "604"
+  },
+  {
+    "Country": "Philippines",
+    "Country Code": "PH",
+    "Dialling Code": "63",
+    "Currency Name": "Philippine Peso",
+    "Currency Code": "php",
+    "Numeric Currency Code": "608"
+  },
+  {
+    "Country": "Pitcairn",
+    "Country Code": "PN",
+    "Dialling Code": "64",
+    "Currency Name": "New Zealand Dollar",
+    "Currency Code": "nzd",
+    "Numeric Currency Code": "554"
+  },
+  {
+    "Country": "Poland",
+    "Country Code": "PL",
+    "Dialling Code": "48",
+    "Currency Name": "Zloty",
+    "Currency Code": "pln",
+    "Numeric Currency Code": "985"
+  },
+  {
+    "Country": "Portugal",
+    "Country Code": "PT",
+    "Dialling Code": "351",
+    "Currency Name": "Euro",
+    "Currency Code": "eur",
+    "Numeric Currency Code": "978"
+  },
+  {
+    "Country": "Puerto Rico",
+    "Country Code": "PR",
+    "Dialling Code": "1 787",
+    "Currency Name": "United States Dollar",
+    "Currency Code": "usd",
+    "Numeric Currency Code": "840"
+  },
+  {
+    "Country": "Qatar",
+    "Country Code": "QA",
+    "Dialling Code": "974",
+    "Currency Name": "Qatari Rial",
+    "Currency Code": "qar",
+    "Numeric Currency Code": "634"
+  },
+  {
+    "Country": "Réunion",
+    "Country Code": "RE",
+    "Dialling Code": "262",
+    "Currency Name": "Euro",
+    "Currency Code": "eur",
+    "Numeric Currency Code": "978"
+  },
+  {
+    "Country": "Romania",
+    "Country Code": "RO",
+    "Dialling Code": "40",
+    "Currency Name": "Romanian Leu",
+    "Currency Code": "ron",
+    "Numeric Currency Code": "946"
+  },
+  {
+    "Country": "Russian Federation",
+    "Country Code": "RU",
+    "Dialling Code": "7",
+    "Currency Name": "Russian Ruble",
+    "Currency Code": "rub",
+    "Numeric Currency Code": "643"
+  },
+  {
+    "Country": "Rwanda",
+    "Country Code": "RW",
+    "Dialling Code": "250",
+    "Currency Name": "Rwanda Franc",
+    "Currency Code": "rwf",
+    "Numeric Currency Code": "646"
+  },
+  {
+    "Country": "Saint Helena, Ascension and Tristan da Cunha",
+    "Country Code": "SH",
+    "Dialling Code": "290",
+    "Currency Name": "Saint Helena Pound",
+    "Currency Code": "shp",
+    "Numeric Currency Code": "654"
+  },
+  {
+    "Country": "Saint Kitts and Nevis",
+    "Country Code": "KN",
+    "Dialling Code": "869",
+    "Currency Name": "East Caribbean Dollar",
+    "Currency Code": "xcd",
+    "Numeric Currency Code": "951"
+  },
+  {
+    "Country": "Saint Lucia",
+    "Country Code": "LC",
+    "Dialling Code": "1 758",
+    "Currency Name": "East Caribbean Dollar",
+    "Currency Code": "xcd",
+    "Numeric Currency Code": "951"
+  },
+  {
+    "Country": "Saint Martin (French part)",
+    "Country Code": "MF",
+    "Dialling Code": "721",
+    "Currency Name": "Euro",
+    "Currency Code": "eur",
+    "Numeric Currency Code": "978"
+  },
+  {
+    "Country": "Saint Pierre and Miquelon",
+    "Country Code": "PM",
+    "Dialling Code": "508",
+    "Currency Name": "Euro",
+    "Currency Code": "eur",
+    "Numeric Currency Code": "978"
+  },
+  {
+    "Country": "Saint Vincent and the Grenadines",
+    "Country Code": "VC",
+    "Dialling Code": "1 784",
+    "Currency Name": "East Caribbean Dollar",
+    "Currency Code": "xcd",
+    "Numeric Currency Code": "951"
+  },
+  {
+    "Country": "Samoa",
+    "Country Code": "WS",
+    "Dialling Code": "685",
+    "Currency Name": "Tala",
+    "Currency Code": "wst",
+    "Numeric Currency Code": "882"
+  },
+  {
+    "Country": "San Marino",
+    "Country Code": "SM",
+    "Dialling Code": "378",
+    "Currency Name": "Euro",
+    "Currency Code": "eur",
+    "Numeric Currency Code": "978"
+  },
+  {
+    "Country": "Sao Tome and Principe",
+    "Country Code": "ST",
+    "Dialling Code": "239",
+    "Currency Name": "Dobra",
+    "Currency Code": "stn",
+    "Numeric Currency Code": "930"
+  },
+  {
+    "Country": "Saudi Arabia",
+    "Country Code": "SA",
+    "Dialling Code": "966",
+    "Currency Name": "Saudi Royal",
+    "Currency Code": "sar",
+    "Numeric Currency Code": "682"
+  },
+  {
+    "Country": "Senegal",
+    "Country Code": "SN",
+    "Dialling Code": "221",
+    "Currency Name": "CFA Franc BCEAO",
+    "Currency Code": "xof",
+    "Numeric Currency Code": "952"
+  },
+  {
+    "Country": "Serbia",
+    "Country Code": "RS",
+    "Dialling Code": "381",
+    "Currency Name": "Serbian Dinar",
+    "Currency Code": "rsd",
+    "Numeric Currency Code": "941"
+  },
+  {
+    "Country": "Seychelles",
+    "Country Code": "SC",
+    "Dialling Code": "248",
+    "Currency Name": "Seychelles Rupee",
+    "Currency Code": "scr",
+    "Numeric Currency Code": "690"
+  },
+  {
+    "Country": "Sierra Leone",
+    "Country Code": "SL",
+    "Dialling Code": "232",
+    "Currency Name": "Leone",
+    "Currency Code": "sle",
+    "Numeric Currency Code": "925"
+  },
+  {
+    "Country": "Singapore",
+    "Country Code": "SG",
+    "Dialling Code": "65",
+    "Currency Name": "Singapore Dollar",
+    "Currency Code": "sgd",
+    "Numeric Currency Code": "702"
+  },
+  {
+    "Country": "Sint Maarten (Dutch part)",
+    "Country Code": "SX",
+    "Dialling Code": "721",
+    "Currency Name": "Netherlands Antillean Guilder",
+    "Currency Code": "ang",
+    "Numeric Currency Code": "532"
+  },
+  {
+    "Country": "Slovakia",
+    "Country Code": "SK",
+    "Dialling Code": "421",
+    "Currency Name": "Euro",
+    "Currency Code": "eur",
+    "Numeric Currency Code": "978"
+  },
+  {
+    "Country": "Slovenia",
+    "Country Code": "SI",
+    "Dialling Code": "386",
+    "Currency Name": "Euro",
+    "Currency Code": "eur",
+    "Numeric Currency Code": "978"
+  },
+  {
+    "Country": "Solomon Islands",
+    "Country Code": "SB",
+    "Dialling Code": "677",
+    "Currency Name": "Solomon Islands Dollar",
+    "Currency Code": "sbd",
+    "Numeric Currency Code": "090"
+  },
+  {
+    "Country": "Somalia",
+    "Country Code": "SO",
+    "Dialling Code": "252",
+    "Currency Name": "Somali Shilling",
+    "Currency Code": "sos",
+    "Numeric Currency Code": "706"
+  },
+  {
+    "Country": "South Africa",
+    "Country Code": "ZA",
+    "Dialling Code": "27",
+    "Currency Name": "Rand",
+    "Currency Code": "zar",
+    "Numeric Currency Code": "710"
+  },
+  {
+    "Country": "South Georgia and the South Sandwich Islands",
+    "Country Code": "GS",
+    "Dialling Code": "500",
+    "Currency Name": "Pound Sterling",
+    "Currency Code": "gbp",
+    "Numeric Currency Code": "826"
+  },
+  {
+    "Country": "South Sudan",
+    "Country Code": "SS",
+    "Dialling Code": "211",
+    "Currency Name": "South Sudanese Pound",
+    "Currency Code": "ssp",
+    "Numeric Currency Code": "728"
+  },
+  {
+    "Country": "Spain",
+    "Country Code": "ES",
+    "Dialling Code": "34",
+    "Currency Name": "Euro",
+    "Currency Code": "eur",
+    "Numeric Currency Code": "978"
+  },
+  {
+    "Country": "Sri Lanka",
+    "Country Code": "LK",
+    "Dialling Code": "94",
+    "Currency Name": "Sri Lanka Rupee",
+    "Currency Code": "lkr",
+    "Numeric Currency Code": "144"
+  },
+  {
+    "Country": "Sudan",
+    "Country Code": "SD",
+    "Dialling Code": "249",
+    "Currency Name": "Sudanese Pound",
+    "Currency Code": "sdg",
+    "Numeric Currency Code": "938"
+  },
+  {
+    "Country": "Suriname",
+    "Country Code": "SR",
+    "Dialling Code": "597",
+    "Currency Name": "Surinam Dollar",
+    "Currency Code": "srd",
+    "Numeric Currency Code": "968"
+  },
+  {
+    "Country": "Svalbard and Jan Mayen",
+    "Country Code": "SJ",
+    "Dialling Code": "47",
+    "Currency Name": "Norwegian Krone",
+    "Currency Code": "nok",
+    "Numeric Currency Code": "578"
+  },
+  {
+    "Country": "Swaziland",
+    "Country Code": "SZ",
+    "Dialling Code": "268",
+    "Currency Name": "Lilangeni",
+    "Currency Code": "szl",
+    "Numeric Currency Code": "748"
+  },
+  {
+    "Country": "Sweden",
+    "Country Code": "SE",
+    "Dialling Code": "46",
+    "Currency Name": "Swedish Krona",
+    "Currency Code": "sek",
+    "Numeric Currency Code": "752"
+  },
+  {
+    "Country": "Switzerland",
+    "Country Code": "CH",
+    "Dialling Code": "41",
+    "Currency Name": "Swiss Franc",
+    "Currency Code": "chf",
+    "Numeric Currency Code": "756"
+  },
+  {
+    "Country": "Syrian Arab Republic",
+    "Country Code": "SY",
+    "Dialling Code": "963",
+    "Currency Name": "Syrian Pound",
+    "Currency Code": "syp",
+    "Numeric Currency Code": "760"
+  },
+  {
+    "Country": "Taiwan, Province of China",
+    "Country Code": "TW",
+    "Dialling Code": "886",
+    "Currency Name": "New Taiwan Dollar",
+    "Currency Code": "twd",
+    "Numeric Currency Code": "901"
+  },
+  {
+    "Country": "Tajikistan",
+    "Country Code": "TJ",
+    "Dialling Code": "7",
+    "Currency Name": "Somoni",
+    "Currency Code": "tjs",
+    "Numeric Currency Code": "972"
+  },
+  {
+    "Country": "Tanzania, United Republic of",
+    "Country Code": "TZ",
+    "Dialling Code": "255",
+    "Currency Name": "Tanzanian Shilling",
+    "Currency Code": "tzs",
+    "Numeric Currency Code": "834"
+  },
+  {
+    "Country": "Thailand",
+    "Country Code": "TH",
+    "Dialling Code": "66",
+    "Currency Name": "Baht",
+    "Currency Code": "thb",
+    "Numeric Currency Code": "764"
+  },
+  {
+    "Country": "Timor-Leste",
+    "Country Code": "TL",
+    "Dialling Code": "670",
+    "Currency Name": "United States Dollar",
+    "Currency Code": "usd",
+    "Numeric Currency Code": "840"
+  },
+  {
+    "Country": "Togo",
+    "Country Code": "TG",
+    "Dialling Code": "228",
+    "Currency Name": "CFA Franc BCEAO",
+    "Currency Code": "xof",
+    "Numeric Currency Code": "952"
+  },
+  {
+    "Country": "Tokelau",
+    "Country Code": "TK",
+    "Dialling Code": "690",
+    "Currency Name": "New Zealand Dollar",
+    "Currency Code": "nzd",
+    "Numeric Currency Code": "554"
+  },
+  {
+    "Country": "Tonga",
+    "Country Code": "TO",
+    "Dialling Code": "676",
+    "Currency Name": "Pa’anga",
+    "Currency Code": "top",
+    "Numeric Currency Code": "776"
+  },
+  {
+    "Country": "Trinidad and Tobago",
+    "Country Code": "TT",
+    "Dialling Code": "1 868",
+    "Currency Name": "Trinidad and Tobago Dollar",
+    "Currency Code": "ttd",
+    "Numeric Currency Code": "780"
+  },
+  {
+    "Country": "Tunisia",
+    "Country Code": "TN",
+    "Dialling Code": "216",
+    "Currency Name": "Tunisian Dinar",
+    "Currency Code": "tnd",
+    "Numeric Currency Code": "788"
+  },
+  {
+    "Country": "Turkey",
+    "Country Code": "TR",
+    "Dialling Code": "90",
+    "Currency Name": "Turkish Lira",
+    "Currency Code": "try",
+    "Numeric Currency Code": "949"
+  },
+  {
+    "Country": "Turkmenistan",
+    "Country Code": "TM",
+    "Dialling Code": "993",
+    "Currency Name": "Turkmenistan New Manat",
+    "Currency Code": "tmt",
+    "Numeric Currency Code": "934"
+  },
+  {
+    "Country": "Turks and Caicos Islands",
+    "Country Code": "TC",
+    "Dialling Code": "1 649",
+    "Currency Name": "United States Dollar",
+    "Currency Code": "usd",
+    "Numeric Currency Code": "840"
+  },
+  {
+    "Country": "Tuvalu",
+    "Country Code": "TV",
+    "Dialling Code": "688",
+    "Currency Name": "Australian Dollar",
+    "Currency Code": "aud",
+    "Numeric Currency Code": "036"
+  },
+  {
+    "Country": "Uganda",
+    "Country Code": "UG",
+    "Dialling Code": "256",
+    "Currency Name": "Uganda Shilling",
+    "Currency Code": "ugx",
+    "Numeric Currency Code": "800"
+  },
+  {
+    "Country": "Ukraine",
+    "Country Code": "UA",
+    "Dialling Code": "380",
+    "Currency Name": "Hryvnia",
+    "Currency Code": "uah",
+    "Numeric Currency Code": "980"
+  },
+  {
+    "Country": "United Arab Emirates",
+    "Country Code": "AE",
+    "Dialling Code": "971",
+    "Currency Name": "UAE Dirham",
+    "Currency Code": "aed",
+    "Numeric Currency Code": "784"
+  },
+  {
+    "Country": "United Kingdom",
+    "Country Code": "GB",
+    "Dialling Code": "44",
+    "Currency Name": "Pound Sterling",
+    "Currency Code": "gbp",
+    "Numeric Currency Code": "826"
+  },
+  {
+    "Country": "United States",
+    "Country Code": "US",
+    "Dialling Code": "1",
+    "Currency Name": "United States Dollar",
+    "Currency Code": "usd",
+    "Numeric Currency Code": "840"
+  },
+  {
+    "Country": "United States Minor Outlying Islands",
+    "Country Code": "UM",
+    "Dialling Code": "1",
+    "Currency Name": "United States Dollar",
+    "Currency Code": "usd",
+    "Numeric Currency Code": "840"
+  },
+  {
+    "Country": "Uruguay",
+    "Country Code": "UY",
+    "Dialling Code": "598",
+    "Currency Name": "Peso Uruguayo",
+    "Currency Code": "uyu",
+    "Numeric Currency Code": "858"
+  },
+  {
+    "Country": "Uzbekistan",
+    "Country Code": "UZ",
+    "Dialling Code": "7",
+    "Currency Name": "Uzbekistan Sum",
+    "Currency Code": "uzs",
+    "Numeric Currency Code": "860"
+  },
+  {
+    "Country": "Vanuatu",
+    "Country Code": "VU",
+    "Dialling Code": "678",
+    "Currency Name": "Vatu",
+    "Currency Code": "vuv",
+    "Numeric Currency Code": "548"
+  },
+  {
+    "Country": "Venezuela, Bolivarian Republic of",
+    "Country Code": "VE",
+    "Dialling Code": "58",
+    "Currency Name": "Bolivar",
+    "Currency Code": "vef",
+    "Numeric Currency Code": "937"
+  },
+  {
+    "Country": "Viet Nam",
+    "Country Code": "VN",
+    "Dialling Code": "84",
+    "Currency Name": "Dong",
+    "Currency Code": "vnd",
+    "Numeric Currency Code": "704"
+  },
+  {
+    "Country": "Virgin Islands, British",
+    "Country Code": "VG",
+    "Dialling Code": "1 340",
+    "Currency Name": "United States Dollar",
+    "Currency Code": "usd",
+    "Numeric Currency Code": "840"
+  },
+  {
+    "Country": "Virgin Islands, U.S.",
+    "Country Code": "VI",
+    "Dialling Code": "1 340",
+    "Currency Name": "United States Dollar",
+    "Currency Code": "usd",
+    "Numeric Currency Code": "840"
+  },
+  {
+    "Country": "Wallis and Futuna",
+    "Country Code": "WF",
+    "Dialling Code": "681",
+    "Currency Name": "CFP Franc",
+    "Currency Code": "xpf",
+    "Numeric Currency Code": "953"
+  },
+  {
+    "Country": "Western Sahara",
+    "Country Code": "EH",
+    "Dialling Code": "685",
+    "Currency Name": "Moroccan Dirham",
+    "Currency Code": "mad",
+    "Numeric Currency Code": "504"
+  },
+  {
+    "Country": "Zambia",
+    "Country Code": "ZM",
+    "Dialling Code": "260",
+    "Currency Name": "Zambian Kwacha",
+    "Currency Code": "zmw",
+    "Numeric Currency Code": "967"
+  },
+  {
+    "Country": "Zimbabwe",
+    "Country Code": "ZW",
+    "Dialling Code": "263",
+    "Currency Name": "Zimbabwe Dollar",
+    "Currency Code": "zwl",
+    "Numeric Currency Code": "932"
+  }
+]

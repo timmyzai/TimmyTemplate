@@ -1,6 +1,5 @@
-using System.Threading;
-using System.Threading.Tasks;
 using ByteAwesome.Services;
+using ByteAwesome.TestAPI.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace ByteAwesome.TestAPI.DbContexts
@@ -14,6 +13,12 @@ namespace ByteAwesome.TestAPI.DbContexts
         {
             _auditingService = new AuditingService(this);
         }
+
+        public DbSet<Wallet> Wallet { get; set; }
+        public DbSet<ExchangeRate> ExchangeRate { get; set; }
+        public DbSet<BaseCurrency> BaseCurrency { get; set; }
+        public DbSet<User> User { get; set; }
+
         #region Overrides
         public override int SaveChanges()
         {

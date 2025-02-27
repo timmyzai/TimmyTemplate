@@ -4,15 +4,11 @@ using Serilog;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using ByteAwesome.StartupConfig;
-using Microsoft.Extensions.Configuration;
-using Microsoft.AspNetCore.Hosting;
-using System.Collections.Generic;
-using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Linq;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Routing;
+using ByteAwesome.TestAPI.Data;
+using ByteAwesome.TestAPI.Helper.Services;
+using ByteAwesome.TestAPI.Modules;
+using ByteAwesome.TestAPI.Repositories;
+using ByteAwesome.TestAPI.Workers;
 
 namespace ByteAwesome.TestAPI
 {
@@ -68,6 +64,19 @@ namespace ByteAwesome.TestAPI
             PreInitialize(services);
             //Validare Required Field For All API Methods
             services.AddMvc(options => options.Filters.Add(new ValidateModelAttribute()));
+            
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IWalletRepository, WalletRepository>();
+            services.AddScoped<IExchangeRateRepository, ExchangeRateRepository>();
+            services.AddScoped<IBaseCurrencyRepository, BaseCurrencyRepository>();
+            
+            services.Configure<ApiSettings>(configuration.GetSection("ApiSettings"));
+            services.AddHttpClient<IExchangeRateService, ExchangeRateService>();
+            services.AddTransient<IExchangeRateService, ExchangeRateService>();
+            
+            services.AddHostedService<ExchangeRateWorker>(); 
+            
+            CountryCurrencyList.LoadData(Path.Combine(Directory.GetCurrentDirectory(), "../ByteAwesome.Shared.Files/ISOResources/CountryCurrency.json"));
         }
         public void Configure(IApplicationBuilder app)
         {
