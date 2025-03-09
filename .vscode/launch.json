@@ -2,13 +2,53 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "UserAPI",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/UserAPI/bin/Debug/net8.0/UserAPI.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/UserAPI",
+            "stopAtEntry": false,
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+            },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "sourceFileMap": {
+                "/Views": "${workspaceFolder}/Views"
+            }
+        },
+        {
+            "name": "SecretAPI",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/SecretAPI/bin/Debug/net8.0/SecretAPI.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/SecretAPI",
+            "stopAtEntry": false,
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+            },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "sourceFileMap": {
+                "/Views": "${workspaceFolder}/Views"
+            }
+        },
+        {
             "name": "TestAPI",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/ByteAwesome.TestAPI/bin/Debug/net8.0/ByteAwesome.TestAPI.dll",
+            "program": "${workspaceFolder}/TestAPI/bin/Debug/net8.0/TestAPI.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/ByteAwesome.TestAPI",
+            "cwd": "${workspaceFolder}/TestAPI",
             "stopAtEntry": false,
             "serverReadyAction": {
                 "action": "openExternally",

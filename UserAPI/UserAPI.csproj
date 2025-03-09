@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+  <ItemGroup Condition="'$(Configuration)' != 'Debug'">
+    <Content Remove="appsettings.*.json" />
+    <Content Include="appsettings.$(Configuration).json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Shared.Core\Shared.Core.csproj" />
+    <!-- Grpc Server References -->
+    <PackageReference Include="Grpc.AspNetCore" Version="2.66.0" />
+    <Protobuf Include="..\Shared.Files\GrpcProtos\UserAPI.proto" GrpcServices="Server" />
+    <!-- Grpc Client References -->
+    <PackageReference Include="Grpc.Tools" Version="2.66.0" />
+    <PackageReference Include="Grpc.Net.Client" Version="2.66.0" />
+    <PackageReference Include="Grpc.Net.ClientFactory" Version="2.66.0" />
+    <Protobuf Include="..\Shared.Files\GrpcProtos\SecretAPI.proto" GrpcServices="Client" />
+  </ItemGroup>
+</Project>
