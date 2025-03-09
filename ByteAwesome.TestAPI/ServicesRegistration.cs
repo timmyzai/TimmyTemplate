@@ -1,11 +1,6 @@
 using ByteAwesome.Services;
 using ByteAwesome.TestAPI.Modules;
 using ByteAwesome.StartupConfig;
-using Microsoft.Extensions.DependencyInjection;
-using System.IO;
-using System;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Configuration;
 
 namespace ByteAwesome.TestAPI
 {
@@ -27,8 +22,6 @@ namespace ByteAwesome.TestAPI
 
             //HttpClient
             RegisterHttpClient(services);
-            //GRPC
-            RegisterGRPC(services);
             //Redis
             var redisConnectionString = configuration.GetConnectionString("Redis");
             RedisConnectionManager.ConnectRedis(services, redisConnectionString);
@@ -57,9 +50,6 @@ namespace ByteAwesome.TestAPI
             }
         }
         protected void RegisterWorkers(IServiceCollection services)
-        {
-        }
-        protected void RegisterGRPC(IServiceCollection services)
         {
         }
         protected void RegisterHttpClient(IServiceCollection services)
