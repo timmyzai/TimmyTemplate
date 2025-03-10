@@ -24,7 +24,7 @@ namespace UserAPI
             services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
 
             //Modules
-            var encryptSecretKey = configuration["App:EncryptSecretKey"];
+            // var encryptSecretKey = configuration["App:EncryptSecretKey"];
 
             services.Configure<AppModuleConfig>(configuration.GetSection("App"));
             services.Configure<BrevoMailModuleConfig>(configuration.GetSection("BrevoConfig"));
@@ -43,10 +43,7 @@ namespace UserAPI
             var redisConnectionString = configuration.GetConnectionString("Redis");
             RedisConnectionManager.ConnectRedis(services, redisConnectionString);
             //Worker
-            if (!GeneralHelper.IsDevelopmentEnvironment())
-            {
-                RegisterWorkers(services);
-            }
+            RegisterWorkers(services);
         }
         protected void PreLoadServices(IServiceCollection services)
         {
