@@ -15,14 +15,7 @@ public class ExchangeRateWorker : BaseBackgroundWorker
     {
         using var scope = ScopeFactory.CreateScope();
         var exchangeRateService = scope.ServiceProvider.GetRequiredService<IExchangeRateService>();
-
-        try
-        {
-            await exchangeRateService.StoreExchangeRates();
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine(ex.Message);
-        }
+        
+        await exchangeRateService.StoreExchangeRates();
     }
 }

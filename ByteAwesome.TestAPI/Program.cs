@@ -1,8 +1,5 @@
-using System;
 using ByteAwesome.StartupConfig;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
-using Microsoft.Extensions.Hosting;
 using Serilog;
 
 namespace ByteAwesome.TestAPI

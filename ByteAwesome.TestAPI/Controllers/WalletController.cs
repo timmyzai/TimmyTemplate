@@ -13,7 +13,11 @@ public class WalletController : CRUD_BaseController<WalletDto, CreateWalletDto, 
     private readonly IUserRepository _userRepository;
     private readonly IExchangeRateService _exchangeRateService;
     
-    public WalletController(IWalletRepository repository, IUserRepository userRepository, IExchangeRateService exchangeRateService) : base(repository)
+    public WalletController(
+        IWalletRepository repository,
+        IUserRepository userRepository,
+        IExchangeRateService exchangeRateService
+    ) : base(repository)
     {
         _repository = repository;
         _userRepository = userRepository;
@@ -44,17 +48,18 @@ public class WalletController : CRUD_BaseController<WalletDto, CreateWalletDto, 
         var response = new ResponseDto<WalletDto>();
         try
         {
+            var user = await _userRepository.GetById(input.UserId);
             //check if user ID exists
-            if (await _userRepository.GetById(input.UserId) == null)
+            if (user == null)
             {
-                throw new AppException("W1003");
+                throw new AppException(ErrorCodes.Wallet.WalletUserNotFound);
             }
             
             //check if user already has a wallet
-            var existingWalletList = await _repository.Get();
-            if (existingWalletList.FirstOrDefault(wallet => wallet.UserId == input.UserId) != null)
+            var existingWallet = await _repository.GetByUserId(input.UserId);
+            if (existingWallet != null)
             {
-                throw new AppException("W1009");
+                throw new AppException(ErrorCodes.Wallet.UserAlreadyHasWallet);
             }
 
             response.Result = await repository.Add(input);
@@ -70,7 +75,6 @@ public class WalletController : CRUD_BaseController<WalletDto, CreateWalletDto, 
         return Json(response);
     }
     
-    [HttpPost]
     public async Task<ActionResult<ResponseDto<WalletDto>>> Deposit(DepositIntoWalletDto input)
     {
         var response = new ResponseDto<WalletDto>();
@@ -79,14 +83,14 @@ public class WalletController : CRUD_BaseController<WalletDto, CreateWalletDto, 
             var existingWallet = (await _repository.GetById(input.Id));
             if (existingWallet == null)
             {
-                throw new AppException("W1001");
+                throw new AppException(ErrorCodes.Wallet.WalletGroupNotFound);
             }
             
             //check if user exists
             var existingUser = await _userRepository.GetById(existingWallet.UserId);
             if (existingUser == null)
             {
-                throw new AppException("W1003");
+                throw new AppException(ErrorCodes.Wallet.WalletUserNotFound);
             }
             
             var amountUsd = await _exchangeRateService.GetConvertedAmount(input.Amount, existingUser.CountryName);
@@ -106,8 +110,6 @@ public class WalletController : CRUD_BaseController<WalletDto, CreateWalletDto, 
         return Json(response);
     }
     
-        
-    [HttpPost]
     public async Task<ActionResult<ResponseDto<WalletDto>>> Withdraw(WithdrawFromWalletDto input)
     {
         var response = new ResponseDto<WalletDto>();
@@ -116,21 +118,21 @@ public class WalletController : CRUD_BaseController<WalletDto, CreateWalletDto, 
             var existingWallet = (await _repository.GetById(input.Id));
             if (existingWallet == null)
             {
-                throw new AppException("W1001");
+                throw new AppException(ErrorCodes.Wallet.WalletGroupNotFound);
             }
             
             //check if user exists
             var existingUser = await _userRepository.GetById(existingWallet.UserId);
             if (existingUser == null)
             {
-                throw new AppException("W1003");
+                throw new AppException(ErrorCodes.Wallet.WalletUserNotFound);
             }
             
             var amountUsd = await _exchangeRateService.GetConvertedAmount(input.Amount, existingUser.CountryName);
             
             if (existingWallet.WalletAmount < amountUsd)
             {
-                throw new AppException("W1002");
+                throw new AppException(ErrorCodes.Wallet.WalletNotEnoughFunds);
             }
 
             existingWallet.WalletAmount -= amountUsd;
@@ -147,6 +149,4 @@ public class WalletController : CRUD_BaseController<WalletDto, CreateWalletDto, 
         }
         return Json(response);
     }
-    
-    
 }

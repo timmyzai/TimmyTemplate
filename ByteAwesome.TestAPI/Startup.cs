@@ -5,10 +5,6 @@ using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using ByteAwesome.StartupConfig;
 using ByteAwesome.TestAPI.Data;
-using ByteAwesome.TestAPI.Helper.Services;
-using ByteAwesome.TestAPI.Modules;
-using ByteAwesome.TestAPI.Repositories;
-using ByteAwesome.TestAPI.Workers;
 
 namespace ByteAwesome.TestAPI
 {
@@ -61,22 +57,12 @@ namespace ByteAwesome.TestAPI
             services.AddDistributedMemoryCache();
             services.AddHttpContextAccessor();
             services.RegisterSwagger(ApiVersions, _microServiceApiName);
+            
+            CountryCurrencyList.LoadData(Path.Combine(Directory.GetCurrentDirectory(), "../ByteAwesome.Shared.Files/ISOResources/CountryCurrency.json"));
+            
             PreInitialize(services);
             //Validare Required Field For All API Methods
             services.AddMvc(options => options.Filters.Add(new ValidateModelAttribute()));
-            
-            services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<IWalletRepository, WalletRepository>();
-            services.AddScoped<IExchangeRateRepository, ExchangeRateRepository>();
-            services.AddScoped<IBaseCurrencyRepository, BaseCurrencyRepository>();
-            
-            services.Configure<ApiSettings>(configuration.GetSection("ApiSettings"));
-            services.AddHttpClient<IExchangeRateService, ExchangeRateService>();
-            services.AddTransient<IExchangeRateService, ExchangeRateService>();
-            
-            services.AddHostedService<ExchangeRateWorker>(); 
-            
-            CountryCurrencyList.LoadData(Path.Combine(Directory.GetCurrentDirectory(), "../ByteAwesome.Shared.Files/ISOResources/CountryCurrency.json"));
         }
         public void Configure(IApplicationBuilder app)
         {

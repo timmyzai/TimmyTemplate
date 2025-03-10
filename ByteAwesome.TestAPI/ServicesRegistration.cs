@@ -1,11 +1,9 @@
 using ByteAwesome.Services;
 using ByteAwesome.TestAPI.Modules;
 using ByteAwesome.StartupConfig;
-using Microsoft.Extensions.DependencyInjection;
-using System.IO;
-using System;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Configuration;
+using ByteAwesome.TestAPI.Helper.Services;
+using ByteAwesome.TestAPI.Repositories;
+using ByteAwesome.TestAPI.Workers;
 
 namespace ByteAwesome.TestAPI
 {
@@ -17,13 +15,19 @@ namespace ByteAwesome.TestAPI
             PreLoadServices(services);
 
             //Repositories
-
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IWalletRepository, WalletRepository>();
+            services.AddScoped<IExchangeRateRepository, ExchangeRateRepository>();
+            services.AddScoped<IBaseCurrencyRepository, BaseCurrencyRepository>();
+            services.AddScoped<IExchangeRateService, ExchangeRateService>();
+            
             //Singleton Services
             services.AddSingleton<IRedisCacheService, RedisCacheService>();
             services.AddSingleton<IRedisLockManager, RedisLockManager>();
 
             //Modules
             services.Configure<AppModuleConfig>(configuration.GetSection("App"));
+            services.Configure<ApiSettings>(configuration.GetSection("ApiSettings"));
 
             //HttpClient
             RegisterHttpClient(services);
@@ -58,12 +62,14 @@ namespace ByteAwesome.TestAPI
         }
         protected void RegisterWorkers(IServiceCollection services)
         {
+            services.AddHostedService<ExchangeRateWorker>(); 
         }
         protected void RegisterGRPC(IServiceCollection services)
         {
         }
         protected void RegisterHttpClient(IServiceCollection services)
         {
+            services.AddHttpClient<IExchangeRateService, ExchangeRateService>();
         }
     }
 }
