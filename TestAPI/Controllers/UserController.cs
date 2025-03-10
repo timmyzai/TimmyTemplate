@@ -1,14 +1,12 @@
 using TestAPI.Dtos.User;
 using TestAPI.Repositories;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 using AwesomeProject;
 
 namespace TestAPI.Controllers;
 
-[AllowAnonymous]
-public class UserController : CRUD_BaseController<UserDto, CreateUserDto, Guid, IUserRepository>
+public class UserController : BaseController<UserDto, CreateUserDto, Guid, IUserRepository>
 {
     private readonly IUserRepository _repository;
     

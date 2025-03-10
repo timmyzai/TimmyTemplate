@@ -1,9 +1,14 @@
-using TestAPI.Helper.CustomDataAttributes;
+using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
+
 
 namespace TestAPI.Dtos.Wallet;
 
 public class CreateWalletDto
 {
-    [RequiredValidGuid]
+    [JsonIgnore]
     public Guid UserId { get; set; }
+
+    [Required]
+    public string CountryName {get; set;}
 }

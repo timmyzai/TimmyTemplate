@@ -114,18 +114,11 @@ namespace AwesomeProject
         }
         public static class Wallet
         {
-            public const string WalletGroupNotFound = "W1001";
+            public const string WalletNotFound = "W1001";
             public const string WalletNotEnoughFunds = "W1002";
-            public const string WalletUserNotFound = "W1003";
-            public const string WalletUserNotExists = "W1004";
-            public const string CurrencyConversionError = "W1005";
             public const string CurrencyCodeInvalid = "W1006";
-            public const string CountryNotSupported = "W1007";
             public const string CountryOrCurrencyNotSupported = "W1008";
             public const string UserAlreadyHasWallet = "W1009";
-            public const string RateRetrievalError = "W1010";
-            public const string RateStorageError = "W1011";
-            public const string CurrencyRetrievalError = "W1012";
         }
         public static class Notification
         {

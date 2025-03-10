@@ -1,10 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 
-using AwesomeProject;
-
 namespace TestAPI.Dtos.Wallet;
 
-public class DepositIntoWalletDto : EntityDto<Guid>
+public class DepositIntoWalletDto
 {
     [Required]
     public decimal Amount { get; set; }

@@ -25,15 +25,8 @@
         <!-- Wallet API -->
         <text name="W1001">錢包未找到。</text>
         <text name="W1002">錢包餘額不足，無法提領。</text>
-        <text name="W1003">找不到使用者。</text>
-        <text name="W1004">指定的使用者不存在。</text>
-        <text name="W1005">貨幣轉換時發生錯誤。</text>
         <text name="W1006">指定的貨幣代碼無效。</text>
-        <text name="W1007">指定的國家尚未支援。</text>
         <text name="W1008">指定的國家/貨幣尚未支援。</text>
         <text name="W1009">指定的使用者已經擁有錢包。</text>
-        <text name="W1010">取得匯率時發生錯誤。</text>
-        <text name="W1011">儲存匯率時發生錯誤。</text>
-        <text name="W1012">從資料庫取得貨幣 ID 時發生錯誤。</text>
     </texts>
 </localizationDictionary>

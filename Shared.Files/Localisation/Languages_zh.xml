@@ -25,15 +25,8 @@
         <!-- Walllet API -->
         <text name="W1001">钱包未找到。</text>
         <text name="W1002">钱包余额不足，无法提款。</text>
-        <text name="W1003">用户未找到。</text>
-        <text name="W1004">指定用户不存在。</text>
-        <text name="W1005">货币转换时发生错误。</text>
         <text name="W1006">指定的货币代码无效。</text>
-        <text name="W1007">指定的国家/地区尚不支持。</text>
         <text name="W1008">指定的国家/货币尚不支持。</text>
         <text name="W1009">指定用户已拥有钱包。</text>
-        <text name="W1010">获取汇率时发生错误。</text>
-        <text name="W1011">存储汇率时发生错误。</text>
-        <text name="W1012">从数据库获取货币 ID 时发生错误。</text>
     </texts>
 </localizationDictionary>

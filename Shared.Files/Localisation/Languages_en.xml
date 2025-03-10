@@ -25,15 +25,8 @@
         <!-- Wallet API -->
         <text name="W1001">Wallet not found.</text>
         <text name="W1002">Wallet not enough funds to withdraw from.</text>
-        <text name="W1003">User not found.</text>
-        <text name="W1004">Given user does not exist.</text>
-        <text name="W1005">Error while converting currency.</text>
         <text name="W1006">Given currency code invalid.</text>
-        <text name="W1007">Given country not supported yet.</text>
         <text name="W1008">Given country/currency not supported yet.</text>
         <text name="W1009">Given user already has a wallet.</text>
-        <text name="W1010">Error while retrieving rates.</text>
-        <text name="W1011">Error while storing rates.</text>
-        <text name="W1012">Error while obtaining base currency id from DB.</text>
     </texts>
 </localizationDictionary>
