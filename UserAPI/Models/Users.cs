@@ -1,6 +1,3 @@
-
-
-using System.ComponentModel.DataAnnotations.Schema;
 using AwesomeProject;
 
 namespace UserAPI.Models
