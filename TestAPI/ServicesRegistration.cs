@@ -2,6 +2,10 @@ using Services;
 using TestAPI.Modules;
 using StartupConfig;
 using AwesomeProject;
+using TestAPI.Repository;
+using TestAPI.ExternalApi.CoinGeckoApi;
+using TestAPI.ExternalApi;
+using TestAPI.Service;
 
 namespace TestAPI
 {
@@ -13,6 +17,11 @@ namespace TestAPI
             PreLoadServices(services);
 
             //Repositories
+            services.AddScoped<ICryptoOrderRepository, CryptoOrderRepository>();
+
+            services.AddScoped<ICoinGeckoService, CoinGeckoService>();
+
+            services.AddScoped<IOrderService, OrderService>();
 
             //Singleton Services
             services.AddSingleton<IRedisCacheService, RedisCacheService>();
@@ -23,6 +32,7 @@ namespace TestAPI
 
             //HttpClient
             RegisterHttpClient(services);
+            
             //Redis
             var redisConnectionString = configuration.GetConnectionString("Redis");
             RedisConnectionManager.ConnectRedis(services, redisConnectionString);
@@ -42,6 +52,12 @@ namespace TestAPI
         }
         protected void RegisterHttpClient(IServiceCollection services)
         {
+            services.AddHttpClient<ICoinGeckoService, CoinGeckoService>((provider, client) =>
+            {
+                client.BaseAddress = new Uri("https://api.coingecko.com");
+                client.DefaultRequestHeaders.Add("Accept", "application/json");
+                client.DefaultRequestHeaders.Add("x-cg-demo-api-key", "CG-2W7VnFcWkgBnA6Kg9gKJcddV");
+            });
         }
     }
 }

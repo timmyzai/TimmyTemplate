@@ -359,5 +359,20 @@ namespace AwesomeProject
             public const string SellTokenError = "F1011";
             public const string FiatCurrencyOrCountryInvalid = "F1012";
         }
+
+        public static class CryptoOrder
+        {
+            public const string CoinNotFound = "CO1001";
+            public const string InvalidLivePrice = "CO1002";
+            public const string InvalidCoinAmount = "CO1003";
+            public const string InvalidUsdAmount = "CO1004";
+            public const string OrderNotFound = "CO1005";
+            public const string DeleteMyCoinOrder = "CO1006";
+            public const string UpdateMyCoinOrder = "CO1007";
+            public const string UserIdNotFound = "CO1008";
+            public const string DataNotFound = "CO1009";
+            public const string CreateMyCoinOrder = "CO1010";
+
+        }
     }
 }

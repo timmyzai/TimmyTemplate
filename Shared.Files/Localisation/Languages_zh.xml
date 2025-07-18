@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <localizationDictionary culture="zh">
     <texts>
+        <!-- CoinGeckoAPI -->
+        <text name="CO1001">找不到加密货币。</text>
+        <text name="CO1002">无法获取美元实时价格。</text>
+        <text name="CO1003">加密货币金额无效。</text>
+        <text name="CO1004">美元金额无效。</text>
+        <text name="CO1005">未找到订单。</text>
+        <text name="CO1006">删除订单时发生异常。</text>
+        <text name="CO1007">更新订单时发生异常。</text>
+        <text name="CO1008">未找到用户ID。</text>
+        <text name="CO1009">获取数据时发生异常。</text>
+        <text name="CO1010">创建订单时发生异常。</text>
         <!-- General -->
         <text name="1001">主机意外终止。</text>
         <text name="1002">未处理的错误。</text>

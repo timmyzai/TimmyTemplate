@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <localizationDictionary culture="en">
     <texts>
+        <!-- CoinGeckoAPI-->
+        <text name="CO1001">CoinID Not Found.</text>
+        <text name="CO1002">Failed to retrieve USD Live Price.</text>
+        <text name="CO1003">Invalid Coin amount.</text>
+        <text name="CO1004">Invalid USD amount.</text>
+        <text name="CO1005">Order Not Found.</text>
+        <text name="CO1006">Exception occurred while deleting Coin order.</text>
+        <text name="CO1007">Exception occurred while updating Coin order.</text>
+        <text name="CO1008">User ID not found.</text>
+        <text name="CO1009">Exception occurred while retrieving data.</text>
+        <text name="CO1010">Exception occurred while creating Coin order.</text>
         <!-- General -->
         <text name="1001">Host terminated unexpectedly.</text>
         <text name="1002">Unhandled error.</text>

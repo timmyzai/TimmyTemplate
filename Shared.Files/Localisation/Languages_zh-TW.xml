@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <localizationDictionary culture="zh-CN">
     <texts>
+        <!-- CoinGeckoAPI -->
+        <text name="CO1001">找不到加密貨幣。</text>
+        <text name="CO1002">無法取得美元即時價格。</text>
+        <text name="CO1003">加密貨幣金額無效。</text>
+        <text name="CO1004">美元金額無效。</text>
+        <text name="CO1005">找不到訂單。</text>
+        <text name="CO1006">刪除訂單時發生例外錯誤。</text>
+        <text name="CO1007">更新訂單時發生例外錯誤。</text>
+        <text name="CO1008">找不到使用者 ID。</text>
+        <text name="CO1009">取得資料時發生例外錯誤。</text>
+        <text name="CO1010">建立訂單時發生例外錯誤。</text>
         <!-- General -->
         <text name="1001">主機意外終止。</text>
         <text name="1002">未處理的錯誤。</text>

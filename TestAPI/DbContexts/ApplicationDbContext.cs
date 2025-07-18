@@ -1,5 +1,6 @@
 using Services;
 using Microsoft.EntityFrameworkCore;
+using TestAPI.Models;
 
 namespace TestAPI.DbContexts
 {
@@ -29,5 +30,11 @@ namespace TestAPI.DbContexts
         {
             _auditingService.ApplyGlobalFilters(modelBuilder);
         }
+
+        public DbSet<Coins> Coins { get; set; }
+
+        public DbSet<CryptoOrder> CryptoOrders { get; set; }
+        
+    
     }
 }
