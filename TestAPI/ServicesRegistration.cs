@@ -6,6 +6,7 @@ using TestAPI.Repository;
 using TestAPI.ExternalApi.CoinGeckoApi;
 using TestAPI.ExternalApi;
 using TestAPI.Service;
+using Microsoft.Extensions.Options;
 
 namespace TestAPI
 {
@@ -29,6 +30,7 @@ namespace TestAPI
 
             //Modules
             services.Configure<AppModuleConfig>(configuration.GetSection("App"));
+            services.Configure<CoinGeckoConfig>(configuration.GetSection("CoinGecko"));
 
             //HttpClient
             RegisterHttpClient(services);
@@ -54,9 +56,10 @@ namespace TestAPI
         {
             services.AddHttpClient<ICoinGeckoService, CoinGeckoService>((provider, client) =>
             {
+                var config = provider.GetRequiredService<IOptions<CoinGeckoConfig>>().Value;
                 client.BaseAddress = new Uri("https://api.coingecko.com");
                 client.DefaultRequestHeaders.Add("Accept", "application/json");
-                client.DefaultRequestHeaders.Add("x-cg-demo-api-key", "CG-2W7VnFcWkgBnA6Kg9gKJcddV");
+                client.DefaultRequestHeaders.Add("x-cg-demo-api-key", config.ApiKey);
             });
         }
     }
