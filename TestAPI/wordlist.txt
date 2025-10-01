@@ -1,0 +1,7 @@
+apple
+orange
+elephant
+monkey
+aerospace
+computer
+keyboard
