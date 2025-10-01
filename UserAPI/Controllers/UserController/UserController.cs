@@ -128,64 +128,64 @@ namespace UserAPI.Controllers
                     throw new AppException(ErrorCodes.General.ComingSoon);
                 }
                 var user = await repository.GetUserByUserLoginIdentity(input.UserLoginIdentityAddress);
-                UserValidationClass.ValidateUser(user);
-                #region Password Verification
-                var isInvalidPassword = !PwdHashTokenHelper.VerifyHashedPassword(user.UserData.PassWord, user.UserData.PasswordSalt, input.Password);
-                if (isInvalidPassword)
-                {
-                    user.UserData.PasswordTryCount++;
-                    if (user.UserData.PasswordTryCount >= 50)
-                    {
-                        user.UserData.IsLockedOut = true;
-                    }
-                    await repository.Update(user);
-                    throw new AppException(ErrorCodes.User.InvalidPassword);
-                }
-                if (user.UserData.PasswordTryCount > 0)
-                {
-                    user.UserData.PasswordTryCount = 0;
-                    await repository.Update(user);
-                }
-                #endregion
-                #region Email Verification and Two Factor Authentication Before Login
-                if (!user.UserData.RoleNames.Contains(RoleNames.Admin) && !user.UserData.IsEmailVerified)
-                {
-                    if (string.IsNullOrEmpty(input.EmailTacCode))
-                    {
-                        await userServices.SendConfirmationEmail(user, isLogin: true);
-                        response.DisplayMessage = "Verify Otp Email will be sent.";
-                        throw new AppException(ErrorCodes.User.RequireOtpToVerifyEmail, GeneralHelper.MaskEmail(user.UserData.EmailAddress));
-                    }
-                    await otpGrpcClient.Verify(user.Id, user.UserData.EmailAddress, input.EmailTacCode, OtpActionProtoType.EmailVerification);
-                    user.UserData.IsEmailVerified = true;
-                    await repository.Update(user);
-                }
-                else if (user.UserData.IsTwoFactorEnabled)
-                {
-                    if (string.IsNullOrEmpty(input.TwoFactorPin))
-                    {
-                        throw new AppException(ErrorCodes.User.RequireTwoFactorPin);
-                    }
-                    await tfaGrpcClient.VerifyTwoFactorPin(user.Id, input.TwoFactorPin);
-                }
-                else
-                {
+                // UserValidationClass.ValidateUser(user);
+                // #region Password Verification
+                // var isInvalidPassword = !PwdHashTokenHelper.VerifyHashedPassword(user.UserData.PassWord, user.UserData.PasswordSalt, input.Password);
+                // if (isInvalidPassword)
+                // {
+                //     user.UserData.PasswordTryCount++;
+                //     if (user.UserData.PasswordTryCount >= 50)
+                //     {
+                //         user.UserData.IsLockedOut = true;
+                //     }
+                //     await repository.Update(user);
+                //     throw new AppException(ErrorCodes.User.InvalidPassword);
+                // }
+                // if (user.UserData.PasswordTryCount > 0)
+                // {
+                //     user.UserData.PasswordTryCount = 0;
+                //     await repository.Update(user);
+                // }
+                // #endregion
+                // #region Email Verification and Two Factor Authentication Before Login
+                // if (!user.UserData.RoleNames.Contains(RoleNames.Admin) && !user.UserData.IsEmailVerified)
+                // {
+                //     if (string.IsNullOrEmpty(input.EmailTacCode))
+                //     {
+                //         await userServices.SendConfirmationEmail(user, isLogin: true);
+                //         response.DisplayMessage = "Verify Otp Email will be sent.";
+                //         throw new AppException(ErrorCodes.User.RequireOtpToVerifyEmail, GeneralHelper.MaskEmail(user.UserData.EmailAddress));
+                //     }
+                //     await otpGrpcClient.Verify(user.Id, user.UserData.EmailAddress, input.EmailTacCode, OtpActionProtoType.EmailVerification);
+                //     user.UserData.IsEmailVerified = true;
+                //     await repository.Update(user);
+                // }
+                // else if (user.UserData.IsTwoFactorEnabled)
+                // {
+                //     if (string.IsNullOrEmpty(input.TwoFactorPin))
+                //     {
+                //         throw new AppException(ErrorCodes.User.RequireTwoFactorPin);
+                //     }
+                //     await tfaGrpcClient.VerifyTwoFactorPin(user.Id, input.TwoFactorPin);
+                // }
+                // else
+                // {
 
-                    if (!user.UserData.RoleNames.Contains(RoleNames.Admin))
-                    {
-                        if (string.IsNullOrEmpty(input.EmailTacCode))
-                        {
-                            await userServices.SendLoginOtpEmail(user);
-                            response.DisplayMessage = "Login Otp Email will be sent.";
-                            throw new AppException(ErrorCodes.User.RequireLoginOtp, GeneralHelper.MaskEmail(user.UserData.EmailAddress));
-                        }
-                        else
-                        {
-                            await otpGrpcClient.Verify(user.Id, user.UserData.EmailAddress, input.EmailTacCode, OtpActionProtoType.Login);
-                        }
-                    }
-                }
-                #endregion
+                //     if (!user.UserData.RoleNames.Contains(RoleNames.Admin))
+                //     {
+                //         if (string.IsNullOrEmpty(input.EmailTacCode))
+                //         {
+                //             await userServices.SendLoginOtpEmail(user);
+                //             response.DisplayMessage = "Login Otp Email will be sent.";
+                //             throw new AppException(ErrorCodes.User.RequireLoginOtp, GeneralHelper.MaskEmail(user.UserData.EmailAddress));
+                //         }
+                //         else
+                //         {
+                //             await otpGrpcClient.Verify(user.Id, user.UserData.EmailAddress, input.EmailTacCode, OtpActionProtoType.Login);
+                //         }
+                //     }
+                // }
+                // #endregion
                 response.Result = await userServices.GenerateLoginResult(user.Id, user.UserData.UserName, user.UserData.EmailAddress, user.UserData.PhoneNumber, user.UserData.RoleNames);
                 response.DisplayMessage = "Login Successfully";
             }
