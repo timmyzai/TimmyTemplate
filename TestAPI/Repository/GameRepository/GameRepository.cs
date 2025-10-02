@@ -59,13 +59,5 @@ namespace TestAPI.Repository
             return MapEntitiesToDtos(items);
         }
 
-        public async Task<bool> CheckIfWordIsUsed(Guid GameId, string word)
-        {
-            return await Query()
-                .Where(g => g.Id == GameId)
-                .SelectMany(gs => gs.GameScores)
-                .AnyAsync(s => s.Answer.ToLower() == word.ToLower());
-        }
-
     }
 }

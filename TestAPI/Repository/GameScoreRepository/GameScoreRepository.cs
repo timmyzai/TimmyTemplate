@@ -1,5 +1,6 @@
 using AutoMapper;
 using AwesomeProject;
+using Microsoft.EntityFrameworkCore;
 using TestAPI.DbContexts;
 using TestAPI.Models;
 using TestAPI.Models.Dtos;
@@ -18,6 +19,12 @@ namespace TestAPI.Repository
         {
         }
 
+        public async Task<bool> CheckIfWordIsUsed(Guid GameId, string word)
+        {
+            return await Query()
+                .Where(g => g.GamesId == GameId)
+                .AnyAsync(s => s.Answer.ToLower() == word.ToLower());
+        }
 
     }
 }

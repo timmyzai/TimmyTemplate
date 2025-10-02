@@ -45,7 +45,7 @@ namespace TestAPI.Services
                 return new(false, $"Your word must begin with '{prompt[^1]}'");
             }
 
-            if (await gameRepository.CheckIfWordIsUsed(gameId, word))
+            if (await gameScoreRepository.CheckIfWordIsUsed(gameId, word))
             {
                 return new(false, "You used this word before. Game over.");
             }
