@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using AwesomeProject;
 
 namespace TestAPI.Models.Dtos
@@ -13,7 +9,7 @@ namespace TestAPI.Models.Dtos
         public string WordPrompt { get; set; }
         public string Answer { get; set; }
         public bool IsCorrect { get; set; }
-        public double Score { get; set; }
+        public int Score { get; set; }
         public DateTime AnswerStartTime { get; set; }
         public string Remarks { get; set; }
     }
@@ -25,7 +21,7 @@ namespace TestAPI.Models.Dtos
         public string WordPrompt { get; set; }
         public string Answer { get; set; }
         public bool IsCorrect { get; set; }
-        public double Score { get; set; }
+        public int Score { get; set; }
         public DateTime AnswerStartTime { get; set; }
         public string Remarks { get; set; }
     }

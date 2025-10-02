@@ -65,8 +65,8 @@ namespace TestAPI.Migrations
                     b.Property<int>("RoundNumber")
                         .HasColumnType("int");
 
-                    b.Property<double>("Score")
-                        .HasColumnType("double");
+                    b.Property<int>("Score")
+                        .HasColumnType("int");
 
                     b.Property<string>("WordPrompt")
                         .HasColumnType("longtext");
@@ -103,8 +103,8 @@ namespace TestAPI.Migrations
                     b.Property<DateTime?>("EndTime")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<double>("FinalScore")
-                        .HasColumnType("double");
+                    b.Property<int>("FinalScore")
+                        .HasColumnType("int");
 
                     b.Property<string>("FirstWord")
                         .HasColumnType("longtext");

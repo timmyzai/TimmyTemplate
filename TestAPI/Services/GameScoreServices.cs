@@ -1,13 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
-using AwesomeProject;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
-using TestAPI.Models;
 using TestAPI.Models.Dtos;
 using TestAPI.Models.Word;
 using TestAPI.Repository;
@@ -44,8 +34,8 @@ namespace TestAPI.Services
         private record WordCheckResult(
             bool IsValid,
             string Remarks,
-            double Score = 0,
-            List<WordDefinition>? Definitions = null
+            int Score = 0,
+            List<WordDefinition> Definitions = null
         );
 
         private async Task<WordCheckResult> CheckWord(Guid gameId, string word, string prompt, DateTime answerStartTime)
@@ -157,9 +147,9 @@ namespace TestAPI.Services
             return wordPrompt.EndsWith(answer[0]);
         }
 
-        private async Task<double> CalculateScore(string answer, DateTime answerStartTime)
+        private async Task<int> CalculateScore(string answer, DateTime answerStartTime)
         {
-            double lengthScore = answer.Length;
+            int lengthScore = answer.Length;
 
             DateTime endTime = DateTime.Now;
 
@@ -171,7 +161,7 @@ namespace TestAPI.Services
                         .OrderBy(r => r.MaxSeconds)
                         .FirstOrDefault(r => durationInSecs.TotalSeconds <= r.MaxSeconds);
 
-            double timeScore = rule?.Points ?? 0;
+            int timeScore = rule?.Points ?? 0;
 
             return lengthScore + timeScore;
 
@@ -183,17 +173,6 @@ namespace TestAPI.Services
             return game.GameScores.Any(s => string.Equals(s.Answer, word, StringComparison.OrdinalIgnoreCase));
         }
 
-        private string GenerateRemarks(int definitionCount, bool isStartCorrect, bool isUsed, string wordPrompt, double score)
-        {
-            if (!isStartCorrect)
-                return $"Your word did not begin with the first letter of {wordPrompt}, which is '{wordPrompt[wordPrompt.Length - 1]}'";
-            else if (isUsed)
-                return "You used this word before. Game over";
-            else if (definitionCount <= 0)
-                return "Not a real word. Game over.";
-            else
-                return $"Correct! +{score} points awarded!";
-        }
 
     }
 }

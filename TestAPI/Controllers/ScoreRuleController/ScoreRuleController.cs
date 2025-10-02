@@ -1,11 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using AwesomeProject;
 using Microsoft.AspNetCore.Mvc;
 using TestAPI.Models.Dtos;
-using TestAPI.Repository;
 using TestAPI.Repository.ScoreRuleRepository;
 
 namespace TestAPI.Controllers.ScoreRuleController

@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using AwesomeProject;
 
 namespace TestAPI.Models.Dtos
@@ -23,7 +19,7 @@ namespace TestAPI.Models.Dtos
     public class GamesDto : FullyAuditedEntityDto<Guid>
     {
         public Guid UserId { get; set; }
-        public double FinalScore { get; set; }
+        public int FinalScore { get; set; }
         public int MaxRounds { get; set; }
         public int ActualRounds { get; set; }
         public string FirstWord { get; set; }
@@ -34,7 +30,7 @@ namespace TestAPI.Models.Dtos
 
     public class GameHistoryDto
     {
-        public double FinalScore { get; set; }
+        public int FinalScore { get; set; }
         public int MaxRounds { get; set; }
         public int ActualRounds { get; set; }
         public string FirstWord { get; set; }
@@ -44,7 +40,7 @@ namespace TestAPI.Models.Dtos
 
     public class GameLeaderboardDto
     {
-        public double FinalScore { get; set; }
+        public int FinalScore { get; set; }
         public int MaxRounds { get; set; }
         public int ActualRounds { get; set; }
         public string FirstWord { get; set; }
