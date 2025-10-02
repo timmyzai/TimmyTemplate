@@ -98,7 +98,7 @@ namespace TestAPI.Services
 
             game.FinalScore = totalScore;
             game.ActualRounds = gameRounds;
-            game.EndTime = DateTime.Now;
+            game.EndTime = DateTime.UtcNow;
 
             var finalizedGame = await gameRepository.PatchGameFinal(game);
 
@@ -151,7 +151,7 @@ namespace TestAPI.Services
         {
             int lengthScore = answer.Length;
 
-            DateTime endTime = DateTime.Now;
+            DateTime endTime = DateTime.UtcNow;
 
             var durationInSecs = endTime.Subtract(answerStartTime);
 
