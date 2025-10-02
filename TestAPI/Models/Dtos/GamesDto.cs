@@ -38,15 +38,4 @@ namespace TestAPI.Models.Dtos
         public DateTime? EndTime { get; set; }
     }
 
-    public class GameLeaderboardDto
-    {
-        public int FinalScore { get; set; }
-        public int MaxRounds { get; set; }
-        public int ActualRounds { get; set; }
-        public string FirstWord { get; set; }
-        public DateTime StartTime { get; set; }
-        public DateTime? EndTime { get; set; }
-    }
-
-
 }

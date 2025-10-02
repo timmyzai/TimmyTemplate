@@ -9,21 +9,17 @@ namespace TestAPI
         {
             var mappingConfig = new MapperConfiguration(config =>
             {
-                // config.CreateMap<GamesDto, Games>().IncludeMembers(src => src.UserData).ReverseMap();
-                config.CreateMap<CreateGamesDto, Games>().ReverseMap();
-                config.CreateMap<CreateGamesDto, GamesDto>().ReverseMap();
-                config.CreateMap<Games, GamesDto>().ReverseMap();
+                config.CreateMap<CreateGamesDto, Games>();
+                config.CreateMap<Games, GamesDto>();
 
-                config.CreateMap<GameScores, GameScoresDto>().ReverseMap();
-                config.CreateMap<GameScores, CreateGameScoresDto>().ReverseMap();
-                config.CreateMap<GameScoresDto, CreateGameScoresDto>().ReverseMap();
+                config.CreateMap<CreateGameScoresDto, GameScores>();
+                config.CreateMap<GameScores, GameScoresDto>();
 
-                config.CreateMap<GameHistoryDto, GamesDto>().ReverseMap();
-                config.CreateMap<GameHistoryDto, Games>().ReverseMap();
+                config.CreateMap<Games, GameHistoryDto>();
+                config.CreateMap<GamesDto, GameHistoryDto>();
 
+                config.CreateMap<CreateScoreRuleDto, ScoreRules>();
                 config.CreateMap<ScoreRules, ScoreRuleDto>().ReverseMap();
-                config.CreateMap<ScoreRules, CreateScoreRuleDto>().ReverseMap();
-                config.CreateMap<ScoreRuleDto, CreateScoreRuleDto>().ReverseMap();
             });
             return mappingConfig;
         }

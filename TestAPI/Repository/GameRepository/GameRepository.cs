@@ -19,10 +19,10 @@ namespace TestAPI.Repository
             var item = await Query(isBoRequest: isBoRequest)
             .Include(g => g.GameScores)
             .FirstOrDefaultAsync(r => Equals(r.Id, id));
-            // if (item is null)
-            // {
-            //     return default;
-            // }
+            if (item is null)
+            {
+                return default;
+            }
             return MapEntityToDto(item);
         }
 
@@ -54,11 +54,18 @@ namespace TestAPI.Repository
             query = CursorPagination(query, pagingFilter);
             var items = await query
                 .Where(g => g.EndTime != null) // only show completed games
-                .OrderByDescending(g => g.FinalScore) 
+                .OrderByDescending(g => g.FinalScore)
                 .ToListAsync();
             return MapEntitiesToDtos(items);
         }
 
+        public async Task<bool> CheckIfWordIsUsed(Guid GameId, string word)
+        {
+            return await Query()
+                .Where(g => g.Id == GameId)
+                .SelectMany(gs => gs.GameScores)
+                .AnyAsync(s => s.Answer.ToLower() == word.ToLower());
+        }
 
     }
 }

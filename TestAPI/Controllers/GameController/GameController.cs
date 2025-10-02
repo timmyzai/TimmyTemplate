@@ -36,18 +36,13 @@ namespace TestAPI.Controllers.GameController
             var response = new ResponseDto<GamesDto>();
             var result = new GamesDto();
 
-            var repoInput = new CreateGamesDto
-            {
-                MaxRounds = input.MaxRounds
-            };
-
             try
             {
                 var displayMessage = "Creating Game";
                 using (var uow = unitOfWorkManager.Begin<ApplicationDbContext>())
                 {
                     #region Add Game
-                    result = await gameService.CreateNewGame(repoInput);
+                    result = await gameService.CreateNewGame(input);
                     #endregion
 
                     await uow.SaveChangesAsync();
@@ -85,12 +80,12 @@ namespace TestAPI.Controllers.GameController
             return Json(response);
         }
 
-        public async Task<ActionResult<ResponseDto<IEnumerable<GameHistoryDto>>>> GetLeaderboards()
+        public async Task<ActionResult<ResponseDto<IEnumerable<GameHistoryDto>>>> GetLeaderboards(FilterPaginationRequestDto pagingFilter)
         {
             var response = new ResponseDto<IEnumerable<GameHistoryDto>>();
             try
             {
-                var result = await repository.GetByScoreDesc(isBoRequest: true);
+                var result = await repository.GetByScoreDesc(pagingFilter, true);
                 response.Result = mapper.Map<IEnumerable<GameHistoryDto>>(result);
             }
             catch (AppException ex)
@@ -104,12 +99,12 @@ namespace TestAPI.Controllers.GameController
             return Json(response);
         }
 
-        public async Task<ActionResult<ResponseDto<IEnumerable<GameHistoryDto>>>> GetMyGameHistory()
+        public async Task<ActionResult<ResponseDto<IEnumerable<GameHistoryDto>>>> GetMyGameHistory(FilterPaginationRequestDto pagingFilter)
         {
             var response = new ResponseDto<IEnumerable<GameHistoryDto>>();
             try
             {
-                var result = await repository.Get();
+                var result = await repository.Get(pagingFilter);
                 response.Result = mapper.Map<IEnumerable<GameHistoryDto>>(result);
             }
             catch (AppException ex)

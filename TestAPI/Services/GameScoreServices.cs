@@ -45,7 +45,7 @@ namespace TestAPI.Services
                 return new(false, $"Your word must begin with '{prompt[^1]}'");
             }
 
-            if (await CheckIfWordIsUsed(gameId, word))
+            if (await gameRepository.CheckIfWordIsUsed(gameId, word))
             {
                 return new(false, "You used this word before. Game over.");
             }
@@ -167,11 +167,6 @@ namespace TestAPI.Services
 
         }
 
-        private async Task<bool> CheckIfWordIsUsed(Guid GameId, string word)
-        {
-            var game = await gameRepository.GetById(GameId);
-            return game.GameScores.Any(s => string.Equals(s.Answer, word, StringComparison.OrdinalIgnoreCase));
-        }
 
 
     }

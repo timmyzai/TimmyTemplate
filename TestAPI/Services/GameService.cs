@@ -24,19 +24,19 @@ namespace TestAPI.Services
             this.gameRepository = gameRepository;
         }
 
-        public async Task<GamesDto> CreateNewGame(CreateGamesDto input)
+        public async Task<GamesDto> CreateNewGame(UserCreateGamesDto input)
         {
-            var currentUserId = CurrentSession.GetUser().Id;
-            input.UserId = currentUserId;
-            input.StartTime = DateTime.UtcNow;
-            input.FirstWord = SelectRandomWord();
+            var repoInput = new CreateGamesDto
+            {
+                UserId = CurrentSession.GetUser().Id,
+                MaxRounds = input.MaxRounds,
+                StartTime = DateTime.UtcNow,
+                FirstWord = SelectRandomWord()
+            }; 
 
-            var word = await gameRepository.Add(input);
+            return await gameRepository.Add(repoInput);
 
-            return word;
         }
-
-
 
         public string SelectRandomWord()
         {
