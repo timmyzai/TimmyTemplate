@@ -1,5 +1,6 @@
 using Services;
 using Microsoft.EntityFrameworkCore;
+using TestAPI.Models;
 
 namespace TestAPI.DbContexts
 {
@@ -24,6 +25,10 @@ namespace TestAPI.DbContexts
             return base.SaveChangesAsync();
         }
         #endregion
+
+        public DbSet<Games> Games { get; set; }
+        public DbSet<GameScores> GameScores { get; set; }
+        public DbSet<ScoreRules> ScoreRules { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

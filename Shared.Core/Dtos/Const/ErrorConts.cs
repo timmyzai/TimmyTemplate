@@ -2,6 +2,12 @@ namespace AwesomeProject
 {
     public static class ErrorCodes
     {
+
+        public static class Game
+        {
+            public const string GameDoesNotExist = "G1001";
+            public const string GameEnded = "G1002";
+        }
         public static class General
         {
             // public const string HostTerminated = "1001";
@@ -11,9 +17,9 @@ namespace AwesomeProject
             // public const string EntityUpdate = "1005";
             // public const string EntityDelete = "1006";
             public const string EntityGetAll = "1007";
+            // public const string NotifyUser = "1010";
             // public const string LoadLanguages = "1008";
             // public const string DecryptString = "1009";
-            // public const string NotifyUser = "1010";
             public const string JsonDataParse = "1011";
             public const string PleaseLogin = "1012";
             public const string EntityNameNotFound = "1013";

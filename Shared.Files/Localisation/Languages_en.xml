@@ -348,6 +348,11 @@
         <text name="PasswordResetEmail">Password Reset</text>
         <text name="OTPMessage">Hello {0}, Here's your OTP code: {1}</text>
         <!-- Messages - Wallet -->
+
+        <!-- Messages - Game -->
+        <text name="G1001">Game does not exist.</text>
+        <text name="G1002">Game has ended. Start a new game instead.</text>
+
         <!-- DepositPendingInformReceiver -->
         <text name="DepositPendingTitle">Deposit Processing</text>
         <text name="DepositPending">Your deposit of {0} {1} is currently processing at {2}.</text>
